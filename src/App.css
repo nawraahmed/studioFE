@@ -6,6 +6,7 @@
   padding: 1rem 2rem;
   font-family: "Arial", sans-serif;
   position: relative;
+  z-index: 1;
 }
 
 .logo {
@@ -53,10 +54,12 @@
     transform: scaleY(0);
     transform-origin: top;
     transition: transform 0.3s ease;
+    z-index: 0;
   }
 
   .nav-links.open {
     transform: scaleY(1);
+    border-top: 1px solid #d3d3d3;
   }
 
   .menu-toggle {
