@@ -9,6 +9,11 @@ const Header = () => {
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen)
   }
+
+  const closeMenu = () => {
+    setIsMenuOpen(false)
+  }
+
   return (
     <header className="header">
       <div className="logo">design studio</div>
@@ -18,11 +23,21 @@ const Header = () => {
       </button>
 
       <nav className={`nav-links ${isMenuOpen ? "open" : ""}`}>
-        <Link to="/">Home</Link>
-        <Link to="/services">Services</Link>
-        <Link to="/packages">Packages</Link>
-        <Link to="/contact">Contact</Link>
-        <Link to="/book">Book</Link>
+        <Link to="/" onClick={closeMenu}>
+          Home
+        </Link>
+        <Link to="/services" onClick={closeMenu}>
+          Services
+        </Link>
+        <Link to="/packages" onClick={closeMenu}>
+          Packages
+        </Link>
+        <Link to="/contact" onClick={closeMenu}>
+          Contact
+        </Link>
+        <Link to="/book" onClick={closeMenu}>
+          Book
+        </Link>
       </nav>
     </header>
   )
