@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
 
-const Header = () => {
+const Header = ({ user, handleLogOut }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   console.log(isMenuOpen)
@@ -38,6 +38,21 @@ const Header = () => {
         <Link to="/book" onClick={closeMenu}>
           Book
         </Link>
+
+        {user ? (
+          <button
+            onClick={() => {
+              handleLogOut()
+              closeMenu()
+            }}
+          >
+            Sign Out
+          </button>
+        ) : (
+          <Link to="/signin" onClick={closeMenu}>
+            Sign In
+          </Link>
+        )}
       </nav>
     </header>
   )
