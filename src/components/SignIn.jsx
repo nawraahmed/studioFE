@@ -14,6 +14,7 @@ const SignIn = ({ setUser }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    console.log("hellos")
     const payload = await SignInUser(formValues)
     setFormValues(initialState)
     console.log(formValues)
