@@ -23,7 +23,6 @@ const Service = () => {
 
     try {
       await Client.delete(`service/services/${serviceId}`)
-      // Update the state by removing the deleted service
       setServices((prevServices) =>
         prevServices.filter((service) => service._id !== serviceId)
       )
