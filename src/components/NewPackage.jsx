@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react"
 import Client from "../services/api"
-import { BASE_URL } from "../services/api"
 
 const NewPackage = () => {
   const [formData, setFormData] = useState({
@@ -14,7 +13,7 @@ const NewPackage = () => {
   useEffect(() => {
     const fetchServices = async () => {
       try {
-        const response = await Client.get(`${BASE_URL}/service/services`)
+        const response = await Client.get(`service/services`)
         setServices(response.data)
       } catch (error) {
         console.error("Error fetching services:", error)
@@ -40,11 +39,11 @@ const NewPackage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      const response = await Client.post(`${BASE_URL}/package/createPackage`, {
+      const response = await Client.post(`package/createPackage`, {
         ...formData,
       })
       if (response.status === 200) {
-        navigate("/")
+        navigate("/packages")
       }
     } catch (err) {
       console.log(err)
