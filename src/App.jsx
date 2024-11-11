@@ -4,6 +4,7 @@ import Project from "./components/Project"
 import Service from "./components/Service"
 import Calendar from "./components/Calendar"
 import Package from "./components/Package"
+import NewPackage from "./components/NewPackage"
 import Contact from "./components/Contact"
 import Policy from "./components/Policy"
 import Home from "./components/Home"
@@ -49,6 +50,7 @@ function App() {
           <Route path="/projects" element={<Project />} />
           <Route path="/services" element={<Service />} />
           <Route path="/packages" element={<Package />} />
+          <Route path="/new-package" element={<NewPackage />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/book" element={<Calendar />} />
           <Route path="/policy" element={<Policy />} />
