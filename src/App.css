@@ -40,6 +40,30 @@
   color: #5e6c5b;
 }
 
+.footer {
+  background-color: #2f2f2e;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #ffffff;
+  font-family: "Arial", sans-serif;
+}
+
+.footer-links {
+  margin-bottom: rem;
+}
+
+.footer-links a {
+  margin: 0.5rem 1rem;
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.footer-info {
+  font-size: 0.9rem;
+}
+
 @media (max-width: 768px) {
   .nav-links {
     display: flex;
@@ -65,28 +89,21 @@
   .menu-toggle {
     display: block;
   }
-}
 
-.footer {
-  background-color: #f4efe6;
-  padding: 1rem 2rem;
-  text-align: center;
-  color: #5e6c5b;
-  font-family: "Arial", sans-serif;
-}
+  .footer {
+    background-color: #2f2f2e;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    color: #ffffff;
+    font-family: "Arial", sans-serif;
+  }
 
-.footer-links {
-  margin-bottom: 0.5rem;
-}
-
-.footer-links a {
-  margin: 0 1rem;
-  text-decoration: none;
-  color: #5e6c5b;
-}
-
-.footer-info {
-  font-size: 0.9rem;
+  .footer-info {
+    margin-top: 1.5rem;
+  }
 }
 
 body {
@@ -162,3 +179,62 @@ button:hover {
   cursor: pointer;
   margin-top: 10px;
 }
+
+/*REGISTER */
+
+/*
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.signin {
+  margin: 50px 80px;
+}
+.card-overlay {
+  background-color: white;
+  padding: 50px;
+  width: 100%;
+  max-width: 80%;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.input-wrapper {
+  margin-bottom: 30px;
+}
+
+.input-wrapper label {
+  display: block;
+  font-weight: 200;
+  color: #333;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.input-wrapper input {
+  width: 100%;
+  padding: 15px;
+  border: 1px solid #ddd;
+  font-size: 1rem;
+  color: #333;
+}
+
+.input-wrapper input:focus {
+  outline: none;
+}
+
+
+.custom-checklist {
+  margin-top: 15px;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.custom-checklist li {
+  display: flex;
+  font-family: "Arial", sans-serif;
+  align-items: center;
+  padding: 5px 0;
+}
+*/
