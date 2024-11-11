@@ -1,16 +1,43 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
+import Client from "../services/api"
+import PackageCard from "./PackageCard"
 
 const Package = () => {
+  const [packages, setPackages] = useState([])
+
+  useEffect(() => {
+    const fetchPackages = async () => {
+      try {
+        const response = await Client.get("/package/packages")
+        setPackages(response.data)
+      } catch (err) {
+        console.error("Error fetching packages:", err)
+      }
+    }
+    fetchPackages()
+  }, [])
+
   return (
-    <div className="package">
-      <div>
+    <div className="container">
+      <div className="section-header">
+        <h3>All Packages</h3>
         <Link to="/new-package">
-          <button>Add New Package</button>
+          <button className="button">+ Add New Package</button>
         </Link>
       </div>
-      <h3>Package Name</h3>
-      <p>Description and details of the package will be listed here.</p>
+
+      {packages.length === 0 ? (
+        <p>No packages available at the moment.</p>
+      ) : (
+        <div className="card-container">
+          {packages.map((pkg) => (
+            <div className="card" key={pkg._id}>
+              <PackageCard packageData={pkg} />
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   )
 }
