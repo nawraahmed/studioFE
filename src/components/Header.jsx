@@ -1,5 +1,5 @@
-import { useState } from "react"
-import { Link } from "react-router-dom"
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 const Header = ({ user, handleLogOut }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -19,10 +19,10 @@ const Header = ({ user, handleLogOut }) => {
       <div className="logo">design studio</div>
 
       <button className="menu-toggle" onClick={toggleMenu}>
-        {isMenuOpen ? "✕" : "☰"}
+        {isMenuOpen ? '✕' : '☰'}
       </button>
 
-      <nav className={`nav-links ${isMenuOpen ? "open" : ""}`}>
+      <nav className={`nav-links ${isMenuOpen ? 'open' : ''}`}>
         <Link to="/" onClick={closeMenu}>
           Home
         </Link>
@@ -38,6 +38,15 @@ const Header = ({ user, handleLogOut }) => {
         <Link to="/book" onClick={closeMenu}>
           Book
         </Link>
+
+        <Link to="/admin" onClick={closeMenu}>
+          Admin Dashboard
+        </Link>
+        {/* {user && user.role === 'admin' && (
+          <Link to="/admin" onClick={closeMenu}>
+            Admin Dashboard
+          </Link>
+        )} */}
 
         {user ? (
           <button

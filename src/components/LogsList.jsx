@@ -1,17 +1,14 @@
-// src/components/LogsList.jsx
-
 import React, { useEffect, useState } from 'react'
-import axios from 'axios'
+import Client from '../services/api'
 
 const LogsList = () => {
   const [logs, setLogs] = useState([])
   const [error, setError] = useState(null)
 
-  // Fetch logs from the API
   useEffect(() => {
     const fetchLogs = async () => {
       try {
-        const response = await axios.get('/api/logs')
+        const response = await Client.get('/logs/logs')
         setLogs(response.data)
       } catch (error) {
         setError('Error fetching logs.')
@@ -22,11 +19,10 @@ const LogsList = () => {
     fetchLogs()
   }, [])
 
-  // Delete a specific log by ID
   const deleteLog = async (logId) => {
     try {
-      await axios.delete(`/api/logs/${logId}`)
-      setLogs(logs.filter((log) => log._id !== logId)) // Remove log from state
+      await Client.delete(`/logs/logs/${logId}`)
+      setLogs(logs.filter((log) => log._id !== logId))
     } catch (error) {
       setError('Error deleting log.')
       console.error('Error deleting log:', error)
@@ -34,45 +30,27 @@ const LogsList = () => {
   }
 
   return (
-    <div>
-      <h2>Logs</h2>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      {logs.length > 0 ? (
-        <ul>
-          {logs.map((log) => (
-            <li
-              key={log._id}
-              style={{
-                marginBottom: '1em',
-                borderBottom: '1px solid #ddd',
-                paddingBottom: '1em'
-              }}
-            >
-              <p>
-                <strong>User ID:</strong> {log.user}
-              </p>
-              <p>
-                <strong>Exception:</strong> {log.exception}
-              </p>
-              <p>
-                <strong>Type:</strong> {log.type}
-              </p>
-              <p>
-                <strong>Date:</strong>{' '}
-                {new Date(log.createdAt).toLocaleString()}
-              </p>
+    <div className="logs-container">
+      {error && <p className="error-message">{error}</p>}
+      <div className="cards-container">
+        {logs.length > 0 ? (
+          logs.map((log) => (
+            <div className="card" key={log._id}>
+              <h4>User: {log.user ? log.user.name : 'Unknown'}</h4>
+              <p>Exception: {log.exception}</p>
+              <p>Type: {log.type}</p>
               <button
+                className="card-button delete-button"
                 onClick={() => deleteLog(log._id)}
-                style={{ color: 'red' }}
               >
-                Delete
+                <i className="fas fa-trash"></i>
               </button>
-            </li>
-          ))}
-        </ul>
-      ) : (
-        <p>No logs found.</p>
-      )}
+            </div>
+          ))
+        ) : (
+          <p>No logs available.</p>
+        )}
+      </div>
     </div>
   )
 }
