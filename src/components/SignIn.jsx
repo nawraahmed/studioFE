@@ -1,6 +1,9 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { SignInUser } from "../services/Auth"
+import { GoogleLogin } from "@react-oauth/google"
+import axios from "axios"
+import Client from "../services/api"
 
 const SignIn = ({ setUser }) => {
   let navigate = useNavigate()
@@ -21,6 +24,24 @@ const SignIn = ({ setUser }) => {
     setUser(payload)
     console.log(setUser)
     navigate("/")
+  }
+
+  const handleGoogleLoginSuccess = async (response) => {
+    try {
+      const { credential } = response
+
+      const { data } = await Client.post("/auth/google/token", {
+        credential,
+      })
+
+      if (data.token) {
+        localStorage.setItem("token", data.token)
+        setUser(data.user)
+        navigate("/")
+      }
+    } catch (error) {
+      console.error("Google login error:", error)
+    }
   }
 
   return (
@@ -52,6 +73,13 @@ const SignIn = ({ setUser }) => {
             Sign In
           </button>
         </form>
+
+        <div>
+          <GoogleLogin
+            onSuccess={handleGoogleLoginSuccess}
+            onError={() => console.log("Google Login Failed")}
+          />
+        </div>
       </div>
     </div>
   )
