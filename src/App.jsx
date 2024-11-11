@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom"
 import "./App.css"
-import Project from "./components/Project"
+import Project from "./components/Project/Project"
 import Service from "./components/Service"
 import Calendar from "./components/Calendar"
 import Package from "./components/Package"
@@ -13,6 +13,7 @@ import Register from "./components/Register"
 import SignIn from "./components/SignIn"
 import { useState, useEffect } from "react"
 import { CheckSession } from "./services/Auth"
+import AddProject from "./components/Project/AddProject"
 
 function App() {
   const [user, setUser] = useState(null)
@@ -47,6 +48,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/projects" element={<Project />} />
+          <Route path="/projects/add" element={<AddProject />} />
           <Route path="/services" element={<Service />} />
           <Route path="/packages" element={<Package />} />
           <Route path="/contact" element={<Contact />} />
