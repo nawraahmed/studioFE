@@ -17,7 +17,7 @@ function App() {
         {/* Add your header content here (e.g., navigation links) */}
         <Header />
       </header>
-      <main>
+      <main className="app-container">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/projects" element={<Project />} />
