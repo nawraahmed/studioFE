@@ -1,22 +1,23 @@
-import { Routes, Route } from "react-router-dom"
-import "./App.css"
-import Project from "./components/Project"
-import Service from "./components/Service"
-import NewService from "./components/NewService"
-import Calendar from "./components/Calendar"
-import Package from "./components/Package"
-import NewPackage from "./components/NewPackage"
-import Contact from "./components/Contact"
-import Policy from "./components/Policy"
-import Home from "./components/Home"
-import Header from "./components/Header"
-import Footer from "./components/Footer"
-import Register from "./components/Register"
-import SignIn from "./components/SignIn"
-import Protofolio from "./components/Protofolio"
-import PortfolioPage from "./components/PortfolioPage"
-import { useState, useEffect } from "react"
-import { CheckSession } from "./services/Auth"
+import { Routes, Route } from 'react-router-dom'
+import './App.css'
+import Project from './components/Project'
+import Service from './components/Service'
+import NewService from './components/NewService'
+import Calendar from './components/Calendar'
+import Package from './components/Package'
+import NewPackage from './components/NewPackage'
+import Contact from './components/Contact'
+import Policy from './components/Policy'
+import Home from './components/Home'
+import Header from './components/Header'
+import Footer from './components/Footer'
+import Register from './components/Register'
+import SignIn from './components/SignIn'
+import AdminDashboard from './components/AdminDashboard'
+import Protofolio from './components/Protofolio'
+import PortfolioPage from './components/PortfolioPage'
+import { useState, useEffect } from 'react'
+import { CheckSession } from './services/Auth'
 import Profile from "./components/Profile"
 
 function App() {
@@ -55,6 +56,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/book" element={<Calendar />} />
           <Route path="/policy" element={<Policy />} />
+          <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/signin" element={<SignIn setUser={setUser} />} />
           <Route path="/register" element={<Register />} />
           <Route path="/protofolio" element={<Protofolio />} />
