@@ -138,7 +138,6 @@ button:hover {
   opacity: 0.9;
 }
 
-
 .protofolio-slider {
   width: 80%;
   margin: 0 auto;
@@ -400,6 +399,13 @@ button:hover {
   padding: 20px;
 }
 
+.dashboard-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
 .dashboard-title {
   text-align: center;
   font-size: 2rem;
@@ -421,6 +427,13 @@ button:hover {
 
 .navigation-button {
   margin-right: 20px;
+  background-color: #5e6c5b;
+  color: #fefcf6;
+  border: none;
+  padding: 0.5rem 1.5rem;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 1rem;
 }
 
 /* Segment Container */
@@ -451,6 +464,7 @@ button:hover {
   justify-content: center;
   gap: 20px;
   width: 100%;
+  margin-bottom: 3vh;
 }
 
 /* Card Styling */
@@ -479,6 +493,16 @@ button:hover {
 
 .admin-card-button.admin-delete-button i {
   font-size: 18px;
+}
+
+.admin-card-button {
+  background-color: #5e6c5b;
+  color: #fefcf6;
+  border: none;
+  padding: 0.5rem 1.5rem;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 1rem;
 }
 
 /* Booking History Styling */
@@ -513,4 +537,79 @@ button:hover {
 .admin-error-message {
   color: red;
   text-align: center;
+}
+
+/* Change Password Component Styles */
+.change-password-container {
+  background-color: #f9f9f9;
+  padding: 2rem;
+  max-width: 500px;
+  margin: 2rem auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.change-password-title {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.change-password-success {
+  background-color: #d4edda;
+  color: #155724;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border-radius: 4px;
+}
+
+.change-password-error {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border-radius: 4px;
+}
+
+.change-password-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.change-password-form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.change-password-label {
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 0.3rem;
+}
+
+.change-password-input {
+  padding: 0.5rem;
+  font-size: 1rem;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+}
+
+.change-password-button {
+  background-color: #5e6c5b;
+  color: #fefcf6;
+  border: none;
+  padding: 0.7rem 1.5rem;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+}
+
+.change-password-button:hover {
+  background-color: #49886d;
 }
