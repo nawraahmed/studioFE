@@ -1,24 +1,46 @@
 import AwesomeCalendar from 'react-awesome-calendar'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import Client from '../services/api'
 
 const Calendar = () => {
-  // Sample event data to display on the calendar
-  const [events, setEvents] = useState([
-    {
-      id: 1,
-      color: '#5E6C5B',
-      from: '2024-11-15T10:00:00+00:00',
-      to: '2024-11-15T12:00:00+00:00',
-      title: 'Branding Consultation'
-    },
-    {
-      id: 2,
-      color: '#F4EFE6',
-      from: '2024-11-20T14:00:00+00:00',
-      to: '2024-11-20T15:30:00+00:00',
-      title: 'Product Photography Session'
+  const [events, setEvents] = useState([])
+
+  // Retrieve the user role from localStorage
+  const userRole = localStorage.getItem('role')
+  console.log('User role:', userRole) // Log the user role
+
+  useEffect(() => {
+    const fetchBookings = async () => {
+      try {
+        // Retrieve the user ID from localStorage
+        const userId = localStorage.getItem('userId')
+
+        if (!userId) {
+          console.error('User ID not found in localStorage')
+          return
+        }
+
+        const response = await Client.get(`/userBookings/${userId}`)
+
+        // Map the response data to match the format expected by AwesomeCalendar
+        const formattedEvents = response.data.map((booking) => ({
+          id: booking._id, // Assuming each booking has a unique _id
+          color: '#5E6C5B', // Set a default color or customize as needed
+          from: new Date(booking.bookingDate).toISOString(),
+          to: new Date(
+            new Date(booking.bookingDate).getTime() + 2 * 60 * 60 * 1000
+          ).toISOString(), // Adjust the end time as needed
+          title: booking.serviceName || 'Booking' // Replace with the appropriate property
+        }))
+
+        setEvents(formattedEvents)
+      } catch (error) {
+        console.error('Error fetching bookings:', error)
+      }
     }
-  ])
+
+    fetchBookings()
+  }, [])
 
   return (
     <div>
