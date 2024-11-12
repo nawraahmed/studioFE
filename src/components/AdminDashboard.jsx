@@ -3,6 +3,8 @@ import LogsList from './LogsList'
 import UserManagement from './UserManagement'
 import TotalBookings from './TotalBookings'
 import ChangePassword from './ChangePassword'
+import CurrencyConverter from './CurrencyConverter'
+import CurrencySelector from './CurrencySelectot'
 
 const AdminDashboard = () => {
   const [selectedSection, setSelectedSection] = useState('UserManagement') // Default to 'UserManagement'
