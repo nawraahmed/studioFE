@@ -1,15 +1,25 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
+import { useNavigate, useLocation } from "react-router-dom"
 import Client from "../services/api"
-import { useNavigate } from "react-router-dom"
 
-const AddService = () => {
+const NewService = () => {
   const navigate = useNavigate()
+  const location = useLocation()
+  const serviceData = location.state?.serviceData
 
   const [formData, setFormData] = useState({
-    name: "",
-    description: "",
-    startingPrice: 0,
+    name: serviceData?.name || "",
+    description: serviceData?.description || "",
+    startingPrice: serviceData?.startingPrice || 0,
   })
+
+  useEffect(() => {
+    if (serviceData) {
+      console.log("Editing existing service:", formData)
+    } else {
+      console.log("Creating a new service")
+    }
+  }, [serviceData])
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -19,18 +29,16 @@ const AddService = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      const response = await Client.post(`service/createService`, {
-        ...formData,
-      })
-      console.log("Service created successfully")
+      if (serviceData) {
+        await Client.put(`service/services/${serviceData._id}`, formData)
+        console.log("Service updated successfully")
+      } else {
+        await Client.post("service/createService", formData)
+        console.log("Service created successfully")
+      }
       navigate("/services")
-      setFormData({
-        name: "",
-        description: "",
-        startingPrice: 0,
-      })
     } catch (error) {
-      console.error("Error creating service:", error)
+      console.error("Error submitting service:", error)
     }
   }
 
@@ -58,7 +66,7 @@ const AddService = () => {
           <textarea
             name="description"
             id="description"
-            className="form-input"
+            className="form-textarea"
             value={formData.description}
             onChange={handleChange}
             required
@@ -78,10 +86,12 @@ const AddService = () => {
             required
           />
         </div>
-        <button type="submit">Save Service</button>
+        <button type="submit">
+          {serviceData ? "Update Service" : "Create Service"}
+        </button>
       </form>
     </div>
   )
 }
 
-export default AddService
+export default NewService
