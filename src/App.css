@@ -4,7 +4,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 2rem 2rem;
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
   position: relative;
   z-index: 1;
 }
@@ -72,7 +72,7 @@
   padding: 1rem 2rem;
   text-align: center;
   color: #5e6c5b;
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
 }
 
 .footer-links {
@@ -93,7 +93,7 @@ body {
   margin: 0;
   padding: 0;
   background-color: #fefcf6;
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
   color: #5e6c5b;
 }
 
@@ -372,7 +372,7 @@ button:hover {
   font-size: 24px;
   cursor: pointer;
   color: #333;
-=======
+}
 .container {
   padding: 20px;
 }

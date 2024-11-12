@@ -47,8 +47,9 @@ function App() {
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/projects" element={<Project />} />
-          <Route path="/projects/add" element={<NewProject />} />
+          <Route path="/projects/:projectId" element={<Project />} />
+          <Route path="/projects" element={<NewProject />} />
+          <Route path="/projects/:projectId" element={<NewProject />} />
           <Route path="/services" element={<Service />} />
           <Route path="/new-service" element={<NewService />} />
           <Route path="/packages" element={<Package />} />
