@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react"
 import Client from "../services/api"
+import ChangePassword from "./ChangePassword"
 
 const Profile = ({ user }) => {
   const [bookings, setBookings] = useState([])
@@ -7,6 +8,7 @@ const Profile = ({ user }) => {
   const [error, setError] = useState(null)
 
   console.log(user)
+
   useEffect(() => {
     const fetchUserBookings = async () => {
       if (!user) return // Exit if user is not available
@@ -26,6 +28,9 @@ const Profile = ({ user }) => {
 
   if (!user) return <p>Loading user data...</p>
 
+  // Check if the user is a Google sign-in user (no need to change password)
+  const isGoogleUser = !!user.googleId
+
   return (
     <div className="profile-container">
       <h2>User Profile</h2>
@@ -37,6 +42,9 @@ const Profile = ({ user }) => {
           <strong>Email:</strong> {user.email}
         </p>
       </div>
+
+      {/* Render ChangePassword only if the user is not a Google sign-in user */}
+      {!isGoogleUser && <ChangePassword />}
 
       <div className="booking-history">
         <h3>Booking History</h3>
