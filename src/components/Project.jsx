@@ -100,7 +100,7 @@ const Project = () => {
           }}
         >
           <button
-            onClick={() => navigate(`/projects/add/${projectId}`)}
+            onClick={() => navigate(`/project/${projectId}`)}
             style={{
               backgroundColor: "transparent",
               border: "none",

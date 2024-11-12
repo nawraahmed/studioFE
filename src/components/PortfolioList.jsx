@@ -61,7 +61,7 @@ const PortfolioList = () => {
   }
 
   const handleAddProject = () => {
-    navigate("/projects")
+    navigate("/project")
   }
 
   return (
