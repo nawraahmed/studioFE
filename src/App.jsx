@@ -43,7 +43,7 @@ function App() {
       <header>
         <Header user={user} handleLogOut={handleLogOut} />
       </header>
-      <main>
+      <main className="app-container">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/projects" element={<Project />} />
