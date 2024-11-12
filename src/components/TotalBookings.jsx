@@ -29,12 +29,12 @@ const TotalBookings = () => {
       {loading ? (
         <p>Loading...</p>
       ) : (
-        <div className="cards-container">
-          <div className="card">
+        <div className="admin-cards-container">
+          <div className="admin-card">
             <h3>All-Time Bookings</h3>
             <p>{totalBookings}</p>
           </div>
-          <div className="card">
+          <div className="admin-card">
             <h3>Bookings This Month</h3>
             <p>{monthlyBookings}</p>
           </div>

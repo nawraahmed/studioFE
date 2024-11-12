@@ -13,6 +13,7 @@ import Header from './components/Header'
 import Footer from './components/Footer'
 import Register from './components/Register'
 import SignIn from './components/SignIn'
+import AdminDashboard from './components/AdminDashboard'
 import { useState, useEffect } from 'react'
 import { CheckSession } from './services/Auth'
 

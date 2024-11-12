@@ -31,16 +31,16 @@ const LogsList = () => {
 
   return (
     <div className="logs-container">
-      {error && <p className="error-message">{error}</p>}
-      <div className="cards-container">
+      {error && <p className="admin-error-message">{error}</p>}
+      <div className="admin-cards-container">
         {logs.length > 0 ? (
           logs.map((log) => (
-            <div className="card" key={log._id}>
+            <div className="admin-card" key={log._id}>
               <h4>User: {log.user ? log.user.name : 'Unknown'}</h4>
               <p>Exception: {log.exception}</p>
               <p>Type: {log.type}</p>
               <button
-                className="card-button delete-button"
+                className="admin-card-button admin-delete-button"
                 onClick={() => deleteLog(log._id)}
               >
                 <i className="fas fa-trash"></i>

@@ -25,7 +25,7 @@ const AdminDashboard = () => {
 
       <div className="dashboard-navigation">
         <button
-          className={`nav-button ${
+          className={`navigation-button ${
             selectedSection === 'UserManagement' ? 'active' : ''
           }`}
           onClick={() => setSelectedSection('UserManagement')}
@@ -33,7 +33,7 @@ const AdminDashboard = () => {
           User Management
         </button>
         <button
-          className={`nav-button ${
+          className={`navigation-button ${
             selectedSection === 'TotalBookings' ? 'active' : ''
           }`}
           onClick={() => setSelectedSection('TotalBookings')}
@@ -41,7 +41,7 @@ const AdminDashboard = () => {
           Total Bookings
         </button>
         <button
-          className={`nav-button ${
+          className={`navigation-button ${
             selectedSection === 'LogsList' ? 'active' : ''
           }`}
           onClick={() => setSelectedSection('LogsList')}

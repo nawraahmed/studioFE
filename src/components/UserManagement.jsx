@@ -59,14 +59,14 @@ const UserManagement = () => {
 
   return (
     <div className="user-management-container">
-      {error && <p className="error-message">{error}</p>}
-      <div className="cards-container">
+      {error && <p className="admin-error-message">{error}</p>}
+      <div className="admin-cards-container">
         {users.length ? (
           users.map((user) => (
-            <div className="card" key={user._id}>
+            <div className="admin-card" key={user._id}>
               <h3>{user.name}</h3>
               <button
-                className="card-button"
+                className="admin-card-button"
                 onClick={() => {
                   getUserBookings(user._id)
                   toggleBookings(user._id)
@@ -77,20 +77,20 @@ const UserManagement = () => {
                   : 'View Booking History'}
               </button>
               <button
-                className="card-button delete-button"
+                className="admin-card-button admin-delete-button"
                 onClick={() => deleteUser(user._id)}
               >
                 <i className="fas fa-trash"></i>
               </button>
               {showBookings[user._id] && selectedUserBookings[user._id] && (
-                <div className="booking-history">
+                <div className="admin-booking-history">
                   <h4>Booking History</h4>
                   {loading ? (
                     <p>Loading...</p>
                   ) : Array.isArray(selectedUserBookings[user._id]) ? (
-                    <div className="booking-list">
+                    <div className="admin-booking-list">
                       {selectedUserBookings[user._id].map((booking) => (
-                        <div className="booking-card" key={booking._id}>
+                        <div className="admin-booking-card" key={booking._id}>
                           <div>
                             <strong>Service:</strong> {booking.service.name}
                           </div>
