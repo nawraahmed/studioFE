@@ -14,10 +14,12 @@ import Header from "./components/Header"
 import Footer from "./components/Footer"
 import Register from "./components/Register"
 import SignIn from "./components/SignIn"
+import AdminDashboard from "./components/AdminDashboard"
 import Protofolio from "./components/Protofolio"
 import PortfolioPage from "./components/PortfolioPage"
 import { useState, useEffect } from "react"
 import { CheckSession } from "./services/Auth"
+import Profile from "./components/Profile"
 
 function App() {
   const [user, setUser] = useState(null)
@@ -44,7 +46,7 @@ function App() {
       <header>
         <Header user={user} handleLogOut={handleLogOut} />
       </header>
-      <main>
+      <main className="app-container">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/projects/:projectId" element={<Project />} />
@@ -57,9 +59,11 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/book" element={<Calendar />} />
           <Route path="/policy" element={<Policy />} />
+          <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/signin" element={<SignIn setUser={setUser} />} />
           <Route path="/register" element={<Register />} />
           <Route path="/protofolio" element={<Protofolio />} />
+          <Route path="/profile" element={<Profile user={user} />} />
           <Route path="/portfolio-list" element={<PortfolioPage />} />{" "}
         </Routes>
       </main>

@@ -10,6 +10,7 @@ const SignIn = ({ setUser }) => {
 
   let initialState = { email: "", password: "" }
   const [formValues, setFormValues] = useState(initialState)
+  const [errorMessage, setErrorMessage] = useState("")
 
   const handleChange = (e) => {
     setFormValues({ ...formValues, [e.target.name]: e.target.value })
@@ -17,13 +18,38 @@ const SignIn = ({ setUser }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log("hellos")
-    const payload = await SignInUser(formValues)
-    setFormValues(initialState)
-    console.log(formValues)
-    setUser(payload)
-    console.log(setUser)
-    navigate("/")
+    console.log("Logging in...")
+
+    try {
+      // Send login request and get the response payload
+      const payload = await SignInUser(formValues)
+
+      // Check if the payload contains a token and user object
+      if (payload.token && payload.user) {
+        // Store token, userId, and role in localStorage
+        localStorage.setItem("token", payload.token)
+        localStorage.setItem("userId", payload.user.id)
+        localStorage.setItem("role", payload.user.role)
+
+        // Set the user state in the parent component (e.g., App component)
+        setUser(payload.user)
+
+        console.log("User signed in successfully:", payload)
+
+        // Reset form values
+        setFormValues(initialState)
+
+        // Redirect to homepage or desired page
+        navigate("/")
+      } else {
+        setErrorMessage("Invalid login details. Please try again.")
+      }
+    } catch (error) {
+      console.log("Login error:", error)
+      setErrorMessage(
+        "Invalid login details. Please check your email and password."
+      )
+    }
   }
 
   const handleGoogleLoginSuccess = async (response) => {
@@ -73,6 +99,8 @@ const SignIn = ({ setUser }) => {
             Sign In
           </button>
         </form>
+
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
 
         <div>
           <GoogleLogin

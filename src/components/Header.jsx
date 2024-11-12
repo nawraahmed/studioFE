@@ -39,6 +39,22 @@ const Header = ({ user, handleLogOut }) => {
           Book
         </Link>
 
+        <Link to="/admin" onClick={closeMenu}>
+          Admin Dashboard
+        </Link>
+
+        {user && (
+          <Link to="/profile" onClick={closeMenu}>
+            Profile
+          </Link>
+        )}
+
+        {/* {user && user.role === 'admin' && (
+          <Link to="/admin" onClick={closeMenu}>
+            Admin Dashboard
+          </Link>
+        )} */}
+
         {user ? (
           <button
             onClick={() => {
