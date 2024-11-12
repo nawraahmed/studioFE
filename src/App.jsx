@@ -18,6 +18,7 @@ import Protofolio from './components/Protofolio'
 import PortfolioPage from './components/PortfolioPage'
 import { useState, useEffect } from 'react'
 import { CheckSession } from './services/Auth'
+import Profile from "./components/Profile"
 
 function App() {
   const [user, setUser] = useState(null)
@@ -33,7 +34,7 @@ function App() {
   }
 
   useEffect(() => {
-    const token = localStorage.getItem('token')
+    const token = localStorage.getItem("token")
     if (token) {
       checkToken()
     }
@@ -59,7 +60,8 @@ function App() {
           <Route path="/signin" element={<SignIn setUser={setUser} />} />
           <Route path="/register" element={<Register />} />
           <Route path="/protofolio" element={<Protofolio />} />
-          <Route path="/portfolio-list" element={<PortfolioPage />} />{' '}
+          <Route path="/profile" element={<Profile user={user} />} />
+          <Route path="/portfolio-list" element={<PortfolioPage />} />{" "}
         </Routes>
       </main>
       <Footer />
