@@ -1,45 +1,54 @@
-// src/contexts/CurrencyContext.jsx
-import React, { createContext, useState, useContext, useEffect } from 'react'
-import { getCurrencyConversionRates } from '../services/api'
+// import React, { createContext, useContext, useEffect, useState } from 'react'
+// import axios from 'axios'
 
-export const CurrencyContext = createContext()
+// // Create the context
+// const CurrencyContext = createContext()
 
-export const CurrencyProvider = ({ children }) => {
-  const [currency, setCurrency] = useState('USD')
-  const [exchangeRates, setExchangeRates] = useState({})
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
+// // Custom hook to use the context
+// export const useCurrency = () => useContext(CurrencyContext)
 
-  const changeCurrency = (newCurrency) => {
-    setCurrency(newCurrency)
-  }
+// // CurrencyProvider component to wrap the app and provide context values
+// export const CurrencyProvider = ({ children }) => {
+//   const [selectedCurrency, setSelectedCurrency] = useState('KWD') // Default currency
+//   const [rates, setRates] = useState({})
+//   const [loading, setLoading] = useState(false)
 
-  useEffect(() => {
-    const fetchExchangeRates = async () => {
-      setLoading(true)
-      setError(null)
+//   // Fetch exchange rates when the component mounts or when the selected currency changes
+//   useEffect(() => {
+//     const fetchRates = async () => {
+//       setLoading(true)
+//       try {
+//         const response = await axios.get(`http://localhost:5000/api/rates/KWD`) // Base currency is KWD
+//         setRates(response.data.conversion_rates)
+//       } catch (error) {
+//         console.error('Error fetching exchange rates:', error)
+//       } finally {
+//         setLoading(false)
+//       }
+//     }
 
-      try {
-        const rates = await getCurrencyConversionRates(currency)
-        setExchangeRates(rates)
-      } catch (error) {
-        setError('Unable to fetch currency conversion rates')
-      } finally {
-        setLoading(false)
-      }
-    }
+//     fetchRates()
+//   }, [])
 
-    fetchExchangeRates()
-  }, [currency])
+//   // Method to convert price based on selected currency
+//   const convertPrice = (price) => {
+//     if (rates[selectedCurrency]) {
+//       return (price * rates[selectedCurrency]).toFixed(2)
+//     }
+//     return price
+//   }
 
-  return (
-    <CurrencyContext.Provider
-      value={{ currency, changeCurrency, exchangeRates, loading, error }}
-    >
-      {children}
-    </CurrencyContext.Provider>
-  )
-}
-
-// Named export for the useCurrency hook
-export const useCurrency = () => useContext(CurrencyContext)
+//   return (
+//     <CurrencyContext.Provider
+//       value={{
+//         selectedCurrency,
+//         setSelectedCurrency,
+//         rates,
+//         loading,
+//         convertPrice
+//       }}
+//     >
+//       {children}
+//     </CurrencyContext.Provider>
+//   )
+// }

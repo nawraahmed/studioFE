@@ -2,9 +2,7 @@ import React, { useState, useNavigate } from 'react'
 import LogsList from './LogsList'
 import UserManagement from './UserManagement'
 import TotalBookings from './TotalBookings'
-import ChangePassword from './ChangePassword'
 import CurrencyConverter from './CurrencyConverter'
-import CurrencySelector from './CurrencySelectot'
 
 const AdminDashboard = () => {
   const [selectedSection, setSelectedSection] = useState('UserManagement') // Default to 'UserManagement'
@@ -53,6 +51,10 @@ const AdminDashboard = () => {
       </div>
 
       <div className="dashboard-sections">{renderSection()}</div>
+      <div className="App">
+        <h1>Currency Converter</h1>
+        <CurrencyConverter />
+      </div>
     </div>
   )
 }

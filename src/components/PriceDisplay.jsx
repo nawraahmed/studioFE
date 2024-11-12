@@ -1,37 +1,18 @@
-// src/components/PriceDisplay.js
-import React from 'react'
-import { useCurrency } from '../context/CurrencyContext'
+// // src/components/PriceDisplay.js
+// import React, { useContext } from 'react';
+// import CurrencyContext from '../contexts/CurrencyContext';
 
-const PriceDisplay = ({ price }) => {
-  const { currency, exchangeRates, loading, error } = useCurrency()
+// const PriceDisplay = ({ basePrice }) => {
+//     const { currency, exchangeRate } = useContext(CurrencyContext);
 
-  if (loading) {
-    return <p>Loading currency rates...</p>
-  }
+//     // Calculate converted price
+//     const convertedPrice = (basePrice * exchangeRate).toFixed(2);
 
-  if (error) {
-    return <p>Error: {error}</p>
-  }
+//     return (
+//         <p>
+//             Price: {convertedPrice} {currency}
+//         </p>
+//     );
+// };
 
-  // Convert the price to the selected currency
-  const convertPrice = (price) => {
-    if (currency === 'USD') return price // If the selected currency is USD, return the original price
-    const conversionRate = exchangeRates[currency]
-    if (conversionRate) {
-      return (price * conversionRate).toFixed(2) // Convert price based on the conversion rate
-    }
-    return price // If no conversion rate found, return the original price
-  }
-
-  const convertedPrice = convertPrice(price)
-
-  return (
-    <div>
-      <p>
-        Price: {convertedPrice} {currency}
-      </p>
-    </div>
-  )
-}
-
-export default PriceDisplay
+// export default PriceDisplay;
