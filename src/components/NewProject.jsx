@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
-import Client from "../../services/api"
+import Client from "../services/api"
 
-const AddProject = () => {
+const NewProject = () => {
   const navigate = useNavigate()
   const initialState = {
     title: "",
@@ -65,7 +65,7 @@ const AddProject = () => {
 
       if (response.status === 201) {
         setMessage("Project created successfully")
-        navigate("/")
+        navigate("/projects")
       } else {
         setMessage("Failed to create project")
       }
@@ -135,4 +135,4 @@ const AddProject = () => {
   )
 }
 
-export default AddProject
+export default NewProject
