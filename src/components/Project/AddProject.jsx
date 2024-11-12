@@ -1,107 +1,135 @@
-import { useState, useEffect } from "react"
+import React, { useState, useEffect } from "react"
+import { useNavigate } from "react-router-dom"
 import Client from "../../services/api"
 
-export const createProject = async (projectData) => {
-  try {
-    const res = await Client.post("/projects/project", projectData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    })
-    return res.data
-  } catch (error) {
-    throw error
-  }
-}
-
 const AddProject = () => {
-  const [title, setTitle] = useState("")
-  const [description, setDescription] = useState("")
-  const [service, setService] = useState("")
-  const [userId, setUserId] = useState("")
-  const [files, setFiles] = useState([])
+  const navigate = useNavigate()
+  const initialState = {
+    title: "",
+    description: "",
+    service: "",
+    files: [],
+  }
+
+  const [formData, setFormData] = useState(initialState)
+  const [services, setServices] = useState([])
+  const [message, setMessage] = useState("")
 
   useEffect(() => {
-    loadProjects()
+    const fetchServices = async () => {
+      try {
+        const servicesResponse = await Client.get("/service/services")
+        setServices(servicesResponse.data)
+      } catch (error) {
+        console.error("Error fetching services:", error)
+      }
+    }
+    fetchServices()
   }, [])
 
-  const loadProjects = async () => {
-    try {
-      const projectsData = await GetProjects()
-      setProjects(projectsData)
-    } catch (error) {
-      console.error("Error loading projects:", error)
-    }
+  const handleChange = (e) => {
+    const { name, value } = e.target
+    setFormData((prevData) => ({ ...prevData, [name]: value }))
   }
 
   const handleFileChange = (e) => {
-    setFiles(e.target.files)
+    setFormData((prevData) => ({ ...prevData, files: e.target.files }))
   }
 
-  const handleCreateProject = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
 
-    const formData = new FormData()
-    formData.append("title", title)
-    formData.append("description", description)
-    formData.append("service", service)
-    formData.append("userId", userId)
-    Array.from(files).forEach((file) => formData.append("files", file))
+    const formDataToSubmit = new FormData()
+    Object.entries(formData).forEach(([key, value]) => {
+      if (key !== "files") {
+        formDataToSubmit.append(key, value)
+      }
+    })
+
+    Array.from(formData.files).forEach((file) => {
+      formDataToSubmit.append("files", file)
+    })
 
     try {
-      const newProject = await createProject(formData)
-      setMessage(newProject.message)
-      loadProjects()
+      const token = localStorage.getItem("token")
+      const response = await Client.post(
+        "/projects/project",
+        formDataToSubmit,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      )
+
+      if (response.status === 201) {
+        setMessage("Project created successfully")
+        navigate("/")
+      } else {
+        setMessage("Failed to create project")
+      }
+
+      setFormData(initialState)
     } catch (error) {
-      setMessage("Error creating project")
-      console.error(error)
+      console.error("Error uploading form and file:", error)
+      setMessage("Error uploading form and file.")
     }
   }
 
   return (
-    <div>
-      <h3>Create a New Project</h3>
-      <form onSubmit={handleCreateProject}>
+    <div className="add-project">
+      {message && <p>{message}</p>}
+      <form onSubmit={handleSubmit}>
         <div>
-          <label>Title</label>
+          <label htmlFor="title">Project Title:</label>
           <input
             type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
+            name="title"
+            id="title"
+            value={formData.title}
+            onChange={handleChange}
             required
           />
         </div>
         <div>
-          <label>Description</label>
+          <label htmlFor="description">Description:</label>
           <textarea
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            required
-          ></textarea>
-        </div>
-        <div>
-          <label>Service</label>
-          <input
-            type="text"
-            value={service}
-            onChange={(e) => setService(e.target.value)}
+            name="description"
+            id="description"
+            value={formData.description}
+            onChange={handleChange}
             required
           />
         </div>
         <div>
-          <label>User ID</label>
-          <input
-            type="text"
-            value={userId}
-            onChange={(e) => setUserId(e.target.value)}
+          <label htmlFor="service">Service:</label>
+          <select
+            name="service"
+            id="service"
+            value={formData.service}
+            onChange={handleChange}
             required
-          />
+          >
+            <option value="">Select a service</option>
+            {services.map((service) => (
+              <option key={service._id} value={service._id}>
+                {service.name}
+              </option>
+            ))}
+          </select>
         </div>
         <div>
-          <label>Files</label>
-          <input type="file" multiple onChange={handleFileChange} />
+          <label htmlFor="files">Upload Files:</label>
+          <input
+            type="file"
+            name="files"
+            id="files"
+            multiple
+            onChange={handleFileChange}
+          />
         </div>
-        <button type="submit">Create Project</button>
+        <button type="submit">Save Project</button>
       </form>
     </div>
   )

@@ -71,7 +71,7 @@ const Project = () => {
           <h3>{project.title}</h3>
           <p>{project.description}</p>
           <p>Service: {project.service?.name}</p>
-          <p>User: {project.user?.username}</p>
+          <p>User: {project.user?.name}</p>
           <div>
             <strong>Files:</strong>
             {project.files.map((file, index) => (
