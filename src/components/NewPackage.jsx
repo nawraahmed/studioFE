@@ -1,13 +1,20 @@
 import React, { useState, useEffect } from "react"
 import Client from "../services/api"
+import { useLocation, useNavigate } from "react-router-dom"
 
 const NewPackage = () => {
+  const navigate = useNavigate()
+  const location = useLocation()
+  const packageData = location.state?.packageData
+
   const [formData, setFormData] = useState({
-    name: "",
-    description: "",
-    price: 0,
-    servicesIncluded: [],
+    name: packageData?.name || "",
+    description: packageData?.description || "",
+    price: packageData?.price || 0,
+    servicesIncluded:
+      packageData?.servicesIncluded.map((service) => service._id) || [],
   })
+
   const [services, setServices] = useState([])
 
   useEffect(() => {
@@ -20,6 +27,7 @@ const NewPackage = () => {
       }
     }
     fetchServices()
+    console.log(formData)
   }, [])
 
   const handleChange = (e) => {
@@ -39,67 +47,75 @@ const NewPackage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      const response = await Client.post(`package/createPackage`, {
-        ...formData,
-      })
-      if (response.status === 200) {
-        navigate("/packages")
-      }
-    } catch (err) {
-      console.log(err)
+      const response = packageData
+        ? await Client.put(`package/packages/${packageData._id}`, formData)
+        : await Client.post("package/createPackage", formData)
+
+      navigate("/packages")
+    } catch (error) {
+      console.error("Error submitting package:", error)
     }
-    console.log("Package data submitted:", formData)
   }
+
   return (
-    <div className="package">
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="name">Package Name:</label>
+    <div className="form-container">
+      <form className="form" onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label className="form-label" htmlFor="name">
+            Package Name:
+          </label>
           <input
             type="text"
             name="name"
             id="name"
+            className="form-input"
             value={formData.name}
             onChange={handleChange}
             required
           />
         </div>
-        <div>
-          <label htmlFor="description">Description:</label>
+        <div className="form-group">
+          <label className="form-label" htmlFor="description">
+            Description:
+          </label>
           <textarea
             name="description"
             id="description"
+            className="form-textarea"
             value={formData.description}
             onChange={handleChange}
             required
           />
         </div>
-        <div>
-          <label htmlFor="price">Price:</label>
+        <div className="form-group">
+          <label className="form-label" htmlFor="price">
+            Price:
+          </label>
           <input
             type="number"
             name="price"
             id="price"
+            className="form-input"
             value={formData.price}
             onChange={handleChange}
             required
           />
         </div>
-        <div>
-          <label>Services Included:</label>
-          <div
-            className="services-list"
-            style={{ maxHeight: "150px", overflowY: "auto" }}
-          >
+        <div className="form-group">
+          <label className="form-label">Services Included:</label>
+          <div className="services-list">
             {services.map((service) => (
-              <div key={service._id}>
+              <div key={service._id} className="service-item">
                 <input
                   type="checkbox"
                   id={service._id}
                   checked={formData.servicesIncluded.includes(service._id)}
                   onChange={() => handleServiceChange(service._id)}
+                  className="form-checkbox"
                 />
-                <label htmlFor={service._id}>{service.name}</label>
+                <label htmlFor={service._id} className="service-label">
+                  {service.name}
+                </label>
               </div>
             ))}
           </div>

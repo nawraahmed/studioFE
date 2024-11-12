@@ -17,27 +17,29 @@ const Package = () => {
     }
     fetchPackages()
   }, [])
+  const handleDeletePackage = (packageId) => {
+    setPackages(packages.filter((pkg) => pkg._id !== packageId))
+  }
 
   return (
     <div className="container">
-      <div className="section-header">
+      <div className="add-service">
         <h3>All Packages</h3>
         <Link to="/new-package">
-          <button className="button">+ Add New Package</button>
+          <button>+ Add New Package</button>
         </Link>
       </div>
-
-      {packages.length === 0 ? (
-        <p>No packages available at the moment.</p>
-      ) : (
-        <div className="card-container">
-          {packages.map((pkg) => (
-            <div className="card" key={pkg._id}>
-              <PackageCard packageData={pkg} />
+      <div className="grid">
+        {packages.length === 0 ? (
+          <p>No packages available at the moment.</p>
+        ) : (
+          packages.map((pkg) => (
+            <div key={pkg._id}>
+              <PackageCard packageData={pkg} onDelete={handleDeletePackage} />
             </div>
-          ))}
-        </div>
-      )}
+          ))
+        )}
+      </div>
     </div>
   )
 }
