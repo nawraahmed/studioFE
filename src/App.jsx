@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom"
 import "./App.css"
 import Project from "./components/Project/Project"
 import Service from "./components/Service"
+import NewService from "./components/NewService"
 import Calendar from "./components/Calendar"
 import Package from "./components/Package"
 import NewPackage from "./components/NewPackage"
@@ -51,6 +52,7 @@ function App() {
           <Route path="/projects" element={<Project />} />
           <Route path="/projects/add" element={<AddProject />} />
           <Route path="/services" element={<Service />} />
+          <Route path="/new-service" element={<NewService />} />
           <Route path="/packages" element={<Package />} />
           <Route path="/new-package" element={<NewPackage />} />
           <Route path="/contact" element={<Contact />} />
