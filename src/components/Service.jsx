@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 import Client from "../services/api"
 import { BASE_URL } from "../services/api"
+import { useLocation, useNavigate } from "react-router-dom"
 
 const Service = () => {
   const [services, setServices] = useState([])
+  const navigate = useNavigate()
 
   useEffect(() => {
     const fetchServices = async () => {
@@ -32,6 +34,10 @@ const Service = () => {
     }
   }
 
+  const handleUpdate = (serviceData) => {
+    navigate("/new-service", { state: { serviceData } })
+  }
+
   return (
     <div className="container">
       <div className="add-service">
@@ -53,6 +59,9 @@ const Service = () => {
               </p>
               <button onClick={() => handleDelete(service._id)}>
                 Delete Service
+              </button>
+              <button onClick={() => handleUpdate(service)}>
+                Update Service
               </button>
             </div>
           ))

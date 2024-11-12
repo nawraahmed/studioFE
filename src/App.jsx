@@ -14,6 +14,8 @@ import Footer from './components/Footer'
 import Register from './components/Register'
 import SignIn from './components/SignIn'
 import AdminDashboard from './components/AdminDashboard'
+import Protofolio from './components/Protofolio'
+import PortfolioPage from './components/PortfolioPage'
 import { useState, useEffect } from 'react'
 import { CheckSession } from './services/Auth'
 
@@ -21,20 +23,17 @@ function App() {
   const [user, setUser] = useState(null)
 
   const handleLogOut = () => {
-    //Reset all auth related state and clear localStorage
     setUser(null)
     localStorage.clear()
   }
 
   const checkToken = async () => {
-    //If a token exists, sends token to localStorage to persist logged in user
     const user = await CheckSession()
     setUser(user)
   }
 
   useEffect(() => {
     const token = localStorage.getItem('token')
-
     if (token) {
       checkToken()
     }
@@ -43,10 +42,9 @@ function App() {
   return (
     <div className="App">
       <header>
-        {/* Add your header content here (e.g., navigation links) */}
         <Header user={user} handleLogOut={handleLogOut} />
       </header>
-      <main>
+      <main className="app-container">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/projects" element={<Project />} />
@@ -60,6 +58,8 @@ function App() {
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/signin" element={<SignIn setUser={setUser} />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/protofolio" element={<Protofolio />} />
+          <Route path="/portfolio-list" element={<PortfolioPage />} />{' '}
         </Routes>
       </main>
       <Footer />
