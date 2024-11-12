@@ -8,8 +8,9 @@ import Client from "../services/api"
 const SignIn = ({ setUser }) => {
   let navigate = useNavigate()
 
-  let initialState = { email: '', password: '' }
+  let initialState = { email: "", password: "" }
   const [formValues, setFormValues] = useState(initialState)
+  const [errorMessage, setErrorMessage] = useState("")
 
   const handleChange = (e) => {
     setFormValues({ ...formValues, [e.target.name]: e.target.value })
@@ -17,30 +18,37 @@ const SignIn = ({ setUser }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log('Logging in...')
+    console.log("Logging in...")
 
-    // Send login request and get the response payload
-    const payload = await SignInUser(formValues)
+    try {
+      // Send login request and get the response payload
+      const payload = await SignInUser(formValues)
 
-    // Check if the payload contains a token and user object
-    if (payload.token && payload.user) {
-      // Store token, userId, and role in localStorage
-      localStorage.setItem('token', payload.token)
-      localStorage.setItem('userId', payload.user.id)
-      localStorage.setItem('role', payload.user.role)
+      // Check if the payload contains a token and user object
+      if (payload.token && payload.user) {
+        // Store token, userId, and role in localStorage
+        localStorage.setItem("token", payload.token)
+        localStorage.setItem("userId", payload.user.id)
+        localStorage.setItem("role", payload.user.role)
 
-      // Set the user state in the parent component (e.g., App component)
-      setUser(payload.user)
+        // Set the user state in the parent component (e.g., App component)
+        setUser(payload.user)
 
-      console.log('User signed in successfully:', payload)
+        console.log("User signed in successfully:", payload)
 
-      // Reset form values
-      setFormValues(initialState)
+        // Reset form values
+        setFormValues(initialState)
 
-      // Redirect to homepage or desired page
-      navigate('/')
-    } else {
-      console.log('Error: No token or user object returned')
+        // Redirect to homepage or desired page
+        navigate("/")
+      } else {
+        setErrorMessage("Invalid login details. Please try again.")
+      }
+    } catch (error) {
+      console.log("Login error:", error)
+      setErrorMessage(
+        "Invalid login details. Please check your email and password."
+      )
     }
   }
 
@@ -91,6 +99,8 @@ const SignIn = ({ setUser }) => {
             Sign In
           </button>
         </form>
+
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
 
         <div>
           <GoogleLogin
