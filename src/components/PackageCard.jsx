@@ -26,6 +26,9 @@ const PackageCard = ({ packageData, onDelete }) => {
   const handleUpdate = () => {
     navigate('/new-package', { state: { packageData } })
   }
+  const handleBookNow = () => {
+    navigate("/book")
+  }
 
   const handleToggle = async () => {
     try {
@@ -81,6 +84,7 @@ const PackageCard = ({ packageData, onDelete }) => {
           Delete Package
         </button>
         <button onClick={handleUpdate}>Update Package</button>
+        <button onClick={handleBookNow}>Book Now</button>
       </div>
     </div>
   )

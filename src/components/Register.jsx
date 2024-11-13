@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { RegisterUser } from "../services/Auth"
-
+import PasswordChecklist from "react-password-checklist"
 const Register = () => {
   let navigate = useNavigate()
 
@@ -12,21 +12,39 @@ const Register = () => {
     confirmPassword: "",
   }
   const [formValues, setFormValues] = useState(initialState)
+  const [errorMessage, setErrorMessage] = useState("")
+  const [isPasswordValid, setIsPasswordValid] = useState(false)
 
   const handleChange = (e) => {
-    setFormValues({ ...formValues, [e.target.name]: e.target.value })
-    console.log(formValues)
+    const { name, value } = e.target
+    setFormValues({ ...formValues, [name]: value })
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    await RegisterUser({
-      name: formValues.name,
-      email: formValues.email,
-      password: formValues.password,
-    })
-    setFormValues(initialState)
-    navigate("/signin")
+
+    if (formValues.password !== formValues.confirmPassword) {
+      setErrorMessage("Passwords do not match.")
+      return
+    }
+
+    try {
+      // Attempt to register the user
+      await RegisterUser({
+        name: formValues.name,
+        email: formValues.email,
+        password: formValues.password,
+      })
+      setFormValues(initialState)
+      navigate("/signin")
+    } catch (error) {
+      // Set error message based on response from the backend
+      if (error.response && error.response.status === 400) {
+        setErrorMessage(error.response.data) // This should be "A user with that email has already been registered!"
+      } else {
+        setErrorMessage("Registration failed. Please try again.")
+      }
+    }
   }
 
   return (
@@ -75,15 +93,40 @@ const Register = () => {
               value={formValues.confirmPassword}
               required
             />
+            {formValues.confirmPassword &&
+              formValues.password !== formValues.confirmPassword && (
+                <p className="error-message">Passwords do not match.</p>
+              )}
           </div>
+          {errorMessage && <p className="error-message">{errorMessage}</p>}
+
+          <PasswordChecklist
+            className="custom-checklist"
+            rules={["minLength", "specialChar", "number"]}
+            minLength={8}
+            value={formValues.password}
+            valueAgain={formValues.confirmPassword}
+            messages={{
+              minLength: "At least 8 characters ",
+              specialChar: "At least 1 special character ",
+              number: "At least 1 number",
+            }}
+            iconSize={12}
+            validColor={"#5e6c5b"}
+            validTextColor={"#5e6c5b"}
+            invalidColor={"#808080"}
+            onChange={(isValid) => setIsPasswordValid(isValid)}
+          />
+
           <button
             disabled={
               !formValues.email ||
-              (!formValues.password &&
-                formValues.confirmPassword === formValues.password)
+              !formValues.password ||
+              formValues.password !== formValues.confirmPassword ||
+              !isPasswordValid
             }
           >
-            Sign In
+            Register
           </button>
         </form>
       </div>
