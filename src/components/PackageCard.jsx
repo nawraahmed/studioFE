@@ -3,10 +3,6 @@ import Client from "../services/api"
 import { useNavigate } from "react-router-dom"
 import ProductPrice from "./ProductPrice"
 import "../static/package.css"
-import React, { useState, useEffect } from "react"
-import Client from "../services/api"
-import { useNavigate } from "react-router-dom"
-import ProductPrice from "./ProductPrice"
 import { useTranslation } from "react-i18next" // Import useTranslation hook
 
 const PackageCard = ({ packageData, onDelete }) => {
