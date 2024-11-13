@@ -3,6 +3,7 @@ import CalendarComponent from "./Calendar"
 import AdminCalendar from "./AdminCalendar"
 import "../static/calendar.css"
 
+
 const CalendarWrapper = () => {
   const [userRole, setUserRole] = useState("")
 
@@ -23,7 +24,7 @@ const CalendarWrapper = () => {
       ) : userRole === "user" ? (
         <CalendarComponent />
       ) : (
-        <p>Loading...</p> // Optional loading state if userRole isn't set yet
+        <CalendarComponent />
       )}
     </div>
   )
