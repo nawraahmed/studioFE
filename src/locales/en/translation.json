@@ -1,0 +1,28 @@
+{
+  "nav": {
+    "logo": "design studio",
+    "home": "Home",
+    "services": "Services",
+    "packages": "Packages",
+    "book": "Book",
+    "admin_dashboard": "Admin Dashboard",
+    "profile": "Profile",
+    "sign_in": "Sign In",
+    "sign_out": "Sign Out"
+  },
+  "footer": {
+    "about": "About",
+    "contact": "Contact",
+    "policy": "Our Policy",
+    "info": "@designstudio.bh"
+  },
+  "branding": {
+    "services": "Professional branding services tailored to make your business stand out. Book an appointment and explore our work.",
+    "book_button": "Book A Session!",
+    "view_portfolio": "View Our Portfolio",
+    "or": "or"
+  },
+  "service": {
+    "price": "starting from"
+  }
+}

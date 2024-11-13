@@ -8,8 +8,10 @@ const NewService = () => {
   const serviceData = location.state?.serviceData
 
   const [formData, setFormData] = useState({
-    name: serviceData?.name || "",
-    description: serviceData?.description || "",
+    name_en: serviceData?.name_en || "",
+    name_ar: serviceData?.name_ar || "",
+    description_en: serviceData?.description_en || "",
+    description_ar: serviceData?.description_ar || "",
     startingPrice: serviceData?.startingPrice || 0,
   })
 
@@ -46,28 +48,55 @@ const NewService = () => {
     <div className="form-container">
       <form className="form" onSubmit={handleSubmit}>
         <div className="form-group">
-          <label className="form-label" htmlFor="name">
-            Service Name:
+          <label className="form-label" htmlFor="name_en">
+            Service Name (English):
           </label>
           <input
             type="text"
-            name="name"
-            id="name"
+            name="name_en"
+            id="name_en"
             className="form-input"
-            value={formData.name}
+            value={formData.name_en}
             onChange={handleChange}
             required
           />
         </div>
         <div className="form-group">
-          <label className="form-label" htmlFor="description">
-            Description:
+          <label className="form-label" htmlFor="name_ar">
+            Service Name (Arabic):
+          </label>
+          <input
+            type="text"
+            name="name_ar"
+            id="name_ar"
+            className="form-input"
+            value={formData.name_ar}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label className="form-label" htmlFor="description_en">
+            Description (English):
           </label>
           <textarea
-            name="description"
-            id="description"
+            name="description_en"
+            id="description_en"
             className="form-textarea"
-            value={formData.description}
+            value={formData.description_en}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label className="form-label" htmlFor="description_ar">
+            Description (Arabic):
+          </label>
+          <textarea
+            name="description_ar"
+            id="description_ar"
+            className="form-textarea"
+            value={formData.description_ar}
             onChange={handleChange}
             required
           />
