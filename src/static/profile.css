@@ -1,0 +1,112 @@
+/* Modal Background */
+.change-password-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefcf6; /* Light background color */
+  padding: 20px;
+  border-radius: 8px;
+  width: 400px;
+  max-width: 100%;
+  position: relative;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional shadow for better visual */
+}
+
+/* Close Button */
+.close-modal {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #5e6c5b; /* Highlight color */
+  cursor: pointer;
+}
+
+.close-modal:hover {
+  color: #4e5b47; /* Slightly darker shade on hover */
+}
+
+/* Change Password Button */
+.change-password-button {
+  padding: 10px 20px;
+  background-color: #5e6c5b; /* Highlight color */
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.change-password-button:hover {
+  background-color: #4e5b47; /* Slightly darker shade on hover */
+}
+
+/* Profile Container */
+.profile-container {
+  background: #fefcf6; /* Background color */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Profile Details */
+.profile-details {
+  background: #f4efe6; /* Background for containers */
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+}
+
+/* Booking History Section */
+.booking-history {
+  background: #f4efe6; /* Background for containers */
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.booking-list {
+  margin-top: 10px;
+}
+
+.booking-item {
+  padding: 10px;
+  background: #fefcf6; /* Light background color */
+  margin-bottom: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.delete-button {
+  background-color: #5e6c5b; /* Highlight color */
+  color: white;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.delete-button:hover {
+  background-color: #4e5b47; /* Slightly darker shade on hover */
+}
+
+h2,
+h3 {
+  color: #5e6c5b; /* Highlight color for headings */
+}
