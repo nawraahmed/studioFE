@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react"
 import CalendarComponent from "./Calendar"
 import AdminCalendar from "./AdminCalendar"
+import "../static/calendar.css"
+
 
 const CalendarWrapper = () => {
   const [userRole, setUserRole] = useState("")

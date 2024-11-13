@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 
+
 import { Calendar, momentLocalizer } from "react-big-calendar"
 
 import moment from "moment"
@@ -11,6 +12,8 @@ import Client from "../services/api"
 import Modal from "react-modal"
 
 Modal.setAppElement("#root")
+import "../static/calendar.css"
+
 
 const localizer = momentLocalizer(moment)
 
@@ -20,17 +23,15 @@ const CalendarComponent = () => {
   const [showModal, setShowModal] = useState(false)
 
   const [selectedDate, setSelectedDate] = useState(null)
-
   const [serviceId, setServiceId] = useState("")
-
   const [services, setServices] = useState([])
-
   const [userRole, setUserRole] = useState("")
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
 
   useEffect(() => {
     // Set user role from localStorage
-
-    const role = localStorage.getItem("userRole")
+    const role = localStorage.getItem("role")
+    const userId = localStorage.getItem("userId")
 
     if (role) {
       setUserRole(role)
@@ -41,7 +42,6 @@ const CalendarComponent = () => {
     const fetchData = async () => {
       try {
         const userId = localStorage.getItem("userId")
-
         if (!userId) {
           console.error("User ID not found in localStorage")
 
@@ -53,7 +53,6 @@ const CalendarComponent = () => {
         const [bookingsResponse, servicesResponse, slotsResponse] =
           await Promise.all([
             Client.get(`/userBookings/${userId}`),
-
             Client.get("/service/services"),
 
             Client.get("/slot/slots"),
@@ -63,7 +62,6 @@ const CalendarComponent = () => {
 
         const formattedBookings = bookingsResponse.data.map((booking) => ({
           id: booking._id,
-
           title: booking.service?.name || "Booking",
 
           start: new Date(booking.bookingDate),
@@ -71,7 +69,6 @@ const CalendarComponent = () => {
           end: new Date(
             new Date(booking.bookingDate).getTime() + 2 * 60 * 60 * 1000
           ),
-
           color: "#5E6C5B", // Color for existing bookings
         }))
 
@@ -92,7 +89,6 @@ const CalendarComponent = () => {
         // Combine bookings and slots into events
 
         setEvents([...formattedBookings, ...formattedSlots])
-
         console.log("Services Response:", servicesResponse.data)
 
         setServices(servicesResponse.data)
@@ -111,13 +107,9 @@ const CalendarComponent = () => {
       backgroundColor: event.color,
 
       borderRadius: "8px",
-
       opacity: 0.8,
-
       color: "white",
-
       border: "0px",
-
       display: "block",
     }
 
@@ -132,12 +124,9 @@ const CalendarComponent = () => {
 
       if (!serviceId || !selectedDate) {
         alert("Please select a service and date")
-
         return
       }
-
       const userId = localStorage.getItem("userId")
-
       if (!userId) {
         alert("User ID not found")
 
@@ -145,17 +134,14 @@ const CalendarComponent = () => {
       }
 
       console.log(serviceId)
-
       const response = await Client.post("/createBooking", {
         user: userId,
 
         service: serviceId,
 
         bookingDate: selectedDate,
-
         status: "pending",
       })
-
       alert("Booking created successfully!")
 
       setShowModal(false)
@@ -164,7 +150,6 @@ const CalendarComponent = () => {
 
       const newBooking = {
         id: response.data._id,
-
         title: response.data.service?.name || "Booking",
 
         start: new Date(response.data.bookingDate),
@@ -172,7 +157,6 @@ const CalendarComponent = () => {
         end: new Date(
           new Date(response.data.bookingDate).getTime() + 2 * 60 * 60 * 1000
         ),
-
         color: "#5E6C5B",
       }
 
@@ -199,6 +183,11 @@ const CalendarComponent = () => {
         eventPropGetter={eventStyleGetter}
         onSelectEvent={(event) => {
           if (event.title.includes("Available Slot")) {
+            if (!isAuthenticated) {
+              alert("Please sign in to book")
+              return
+            }
+
             setSelectedDate(event.start)
 
             setShowModal(true)
