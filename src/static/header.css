@@ -4,7 +4,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 2rem 2rem;
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
   position: relative;
   z-index: 1;
 }
@@ -72,8 +72,8 @@
   padding: 1rem 2rem;
   text-align: center;
   color: #5e6c5b;
-  font-family: 'Arial', sans-serif;
-  position: fixed;
+  font-family: "Arial", sans-serif;
+
   bottom: 0;
   left: 0;
   width: 100%;
@@ -105,7 +105,7 @@
   border-radius: 4px;
   background-color: #f4efe6;
   color: #5e6c5b;
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
   font-size: 0.9rem;
   cursor: pointer;
 }
