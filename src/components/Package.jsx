@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 import Client from "../services/api"
 import PackageCard from "./PackageCard"
+import "../static/package.css"
 
 const Package = () => {
   const [packages, setPackages] = useState([])

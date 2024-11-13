@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react"
 import Client from "../services/api"
+import "../static/review.css"
 
 const Review = ({ projectId }) => {
   const [userRole, setUserRole] = useState("")
