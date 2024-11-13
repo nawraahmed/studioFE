@@ -158,9 +158,11 @@ const CalendarComponent = () => {
 
   return (
     <div>
-      <h2>Booking Calendar</h2>
+      <h2 className="calendar-header">Booking Calendar</h2>
 
-      <p>Click any available slot to complete your booking process</p>
+      <p className="calender-description">
+        Click any available slot to complete your booking process
+      </p>
 
       <Calendar
         localizer={localizer}

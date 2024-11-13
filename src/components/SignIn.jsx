@@ -1,18 +1,18 @@
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { SignInUser } from '../services/Auth'
-import { GoogleLogin } from '@react-oauth/google'
-import axios from 'axios'
-import Client from '../services/api'
-import { Link } from 'react-router-dom' // Import Link from react-router-dom
-import '../static/signIn.css'
+import { useState } from "react"
+import { useNavigate } from "react-router-dom"
+import { SignInUser } from "../services/Auth"
+import { GoogleLogin } from "@react-oauth/google"
+import axios from "axios"
+import Client from "../services/api"
+import { Link } from "react-router-dom" // Import Link from react-router-dom
+import "../static/signIn.css"
 
 const SignIn = ({ setUser }) => {
   let navigate = useNavigate()
 
-  let initialState = { email: '', password: '' }
+  let initialState = { email: "", password: "" }
   const [formValues, setFormValues] = useState(initialState)
-  const [errorMessage, setErrorMessage] = useState('')
+  const [errorMessage, setErrorMessage] = useState("")
 
   const handleChange = (e) => {
     setFormValues({ ...formValues, [e.target.name]: e.target.value })
@@ -20,30 +20,30 @@ const SignIn = ({ setUser }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log('Logging in...')
+    console.log("Logging in...")
 
     try {
       const payload = await SignInUser(formValues)
 
       if (payload.token && payload.user) {
-        localStorage.setItem('token', payload.token)
-        localStorage.setItem('userId', payload.user.id)
-        localStorage.setItem('role', payload.user.role)
+        localStorage.setItem("token", payload.token)
+        localStorage.setItem("userId", payload.user.id)
+        localStorage.setItem("role", payload.user.role)
 
         setUser(payload.user)
 
-        console.log('User signed in successfully:', payload)
+        console.log("User signed in successfully:", payload)
 
         setFormValues(initialState)
 
-        navigate('/')
+        navigate("/")
       } else {
-        setErrorMessage('Invalid login details. Please try again.')
+        setErrorMessage("Invalid login details. Please try again.")
       }
     } catch (error) {
-      console.log('Login error:', error)
+      console.log("Login error:", error)
       setErrorMessage(
-        'Invalid login details. Please check your email and password.'
+        "Invalid login details. Please check your email and password."
       )
     }
   }
@@ -52,17 +52,17 @@ const SignIn = ({ setUser }) => {
     try {
       const { credential } = response
 
-      const { data } = await Client.post('/auth/google/token', {
-        credential
+      const { data } = await Client.post("/auth/google/token", {
+        credential,
       })
 
       if (data.token) {
-        localStorage.setItem('token', data.token)
+        localStorage.setItem("token", data.token)
         setUser(data.user)
-        navigate('/')
+        navigate("/")
       }
     } catch (error) {
-      console.error('Google login error:', error)
+      console.error("Google login error:", error)
     }
   }
 
@@ -102,7 +102,7 @@ const SignIn = ({ setUser }) => {
             className="signin-button"
             disabled={!formValues.email || !formValues.password}
           >
-            Sign In
+            SIGN IN
           </button>
         </form>
 
@@ -111,13 +111,13 @@ const SignIn = ({ setUser }) => {
         <div className="signin-google-login">
           <GoogleLogin
             onSuccess={handleGoogleLoginSuccess}
-            onError={() => console.log('Google Login Failed')}
+            onError={() => console.log("Google Login Failed")}
           />
         </div>
 
         <div className="signin-register-link">
           <p>
-            Don't have an account?{' '}
+            Don't have an account?{" "}
             <Link to="/register" className="signin-register-link-text">
               Register here
             </Link>

@@ -4,6 +4,11 @@
   margin: 0 auto;
 }
 
+.calender-description {
+  text-align: center;
+  margin-bottom: 5rem;
+  font-weight: 500;
+}
 .calendar-modal-overlay {
   position: fixed;
   top: 0;
