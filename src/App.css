@@ -1,3 +1,4 @@
+
 h2 {
   border-bottom: 2px solid #5e6c5b;
   display: inline-block;
@@ -11,6 +12,7 @@ h2 {
   color: black;
   z-index: 3;
 }
+
 
 .app-container {
   padding: 0px 20px 0px 20px;
@@ -259,6 +261,20 @@ button:hover {
   padding: 20px;
 }
 
+/* .total-bookings-container {
+  text-align: center;
+  padding: 10px;
+  max-width: 400px; 
+  margin: auto;
+} */
+
+.chart-container {
+  position: relative;
+  margin: 0 auto;
+  width: 50%;
+  height: 350px; /* Set a smaller height for the chart */
+}
+
 .dashboard-container {
   display: flex;
   justify-content: center;
@@ -329,7 +345,7 @@ button:hover {
 
 /* Card Styling */
 .admin-card {
-  width: 300px;
+  width: 200px;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 8px;
@@ -689,4 +705,146 @@ input:checked + .slider:before {
 
 .toggle-checkbox:checked + .toggle-label .toggle-inner {
   transform: translateX(26px);
+}
+/* Container for the entire form */
+.form-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+/* Labels for form fields */
+.form-label {
+  display: block;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.form-input,
+.form-textarea,
+.form-select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-family: Arial, sans-serif;
+}
+
+.form-input:focus,
+.form-textarea:focus,
+.form-select:focus {
+  outline: none;
+  border-color: #333;
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.services-list {
+  max-height: 150px;
+  overflow-y: auto;
+  padding: 0.5rem;
+  border-radius: 4px;
+}
+
+.service-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.service-item label {
+  margin-left: 0.5rem;
+}
+
+.review-section {
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  max-width: 600px;
+  margin: 20px auto;
+}
+
+.review-section form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.review-section input[type="text"],
+.review-section textarea {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  width: 100%;
+}
+
+.review-section textarea {
+  resize: vertical;
+  height: 100px;
+}
+
+.rating-stars {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+}
+
+.star {
+  font-size: 1.5rem;
+  color: #ccc;
+  cursor: pointer;
+}
+
+.star.selected {
+  color: #6a6969;
+}
+
+.review-list {
+  margin-top: 20px;
+}
+
+.review-item {
+  background-color: #fff;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+.review-item p {
+  font-size: 1rem;
+  color: #333;
+}
+
+.review-item .rating {
+  color: #6a6969;
+}
+
+.review-card {
+  position: relative;
+  margin-bottom: 15px;
+}
+
+.trash {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: red;
+  border: none;
+  cursor: pointer;
+  background: transparent;
+  padding: 5px;
 }
