@@ -1,0 +1,240 @@
+/* General Project Page Styles */
+.project-form-container {
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.project-container {
+  margin: 30px auto;
+  padding: 20px;
+}
+
+.message {
+  text-align: center;
+  color: #d9534f;
+  font-size: 1.2rem;
+  margin-bottom: 20px; /* Consolidated margin for both use cases */
+}
+
+/* Project Details Section */
+.project-details h3 {
+  font-size: 1.8rem;
+  margin-bottom: 10px;
+}
+
+.project-details p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.project-files {
+  margin-top: 20px;
+}
+
+.project-files strong {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.file-item {
+  margin-bottom: 15px;
+}
+
+/* File Previews */
+.project-file-image {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.project-file-pdf {
+  width: 100%;
+  height: 500px;
+  margin-bottom: 10px;
+}
+
+/* Action Buttons */
+.edit-button,
+.delete-file-button,
+.delete-project-button {
+  background-color: transparent;
+  border: none;
+  color: #007bff;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-top: 10px;
+}
+
+.edit-button:hover,
+.delete-file-button:hover,
+.delete-project-button:hover {
+  background-color: #f4efe6;
+}
+
+.delete-file-button {
+  color: red;
+  padding: 5px;
+  background: transparent;
+  font-size: 0.9rem;
+}
+
+.delete-project-container {
+  margin-top: 20px;
+}
+
+.delete-project-button {
+  background-color: red;
+  color: white;
+  padding: 10px 20px;
+  font-size: 1.1rem;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.delete-project-button:hover {
+  background-color: #c82333;
+}
+
+/* Review Section Styling */
+.reviews-container {
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 2px solid #f0f0f0;
+}
+
+.reviews-container h4 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+/* Styling for NewProject Form */
+
+h2 {
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  font-size: 1.1rem;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.form-group textarea {
+  height: 150px;
+}
+
+.current-cover img {
+  border: 2px solid #ddd;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.existing-files,
+.new-files {
+  margin-top: 20px;
+}
+
+.existing-files ul,
+.new-files ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.existing-files li,
+.new-files li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.remove-file-button {
+  color: red;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.remove-file-button:hover {
+  text-decoration: underline;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.submit-button,
+.cancel-button {
+  padding: 10px 20px;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.submit-button {
+  background-color: #28a745;
+  color: white;
+}
+
+.submit-button:hover {
+  background-color: #218838;
+}
+
+.cancel-button {
+  background-color: #dc3545;
+  color: white;
+}
+
+.cancel-button:hover {
+  background-color: #c82333;
+}
+
+/* Ensure responsiveness */
+@media (max-width: 768px) {
+  .project-container,
+  .project-form-container {
+    padding: 15px;
+  }
+
+  .project-details h3 {
+    font-size: 1.5rem;
+  }
+
+  .project-details p {
+    font-size: 1rem;
+  }
+
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
+    font-size: 0.9rem;
+  }
+
+  .submit-button,
+  .cancel-button {
+    font-size: 1rem;
+  }
+}
