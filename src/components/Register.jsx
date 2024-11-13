@@ -1,18 +1,21 @@
-import { useState } from "react"
-import { useNavigate } from "react-router-dom"
-import { RegisterUser } from "../services/Auth"
-import PasswordChecklist from "react-password-checklist"
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { RegisterUser } from '../services/Auth'
+import PasswordChecklist from 'react-password-checklist'
+import { Link } from 'react-router-dom' // Import Link from react-router-dom
+import '../static/register.css' // Make sure to import the new CSS
+
 const Register = () => {
   let navigate = useNavigate()
 
   const initialState = {
-    name: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: ''
   }
   const [formValues, setFormValues] = useState(initialState)
-  const [errorMessage, setErrorMessage] = useState("")
+  const [errorMessage, setErrorMessage] = useState('')
   const [isPasswordValid, setIsPasswordValid] = useState(false)
 
   const handleChange = (e) => {
@@ -24,33 +27,31 @@ const Register = () => {
     e.preventDefault()
 
     if (formValues.password !== formValues.confirmPassword) {
-      setErrorMessage("Passwords do not match.")
+      setErrorMessage('Passwords do not match.')
       return
     }
 
     try {
-      // Attempt to register the user
       await RegisterUser({
         name: formValues.name,
         email: formValues.email,
-        password: formValues.password,
+        password: formValues.password
       })
       setFormValues(initialState)
-      navigate("/signin")
+      navigate('/signin')
     } catch (error) {
-      // Set error message based on response from the backend
       if (error.response && error.response.status === 400) {
-        setErrorMessage(error.response.data) // This should be "A user with that email has already been registered!"
+        setErrorMessage(error.response.data)
       } else {
-        setErrorMessage("Registration failed. Please try again.")
+        setErrorMessage('Registration failed. Please try again.')
       }
     }
   }
 
   return (
-    <div className="signin col">
-      <div className="card-overlay centered">
-        <form className="col" onSubmit={handleSubmit}>
+    <div className="register-wrapper">
+      <div className="register-card">
+        <form className="register-form" onSubmit={handleSubmit}>
           <div className="input-wrapper">
             <label htmlFor="name">Name</label>
             <input
@@ -102,19 +103,19 @@ const Register = () => {
 
           <PasswordChecklist
             className="custom-checklist"
-            rules={["minLength", "specialChar", "number"]}
+            rules={['minLength', 'specialChar', 'number']}
             minLength={8}
             value={formValues.password}
             valueAgain={formValues.confirmPassword}
             messages={{
-              minLength: "At least 8 characters ",
-              specialChar: "At least 1 special character ",
-              number: "At least 1 number",
+              minLength: 'At least 8 characters ',
+              specialChar: 'At least 1 special character ',
+              number: 'At least 1 number'
             }}
             iconSize={12}
-            validColor={"#5e6c5b"}
-            validTextColor={"#5e6c5b"}
-            invalidColor={"#808080"}
+            validColor={'#5e6c5b'}
+            validTextColor={'#5e6c5b'}
+            invalidColor={'#808080'}
             onChange={(isValid) => setIsPasswordValid(isValid)}
           />
 
@@ -129,6 +130,15 @@ const Register = () => {
             Register
           </button>
         </form>
+
+        <div className="register-signin-link">
+          <p>
+            Already have an account?{' '}
+            <Link to="/signin" className="register-signin-link-text">
+              Sign In here
+            </Link>
+          </p>
+        </div>
       </div>
     </div>
   )

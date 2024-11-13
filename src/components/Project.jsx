@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { useParams } from "react-router-dom"
 import Client from "../services/api"
+import Review from "./Review"
 
 const Project = () => {
   const { projectId } = useParams()
@@ -168,6 +169,9 @@ const Project = () => {
       ) : (
         <p>Loading project...</p>
       )}
+      <div>
+        <Review projectId={projectId} />
+      </div>
     </div>
   )
 }

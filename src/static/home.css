@@ -1,0 +1,64 @@
+body {
+  margin: 0;
+  background-color: #fefcf6;
+  font-family: 'Arial', sans-serif;
+  color: #5e6c5b;
+}
+
+.home-p {
+  font-size: 16px;
+  line-height: 1.5;
+  color: #3b3b3b;
+  font-family: 'Arial', sans-serif;
+  margin: 180px 100px 0;
+  padding: 10px 0;
+  text-align: justify;
+}
+
+.book-session-btn {
+  padding: 12px 25px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #ffffff;
+  background-color: #5e6c5b;
+  border: none;
+  border-radius: 25px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s ease;
+  margin-left: 160px;
+  margin-top: 50px;
+  margin-bottom: 40px;
+}
+
+.separator {
+  margin: 20px 0;
+  margin-left: 90px;
+  color: #3b3b3b;
+}
+
+.portfolio-link {
+  font-size: 18px;
+  text-decoration: none;
+  color: #3b3b3b;
+  margin-left: 185px;
+}
+
+.featured-title {
+  font-size: 2em;
+  text-align: center;
+  border-bottom: 9px solid #5e6c5b;
+  display: inline-block;
+  margin-top: 230px;
+  color: #3b3b3b;
+  margin-left: 85px;
+}
+
+.protofolio-slider {
+  width: 80%;
+  height: 100%;
+  margin: 0 auto;
+  padding: 40px 0;
+  text-align: center;
+  margin-bottom: 100px;
+}

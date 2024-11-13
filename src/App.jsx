@@ -5,6 +5,7 @@ import NewProject from "./components/NewProject"
 import Service from "./components/Service"
 import NewService from "./components/NewService"
 import Calendar from "./components/Calendar"
+import CalendarWrapper from "./components/CalendarWrapper"
 import Package from "./components/Package"
 import NewPackage from "./components/NewPackage"
 import Contact from "./components/Contact"
@@ -22,6 +23,7 @@ import { CheckSession } from "./services/Auth"
 import Profile from "./components/Profile"
 import { CurrencyProvider } from "./contexts/CurrencyProvider"
 import CurrencySelector from "./components/CurrencySelectot"
+import AdminCalendar from "./components/AdminCalendar"
 import { useTranslation } from "react-i18next"
 import i18n from "./config/i18n"
 
@@ -63,7 +65,6 @@ function App() {
         <header>
           <Header user={user} handleLogOut={handleLogOut} />
         </header>
-        <CurrencySelector />
         <main className="app-container">
           <Routes>
             <Route path="/" element={<Home />} />
@@ -75,7 +76,7 @@ function App() {
             <Route path="/packages" element={<Package />} />
             <Route path="/new-package" element={<NewPackage />} />
             <Route path="/contact" element={<Contact />} />
-            <Route path="/book" element={<Calendar />} />
+            <Route path="/book" element={<CalendarWrapper />} />{" "}
             <Route path="/policy" element={<Policy />} />
             <Route path="/admin" element={<AdminDashboard />} />
             <Route path="/signin" element={<SignIn setUser={setUser} />} />
@@ -83,6 +84,7 @@ function App() {
             <Route path="/protofolio" element={<Protofolio />} />
             <Route path="/profile" element={<Profile user={user} />} />
             <Route path="/portfolio-list" element={<PortfolioPage />} />
+            <Route path="/admin-calendar" element={<AdminCalendar />} />
           </Routes>
         </main>
         <Footer />

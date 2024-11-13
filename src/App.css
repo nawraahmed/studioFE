@@ -1,101 +1,3 @@
-.header {
-  background-color: #f4efe6;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 2rem 2rem;
-  font-family: "Arial", sans-serif;
-  position: relative;
-  z-index: 1;
-}
-
-.logo {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #5e6c5b;
-}
-
-.nav-links {
-  display: flex;
-  flex-direction: row;
-  gap: 1.5rem;
-}
-
-.nav-links a {
-  text-decoration: none;
-  color: #5e6c5b;
-  font-size: 1rem;
-}
-
-.nav-links a:hover {
-  color: #49886d;
-}
-
-.menu-toggle {
-  display: none;
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
-  color: #5e6c5b;
-}
-
-@media (max-width: 768px) {
-  .nav-links {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background-color: #f4efe6;
-    padding: 2rem;
-    transform: scaleY(0);
-    transform-origin: top;
-    transition: transform 0.3s ease;
-    z-index: 0;
-  }
-
-  .nav-links.open {
-    transform: scaleY(1);
-    border-top: 1px solid #d3d3d3;
-  }
-
-  .menu-toggle {
-    display: block;
-  }
-}
-
-.footer {
-  background-color: #f4efe6;
-  padding: 1rem 2rem;
-  text-align: center;
-  color: #5e6c5b;
-  font-family: "Arial", sans-serif;
-}
-
-.footer-links {
-  margin-bottom: 0.5rem;
-}
-
-.footer-links a {
-  margin: 0 1rem;
-  text-decoration: none;
-  color: #5e6c5b;
-}
-
-.footer-info {
-  font-size: 0.9rem;
-}
-
-body {
-  margin: 0;
-  background-color: #fefcf6;
-  font-family: "Arial", sans-serif;
-  color: #5e6c5b;
-}
-
 h2 {
   border-bottom: 2px solid #5e6c5b;
   display: inline-block;
@@ -108,16 +10,6 @@ h2 {
   position: relative;
   color: black;
   z-index: 3;
-}
-
-.custom-heading::after {
-  content: "";
-  display: block;
-  width: 100%;
-  height: 6px;
-  background-color: #5e6c5b;
-  position: absolute;
-  bottom: -2px;
 }
 
 .app-container {
@@ -136,12 +28,6 @@ button {
 
 button:hover {
   opacity: 0.9;
-}
-
-.protofolio-slider {
-  width: 80%;
-  margin: 0 auto;
-  padding: 40px 0;
 }
 
 .project-card {
@@ -173,7 +59,7 @@ button:hover {
 }
 
 .project-card h3 {
-  margin: 10px 0;
+  text-align: center;
   font-size: 1.1em;
   color: #333;
   text-overflow: ellipsis;
@@ -203,32 +89,6 @@ button:hover {
 
 .project-card button:hover {
   background-color: #2e4736;
-}
-
-@media (max-width: 1024px) {
-  .protofolio-slider {
-    width: 90%;
-  }
-
-  .project-card {
-    width: 250px;
-    height: 350px;
-  }
-}
-
-@media (max-width: 768px) {
-  .protofolio-slider {
-    width: 95%;
-  }
-
-  .project-card {
-    width: 200px;
-    height: 300px;
-  }
-
-  .project-image {
-    height: 200px;
-  }
 }
 
 .portfolio-list {
@@ -399,6 +259,20 @@ button:hover {
   padding: 20px;
 }
 
+/* .total-bookings-container {
+  text-align: center;
+  padding: 10px;
+  max-width: 400px; 
+  margin: auto;
+} */
+
+.chart-container {
+  position: relative;
+  margin: 0 auto;
+  width: 50%;
+  height: 350px; /* Set a smaller height for the chart */
+}
+
 .dashboard-container {
   display: flex;
   justify-content: center;
@@ -469,7 +343,7 @@ button:hover {
 
 /* Card Styling */
 .admin-card {
-  width: 300px;
+  width: 200px;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 8px;
@@ -582,13 +456,6 @@ input:checked + .slider:before {
   font-family: "Arial", sans-serif;
 }
 
-.form-header {
-  font-size: 1.8rem;
-  font-weight: bold;
-  margin-bottom: 1.5rem;
-  text-align: center;
-}
-
 /* Change Password Component Styles */
 .change-password-container {
   background-color: #f9f9f9;
@@ -692,102 +559,82 @@ input:checked + .slider:before {
   z-index: 1060; /* Ensures the content of the modal appears on top of the overlay */
 }
 
-/* Calendar Modal Styling */
-.calendar-modal-overlay {
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
-  display: flex;
-  justify-content: center;
-  align-items: center;
+/* Labels for form fields */
+.form-label {
+  display: block;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  color: #333;
 }
 
-.calendar-modal-content {
-  background-color: white;
-  padding: 20px;
-  border-radius: 10px;
-  max-width: 500px;
+.form-input,
+.form-textarea,
+.form-select {
   width: 100%;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease-in-out;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-family: Arial, sans-serif;
 }
 
-/* Close Button */
-.calendar-modal-close {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: none;
-  border: none;
-  font-size: 18px;
-  cursor: pointer;
+.form-input:focus,
+.form-textarea:focus,
+.form-select:focus {
+  outline: none;
+  border-color: #333;
 }
 
-/* Modal Header */
-.calendar-modal-header h3 {
-  font-size: 1.5em;
-  margin-bottom: 20px;
+.form-textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+.card {
+  background-color: #f4efe6;
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 10px;
+  height: 15rem;
   text-align: center;
 }
+.card h3 {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+.card p {
+  font-size: 0.9em;
+  color: #666;
+  margin: 10px 0;
+}
+.card button {
+  background-color: #555;
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+}
 
-/* Form Styling */
-.calendar-form {
+ul {
+  list-style-type: none;
+  justify-content: center;
+  text-align: left;
+}
+.card.package {
+  height: 28rem;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 }
 
-.calendar-form div {
-  margin-bottom: 15px;
-}
-
-.calendar-form label {
-  font-size: 1em;
-  margin-bottom: 5px;
-}
-
-.calendar-form select,
-.calendar-form input {
-  padding: 10px;
-  font-size: 1em;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-}
-
-.calendar-form select:focus,
-.calendar-form input:focus {
-  border-color: #85c1e9; /* Blue focus border */
-  outline: none;
-}
-
-/* Buttons */
-.calendar-btn {
-  padding: 10px 20px;
-  font-size: 1em;
-  border-radius: 5px;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.calendar-btn-submit {
-  background-color: #5e6c5b;
-  color: white;
-  margin-top: 10px;
-}
-
-.calendar-btn-submit:hover {
-  background-color: #4a5a47;
-}
-
-.calendar-btn-cancel {
-  background-color: #ccc;
-  margin-top: 10px;
-  color: white;
-}
-
-.calendar-btn-cancel:hover {
-  background-color: #bbb;
-}
-
-/* Toggle Switch Styles */
 .toggle-switch {
   position: relative;
   display: inline-block;
@@ -796,37 +643,39 @@ input:checked + .slider:before {
   margin-top: 1rem;
 }
 
-.toggle-checkbox {
-  opacity: 0;
-  width: 0;
-  height: 0;
+.form-header {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  text-align: center;
 }
 
-.toggle-label {
-  position: absolute;
-  cursor: pointer;
-  background-color: #ccc;
-  border-radius: 24px;
-  width: 50px;
-  height: 24px;
-  transition: background-color 0.3s ease;
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
-.toggle-label .toggle-inner {
-  position: absolute;
-  top: 2px;
-  left: 2px;
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.5rem;
+}
+
+.form-checkbox {
   width: 20px;
   height: 20px;
-  background-color: #fff;
-  border-radius: 50%;
-  transition: transform 0.3s ease;
+  cursor: pointer;
 }
 
-.toggle-checkbox:checked + .toggle-label {
-  background-color: #4caf50;
-}
-
-.toggle-checkbox:checked + .toggle-label .toggle-inner {
-  transform: translateX(26px);
+.form-button {
+  padding: 0.75rem;
+  font-size: 1rem;
+  font-weight: bold;
+  color: #fff;
+  background-color: #333;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }

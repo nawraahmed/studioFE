@@ -1,6 +1,20 @@
-import React, { useEffect, useState } from "react"
+// src/components/TotalBookings.js
+
+import React, { useEffect, useState } from 'react'
+import axios from 'axios'
 import { useTranslation } from "react-i18next" // Import the useTranslation hook
-import axios from "axios"
+import { Bar } from 'react-chartjs-2'
+import {
+  Chart as ChartJS,
+  BarElement,
+  CategoryScale,
+  LinearScale,
+  Title,
+  Tooltip,
+  Legend
+} from 'chart.js'
+
+ChartJS.register(BarElement, CategoryScale, LinearScale, Title, Tooltip, Legend)
 
 const TotalBookings = () => {
   const { t } = useTranslation() // Get the translation function
@@ -26,12 +40,72 @@ const TotalBookings = () => {
     fetchBookingData()
   }, [])
 
+  // Prepare data for the chart
+  const data = {
+    labels: ['All-Time Bookings', 'Monthly Bookings'],
+    datasets: [
+      {
+        label: 'Bookings',
+        data: [totalBookings, monthlyBookings],
+        backgroundColor: ['#4CAF50', '#FF5722'],
+        borderColor: ['#388E3C', '#D32F2F'],
+        borderWidth: 1
+      }
+    ]
+  }
+
+  const options = {
+    responsive: true,
+    maintainAspectRatio: false, // Disable aspect ratio to allow custom height
+    plugins: {
+      legend: {
+        position: 'bottom',
+        labels: {
+          font: {
+            size: 10 // Smaller font size for legend
+          }
+        }
+      },
+      title: {
+        display: true,
+        text: 'Total and Monthly Bookings',
+        font: {
+          size: 14 // Smaller font for title
+        }
+      }
+    },
+    scales: {
+      x: {
+        ticks: {
+          font: {
+            size: 10 // Smaller font size for x-axis
+          }
+        },
+        grid: {
+          display: false // Disable grid lines on x-axis
+        }
+      },
+      y: {
+        ticks: {
+          font: {
+            size: 10 // Smaller font size for y-axis
+          },
+          beginAtZero: true
+        },
+        grid: {
+          display: false // Disable grid lines on y-axis
+        }
+      }
+    }
+  }
+
   return (
     <div className="total-bookings-container">
       {loading ? (
         <p>{t("loading")}...</p> // Translated loading text
       ) : (
-        <div className="admin-cards-container">
+        <div>
+   <div className="admin-cards-container">
           <div className="admin-card">
             <h3>{t("all_time_bookings")}</h3> {/* Translated heading */}
             <p>{totalBookings}</p>
@@ -39,6 +113,10 @@ const TotalBookings = () => {
           <div className="admin-card">
             <h3>{t("bookings_this_month")}</h3> {/* Translated heading */}
             <p>{monthlyBookings}</p>
+            </div>
+          </div>
+          <div className="chart-container">
+            <Bar data={data} options={options} />
           </div>
         </div>
       )}

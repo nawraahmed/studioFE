@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 import Client from "../services/api"
 import PackageCard from "./PackageCard"
+import "../static/package.css"
 import { useTranslation } from "react-i18next" // Import useTranslation hook
 
 const Package = () => {

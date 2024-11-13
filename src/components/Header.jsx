@@ -1,5 +1,7 @@
-import { useState } from "react"
-import { Link } from "react-router-dom"
+import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
+import '../static/header.css'
+import CurrencySelector from './CurrencySelectot'
 import { useTranslation } from "react-i18next" // Import useTranslation
 
 const Header = ({ user, handleLogOut }) => {
@@ -24,10 +26,10 @@ const Header = ({ user, handleLogOut }) => {
       <div className="logo">design studio</div>
 
       <button className="menu-toggle" onClick={toggleMenu}>
-        {isMenuOpen ? "✕" : "☰"}
+        {isMenuOpen ? '✕' : '☰'}
       </button>
 
-      <nav className={`nav-links ${isMenuOpen ? "open" : ""}`}>
+      <nav className={`nav-links ${isMenuOpen ? 'open' : ''}`}>
         <Link to="/" onClick={closeMenu}>
           {i18n.t("home") || "Home"} {/* Using i18n.t() to get translation */}
         </Link>
@@ -37,9 +39,9 @@ const Header = ({ user, handleLogOut }) => {
         <Link to="/packages" onClick={closeMenu}>
           {i18n.t("packages") || "Packages"}
         </Link>
-        <Link to="/contact" onClick={closeMenu}>
-          {i18n.t("contact") || "Contact"}
-        </Link>
+        {/* <Link to="/contact" onClick={closeMenu}>
+          Contact
+        </Link> */}
         <Link to="/book" onClick={closeMenu}>
           {i18n.t("book") || "Book"}
         </Link>
@@ -52,6 +54,12 @@ const Header = ({ user, handleLogOut }) => {
             {i18n.t("profile") || "Profile"}
           </Link>
         )}
+
+        {/* {user && user.role === 'admin' && (
+          <Link to="/admin" onClick={closeMenu}>
+            Admin Dashboard
+          </Link>
+        )} */}
 
         {user ? (
           <button
@@ -67,12 +75,12 @@ const Header = ({ user, handleLogOut }) => {
             {i18n.t("sign_in") || "Sign In"}
           </Link>
         )}
-
-        {/* Language Toggle Buttons */}
-        <div className="language-switcher">
+{/* Language Toggle Buttons */}
+<div className="language-switcher">
           <button onClick={() => changeLanguage("en")}>English</button>
           <button onClick={() => changeLanguage("ar")}>العربية</button>
         </div>
+        <CurrencySelector />
       </nav>
     </header>
   )

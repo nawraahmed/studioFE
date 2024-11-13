@@ -1,16 +1,18 @@
-import { useState } from "react"
-import { useNavigate } from "react-router-dom"
-import { SignInUser } from "../services/Auth"
-import { GoogleLogin } from "@react-oauth/google"
-import axios from "axios"
-import Client from "../services/api"
+import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { SignInUser } from '../services/Auth'
+import { GoogleLogin } from '@react-oauth/google'
+import axios from 'axios'
+import Client from '../services/api'
+import { Link } from 'react-router-dom' // Import Link from react-router-dom
+import '../static/signIn.css'
 
 const SignIn = ({ setUser }) => {
   let navigate = useNavigate()
 
-  let initialState = { email: "", password: "" }
+  let initialState = { email: '', password: '' }
   const [formValues, setFormValues] = useState(initialState)
-  const [errorMessage, setErrorMessage] = useState("")
+  const [errorMessage, setErrorMessage] = useState('')
 
   const handleChange = (e) => {
     setFormValues({ ...formValues, [e.target.name]: e.target.value })
@@ -18,36 +20,30 @@ const SignIn = ({ setUser }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log("Logging in...")
+    console.log('Logging in...')
 
     try {
-      // Send login request and get the response payload
       const payload = await SignInUser(formValues)
 
-      // Check if the payload contains a token and user object
       if (payload.token && payload.user) {
-        // Store token, userId, and role in localStorage
-        localStorage.setItem("token", payload.token)
-        localStorage.setItem("userId", payload.user.id)
-        localStorage.setItem("role", payload.user.role)
+        localStorage.setItem('token', payload.token)
+        localStorage.setItem('userId', payload.user.id)
+        localStorage.setItem('role', payload.user.role)
 
-        // Set the user state in the parent component (e.g., App component)
         setUser(payload.user)
 
-        console.log("User signed in successfully:", payload)
+        console.log('User signed in successfully:', payload)
 
-        // Reset form values
         setFormValues(initialState)
 
-        // Redirect to homepage or desired page
-        navigate("/")
+        navigate('/')
       } else {
-        setErrorMessage("Invalid login details. Please try again.")
+        setErrorMessage('Invalid login details. Please try again.')
       }
     } catch (error) {
-      console.log("Login error:", error)
+      console.log('Login error:', error)
       setErrorMessage(
-        "Invalid login details. Please check your email and password."
+        'Invalid login details. Please check your email and password.'
       )
     }
   }
@@ -56,26 +52,28 @@ const SignIn = ({ setUser }) => {
     try {
       const { credential } = response
 
-      const { data } = await Client.post("/auth/google/token", {
-        credential,
+      const { data } = await Client.post('/auth/google/token', {
+        credential
       })
 
       if (data.token) {
-        localStorage.setItem("token", data.token)
+        localStorage.setItem('token', data.token)
         setUser(data.user)
-        navigate("/")
+        navigate('/')
       }
     } catch (error) {
-      console.error("Google login error:", error)
+      console.error('Google login error:', error)
     }
   }
 
   return (
-    <div className="signin col">
-      <div className="card-overlay centered">
-        <form className="col" onSubmit={handleSubmit}>
-          <div className="input-wrapper">
-            <label htmlFor="email">Email</label>
+    <div className="signin-wrapper">
+      <div className="signin-card">
+        <form className="signin-form" onSubmit={handleSubmit}>
+          <div className="signin-input-wrapper">
+            <label htmlFor="email" className="signin-label">
+              Email
+            </label>
             <input
               onChange={handleChange}
               name="email"
@@ -83,30 +81,47 @@ const SignIn = ({ setUser }) => {
               placeholder="example@example.com"
               value={formValues.email}
               required
+              className="signin-input"
             />
           </div>
-          <div className="input-wrapper">
-            <label htmlFor="password">Password</label>
+          <div className="signin-input-wrapper">
+            <label htmlFor="password" className="signin-label">
+              Password
+            </label>
             <input
               onChange={handleChange}
               type="password"
               name="password"
               value={formValues.password}
               required
+              className="signin-input"
             />
           </div>
-          <button disabled={!formValues.email || !formValues.password}>
+          <button
+            type="submit"
+            className="signin-button"
+            disabled={!formValues.email || !formValues.password}
+          >
             Sign In
           </button>
         </form>
 
-        {errorMessage && <p className="error-message">{errorMessage}</p>}
+        {errorMessage && <p className="signin-error-message">{errorMessage}</p>}
 
-        <div>
+        <div className="signin-google-login">
           <GoogleLogin
             onSuccess={handleGoogleLoginSuccess}
-            onError={() => console.log("Google Login Failed")}
+            onError={() => console.log('Google Login Failed')}
           />
+        </div>
+
+        <div className="signin-register-link">
+          <p>
+            Don't have an account?{' '}
+            <Link to="/register" className="signin-register-link-text">
+              Register here
+            </Link>
+          </p>
         </div>
       </div>
     </div>
