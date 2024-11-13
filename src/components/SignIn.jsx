@@ -106,7 +106,7 @@ const SignIn = ({ setUser }) => {
             className="signin-button"
             disabled={!formValues.email || !formValues.password}
           >
-            Sign In
+            SIGN IN
           </button>
         </form>
 
@@ -118,6 +118,7 @@ const SignIn = ({ setUser }) => {
         </div>
 
         <div className="signin-google-login">
+
           <div style={{ width: "100%" }}>
             <GoogleLogin
               onSuccess={handleGoogleLoginSuccess}
@@ -125,6 +126,7 @@ const SignIn = ({ setUser }) => {
               className="google-login-button" // Custom class for width control
             />
           </div>
+
         </div>
 
         <div className="signin-register-link">

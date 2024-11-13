@@ -1,37 +1,62 @@
-/* Calendar Modal Styling */
+.calendar {
+  max-width: 80%;
+  height: 500px;
+  margin: 0 auto;
+}
+
+.calender-description {
+  text-align: center;
+  margin-bottom: 5rem;
+  font-weight: 500;
+}
 .calendar-modal-overlay {
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent dark overlay */
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1000; /* Ensure it appears above other elements */
 }
 
+/* Modal Content */
 .calendar-modal-content {
-  background-color: white;
-  padding: 20px;
-  border-radius: 10px;
+  background-color: #fefcf6;
+  padding: 30px;
+  border-radius: 12px;
   max-width: 500px;
-  width: 100%;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease-in-out;
+  width: 90%;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  position: relative;
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 /* Close Button */
 .calendar-modal-close {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 15px;
+  right: 15px;
   background: none;
   border: none;
-  font-size: 18px;
+  font-size: 1.2rem;
   cursor: pointer;
+  color: #5e6c5b;
+  transition: color 0.3s ease;
+}
+
+.calendar-modal-close:hover {
+  color: #49886d;
 }
 
 /* Modal Header */
 .calendar-modal-header h3 {
-  font-size: 1.5em;
-  margin-bottom: 20px;
+  font-size: 1.8em;
+  margin-bottom: 40px;
   text-align: center;
+  color: #5e6c5b;
 }
 
 /* Form Styling */
@@ -46,49 +71,60 @@
 
 .calendar-form label {
   font-size: 1em;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
+  color: #333;
 }
 
 .calendar-form select,
 .calendar-form input {
-  padding: 10px;
+  padding: 15px;
   font-size: 1em;
   border-radius: 5px;
-  border: 1px solid #ccc;
+  margin-top: 20px;
+  border: 1px solid #d3d3d3;
+  width: 100%;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease;
 }
 
 .calendar-form select:focus,
 .calendar-form input:focus {
-  border-color: #85c1e9; /* Blue focus border */
   outline: none;
 }
 
 /* Buttons */
 .calendar-btn {
-  padding: 10px 20px;
+  padding: 12px 20px;
   font-size: 1em;
-  border-radius: 5px;
+  border-radius: 8px;
   border: none;
   cursor: pointer;
   transition: background-color 0.3s ease;
-}
-
-.calendar-btn-submit {
-  background-color: #5e6c5b;
-  color: white;
-  margin-top: 10px;
+  margin-top: 15px;
 }
 
 .calendar-btn-submit:hover {
-  background-color: #4a5a47;
+  cursor: pointer;
 }
 
 .calendar-btn-cancel {
-  background-color: #ccc;
-  margin-top: 10px;
+  background-color: #bbb;
   color: white;
 }
 
 .calendar-btn-cancel:hover {
-  background-color: #bbb;
+  background-color: none;
+  cursor: pointer;
+}
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
