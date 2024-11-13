@@ -8,11 +8,18 @@ import { useTranslation } from "react-i18next"
 
 const Service = () => {
   const [services, setServices] = useState([])
+  const [userRole, setUserRole] = useState("")
+
   const navigate = useNavigate()
   const { i18n } = useTranslation()
   const { t } = useTranslation()
 
   useEffect(() => {
+    const role = localStorage.getItem("userRole")
+
+    if (role) {
+      setUserRole(role)
+    }
     const fetchServices = async () => {
       try {
         const response = await Client.get(`service/services`)
@@ -44,10 +51,23 @@ const Service = () => {
 
   return (
     <div className="container">
-      <div className="add-service">
-        <Link to="/new-service">
-          <button>Add New Service</button>
-        </Link>
+      <div className="service-intro">
+        <div className="service-overlay"></div>
+        <div className="service-content">
+          <h1 className="service-heading">Our Services</h1>
+          <p className="service-description">
+            Discover a range of carefully crafted services designed to elevate
+            your brand.
+            <br />
+            From branding to mobile development, we offer solutions tailored to
+            your needs.
+          </p>
+          {userRole === "admin" && (
+            <Link to="/new-service">
+              <button className="service-btn">+ Add New Service</button>
+            </Link>
+          )}
+        </div>
       </div>
 
       <div className="grid">
@@ -68,12 +88,17 @@ const Service = () => {
                 <strong> {t("service.price")}</strong>{" "}
                 <ProductPrice priceInBHD={service.startingPrice} />
               </p>
-              <button onClick={() => handleDelete(service._id)}>
-                Delete Service
-              </button>
-              <button onClick={() => handleUpdate(service)}>
-                Update Service
-              </button>
+
+              {userRole === "admin" && (
+                <div className="actions">
+                  <button onClick={() => handleDelete(service._id)}>
+                    Delete Service
+                  </button>
+                  <button onClick={() => handleUpdate(service)}>
+                    Update Service
+                  </button>
+                </div>
+              )}
             </div>
           ))
         )}

@@ -257,6 +257,7 @@ button:hover {
 
 .container {
   padding: 20px;
+  height: max-content;
 }
 
 /* .total-bookings-container {
@@ -594,25 +595,48 @@ input:checked + .slider:before {
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 20px;
+  gap: 100px;
 }
 .card {
   background-color: #f4efe6;
   padding: 20px;
-  margin-top: 20px;
+  margin-top: 40px;
   border-radius: 10px;
-  height: 15rem;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  min-height: 15rem;
+  position: relative;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ddd;
+
+  background-image: url("https://www.transparenttextures.com/patterns/white-diamond.png");
+  background-repeat: repeat;
+  background-size: 50px 50px;
+
+  transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
 }
+
+/* On hover, add scale and shadow animation */
+.card:hover {
+  transform: translateY(-10px) scale(1.05); /* Slight lift and enlarge */
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2); /* Deeper shadow */
+  filter: brightness(1.05); /* Slight brightness increase */
+}
+
 .card h3 {
   font-size: 1.2em;
   margin-bottom: 10px;
 }
+
 .card p {
   font-size: 0.9em;
   color: #666;
   margin: 10px 0;
 }
+
 .card button {
   background-color: #555;
   color: white;
@@ -621,6 +645,14 @@ input:checked + .slider:before {
   border-radius: 5px;
   cursor: pointer;
   margin-top: 10px;
+  align-self: center; /* Centers the buttons horizontally */
+}
+
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  grid-auto-rows: minmax(15rem, auto);
 }
 
 ul {
@@ -678,4 +710,55 @@ ul {
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s;
+}
+
+.service-intro {
+  position: relative;
+  height: 40vh;
+  background-image: url("https://i.pinimg.com/736x/82/fc/35/82fc3581d01d79e05be9a82f4bab6898.jpg");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgb(0, 0, 0);
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+
+.service-intro::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: inherit;
+  filter: blur(19px);
+  z-index: 1;
+}
+
+.service-intro > * {
+  position: relative;
+  z-index: 2;
+}
+
+.service-content {
+  position: relative;
+  z-index: 2;
+  padding: 1rem 2rem;
+}
+
+.service-heading {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #000000;
+}
+
+.service-description {
+  font-size: 2rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  color: #000000;
 }
