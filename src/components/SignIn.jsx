@@ -69,6 +69,8 @@ const SignIn = ({ setUser }) => {
   return (
     <div className="signin-wrapper">
       <div className="signin-card">
+        <h1 className="signin-header">Sign In</h1>
+
         <form className="signin-form" onSubmit={handleSubmit}>
           <div className="signin-input-wrapper">
             <label htmlFor="email" className="signin-label">
@@ -84,6 +86,7 @@ const SignIn = ({ setUser }) => {
               className="signin-input"
             />
           </div>
+
           <div className="signin-input-wrapper">
             <label htmlFor="password" className="signin-label">
               Password
@@ -97,6 +100,7 @@ const SignIn = ({ setUser }) => {
               className="signin-input"
             />
           </div>
+
           <button
             type="submit"
             className="signin-button"
@@ -108,18 +112,28 @@ const SignIn = ({ setUser }) => {
 
         {errorMessage && <p className="signin-error-message">{errorMessage}</p>}
 
+        {/* OR Divider */}
+        <div className="signin-or-divider">
+          <span>OR</span>
+        </div>
+
         <div className="signin-google-login">
-          <GoogleLogin
-            onSuccess={handleGoogleLoginSuccess}
-            onError={() => console.log("Google Login Failed")}
-          />
+
+          <div style={{ width: "100%" }}>
+            <GoogleLogin
+              onSuccess={handleGoogleLoginSuccess}
+              onError={() => console.log("Google Login Failed")}
+              className="google-login-button" // Custom class for width control
+            />
+          </div>
+
         </div>
 
         <div className="signin-register-link">
           <p>
             Don't have an account?{" "}
             <Link to="/register" className="signin-register-link-text">
-              Register here
+              Sign Up
             </Link>
           </p>
         </div>

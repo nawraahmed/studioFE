@@ -65,6 +65,18 @@
   .menu-toggle {
     display: block;
   }
+
+  .footer {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
 }
 
 .footer {
@@ -91,6 +103,7 @@
 
 .footer-info {
   font-size: 0.9rem;
+  margin-right: 10px;
 }
 
 .currency-selector {
