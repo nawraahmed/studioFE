@@ -1,0 +1,113 @@
+/* Styling for NewProject Form */
+.project-form-container {
+  max-width: 900px;
+  margin: 30px auto;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+h2 {
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+}
+
+.message {
+  text-align: center;
+  color: #d9534f;
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  font-size: 1.1rem;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.form-group textarea {
+  height: 150px;
+}
+
+.current-cover img {
+  border: 2px solid #ddd;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.existing-files,
+.new-files {
+  margin-top: 20px;
+}
+
+.existing-files ul,
+.new-files ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.existing-files li,
+.new-files li {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.remove-file-button {
+  color: red;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.remove-file-button:hover {
+  text-decoration: underline;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.submit-button,
+.cancel-button {
+  padding: 10px 20px;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.submit-button {
+  background-color: #28a745;
+  color: white;
+}
+
+.submit-button:hover {
+  background-color: #218838;
+}
+
+.cancel-button {
+  background-color: #dc3545;
+  color: white;
+}
+
+.cancel-button:hover {
+  background-color: #c82333;
+}

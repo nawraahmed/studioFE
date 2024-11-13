@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import Client from "../services/api"
+import "../static/project.css"
 
 const NewProject = () => {
   const { projectId } = useParams()
@@ -20,7 +21,6 @@ const NewProject = () => {
   const [isEditing, setIsEditing] = useState(false)
   const [newFiles, setNewFiles] = useState([])
 
-  // Fetch available services and project data if editing an existing project
   useEffect(() => {
     const fetchServices = async () => {
       try {
@@ -43,7 +43,7 @@ const NewProject = () => {
             title: projectResponse.data.title,
             description: projectResponse.data.description,
             service: projectResponse.data.service?._id || "",
-            files: projectResponse.data.files || [], //
+            files: projectResponse.data.files || [],
             coverImage: projectResponse.data.cover || null,
           })
         } catch (error) {
@@ -54,41 +54,6 @@ const NewProject = () => {
       fetchProject()
     }
   }, [projectId])
-
-  const renderFile = (fileUrl) => {
-    const adjustedUrl = `http://localhost:4000/${fileUrl.replace(
-      /^public[\\/]+/,
-      ""
-    )}`
-    const fileExtension = adjustedUrl.split(".").pop().toLowerCase()
-
-    if (["jpg", "jpeg", "png", "gif"].includes(fileExtension)) {
-      return (
-        <img
-          src={adjustedUrl}
-          alt="project-file"
-          style={{ maxWidth: "40%", height: "40%" }}
-        />
-      )
-    } else if (fileExtension === "pdf") {
-      return (
-        <iframe
-          src={adjustedUrl}
-          type="application/pdf"
-          width="100%"
-          height="500px"
-          style={{ border: "none" }}
-          title="PDF Preview"
-        ></iframe>
-      )
-    } else {
-      return (
-        <a href={adjustedUrl} target="_blank" rel="noopener noreferrer">
-          {fileUrl}
-        </a>
-      )
-    }
-  }
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -101,7 +66,7 @@ const NewProject = () => {
   }
 
   const handleCoverImageChange = (e) => {
-    const coverImage = e.target.files[0] // Only one file should be selected for cover image
+    const coverImage = e.target.files[0]
     setFormData((prevData) => ({ ...prevData, coverImage }))
   }
 
@@ -196,11 +161,11 @@ const NewProject = () => {
   }
 
   return (
-    <div className="project-form">
-      {message && <p>{message}</p>}
+    <div className="project-form-container">
+      {message && <p className="message">{message}</p>}
       <h2>{isEditing ? "Edit Project" : "Add New Project"}</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
+      <form onSubmit={handleSubmit} className="project-form">
+        <div className="form-group">
           <label htmlFor="title">Project Title:</label>
           <input
             type="text"
@@ -211,7 +176,7 @@ const NewProject = () => {
             required
           />
         </div>
-        <div>
+        <div className="form-group">
           <label htmlFor="description">Description:</label>
           <textarea
             name="description"
@@ -221,7 +186,7 @@ const NewProject = () => {
             required
           />
         </div>
-        <div>
+        <div className="form-group">
           <label htmlFor="service">Service:</label>
           <select
             name="service"
@@ -239,7 +204,7 @@ const NewProject = () => {
           </select>
         </div>
 
-        <div>
+        <div className="form-group">
           <label htmlFor="coverImage">Cover Image:</label>
           <input
             type="file"
@@ -250,7 +215,7 @@ const NewProject = () => {
         </div>
 
         {isEditing && formData.coverImage && (
-          <div>
+          <div className="current-cover">
             <h4>Current Cover Image:</h4>
             <img
               src={`http://localhost:4000/${formData.coverImage.replace(
@@ -263,7 +228,7 @@ const NewProject = () => {
           </div>
         )}
 
-        <div>
+        <div className="form-group">
           <label htmlFor="files">Upload Files:</label>
           <input
             type="file"
@@ -275,28 +240,19 @@ const NewProject = () => {
         </div>
 
         {isEditing && formData.files.length > 0 && (
-          <div>
+          <div className="existing-files">
             <h4>Existing Files:</h4>
             <ul>
               {formData.files.map((file, index) => (
                 <li key={index}>
-                  {renderFile(file)}
-                  <span>
-                    {file}{" "}
-                    <button
-                      type="button"
-                      onClick={() => handleFileRemove(file)}
-                      style={{
-                        color: "red",
-                        background: "transparent",
-                        border: "none",
-                        cursor: "pointer",
-                        marginLeft: "10px",
-                      }}
-                    >
-                      <i className="fa fa-trash"></i> Remove
-                    </button>
-                  </span>
+                  {file}
+                  <button
+                    type="button"
+                    onClick={() => handleFileRemove(file)}
+                    className="remove-file-button"
+                  >
+                    <i className="fa fa-trash"></i> Remove
+                  </button>
                 </li>
               ))}
             </ul>
@@ -304,29 +260,28 @@ const NewProject = () => {
         )}
 
         {newFiles.length > 0 && (
-          <div>
+          <div className="new-files">
             <h4>New Files:</h4>
             <ul>
               {newFiles.map((file, index) => (
-                <li key={index}>
-                  <span>{file.name}</span>
-                </li>
+                <li key={index}>{file.name}</li>
               ))}
             </ul>
           </div>
         )}
 
-        <button type="submit">
-          {isEditing ? "Save Changes" : "Add Project"}
-        </button>
-
-        <button
-          type="button"
-          onClick={handleCancel}
-          style={{ marginLeft: "10px" }}
-        >
-          Cancel
-        </button>
+        <div className="form-actions">
+          <button type="submit" className="submit-button">
+            {isEditing ? "Save Changes" : "Add Project"}
+          </button>
+          <button
+            type="button"
+            onClick={handleCancel}
+            className="cancel-button"
+          >
+            Cancel
+          </button>
+        </div>
       </form>
     </div>
   )
