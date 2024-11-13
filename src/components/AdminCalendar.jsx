@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react"
-import { Calendar, momentLocalizer, Views } from "react-big-calendar"
-import moment from "moment"
-import "react-big-calendar/lib/css/react-big-calendar.css"
-import Client from "../services/api"
+import React, { useState, useEffect } from 'react'
+import { Calendar, momentLocalizer, Views } from 'react-big-calendar'
+import moment from 'moment'
+import 'react-big-calendar/lib/css/react-big-calendar.css'
+import Client from '../services/api'
 
-moment.locale("en")
+moment.locale('en')
 const localizer = momentLocalizer(moment)
 
 const AdminCalendar = () => {
@@ -19,17 +19,22 @@ const AdminCalendar = () => {
 
   const fetchAvailableSlots = async () => {
     try {
-      const response = await Client.get("/slot/slots")
+      const response = await Client.get('/slot/slots')
       const data = response.data.map((slot) => ({
         id: slot._id,
         title: slot.title,
         start: new Date(slot.start),
         end: new Date(slot.end),
-        color: slot.color || "#85C1E9",
+        color: slot.color || '#85C1E9'
       }))
+
+      if (data.length === 0) {
+        alert('No available slots booked')
+      }
+
       setEvents(data)
     } catch (error) {
-      console.error("Error fetching available slots:", error)
+      console.error('Error fetching available slots:', error)
     }
   }
 
@@ -47,7 +52,7 @@ const AdminCalendar = () => {
       { start: 13, end: 14 },
       { start: 14, end: 15 },
       { start: 15, end: 16 },
-      { start: 16, end: 17 },
+      { start: 16, end: 17 }
     ]
 
     const availableSlots = allSlots.filter((slot) => {
@@ -66,7 +71,7 @@ const AdminCalendar = () => {
         title: `Available Slot ${slot.start}:00 - ${slot.end}:00`,
         start: new Date(date.setHours(slot.start, 0, 0, 0)),
         end: new Date(date.setHours(slot.end, 0, 0, 0)),
-        color: "#85C1E9",
+        color: '#85C1E9'
       }))
     )
   }
@@ -98,8 +103,8 @@ const AdminCalendar = () => {
     if (selectedDate && date.toDateString() === selectedDate.toDateString()) {
       return {
         style: {
-          backgroundColor: "#FFD700",
-        },
+          backgroundColor: '#FFD700'
+        }
       }
     }
     return {}
@@ -112,21 +117,21 @@ const AdminCalendar = () => {
           title: slot.title,
           start: slot.start.toISOString(),
           end: slot.end.toISOString(),
-          color: slot.color,
+          color: slot.color
         }))
         await Promise.all(
-          newSlots.map((slot) => Client.post("/slot/createSlot", slot))
+          newSlots.map((slot) => Client.post('/slot/createSlot', slot))
         )
 
-        alert("Slots saved successfully!")
+        alert('Slots saved successfully!')
         fetchAvailableSlots()
         setSelectedDate(null)
         setSelectedSlots([])
       } catch (error) {
-        console.error("Error saving slots:", error)
+        console.error('Error saving slots:', error)
       }
     } else {
-      alert("Please select a date and time slots to save.")
+      alert('Please select a date and time slots to save.')
     }
   }
 
@@ -139,16 +144,16 @@ const AdminCalendar = () => {
           events={events}
           selectable
           defaultView={Views.MONTH}
-          views={["month", "day", "agenda"]}
-          style={{ height: "500px" }}
+          views={['month', 'day', 'agenda']}
+          style={{ height: '500px' }}
           onSelectSlot={({ start }) => handleSelectDay(start)}
           dayPropGetter={dayPropGetter}
           formats={{
-            dayHeaderFormat: "MMM DD",
+            dayHeaderFormat: 'MMM DD',
             dayRangeHeaderFormat: ({ start, end }) =>
-              `${moment(start).format("MMM DD")} - ${moment(end).format(
-                "MMM DD"
-              )}`,
+              `${moment(start).format('MMM DD')} - ${moment(end).format(
+                'MMM DD'
+              )}`
           }}
         />
       </div>
@@ -176,7 +181,7 @@ const AdminCalendar = () => {
           {selectedSlots.map((slot, index) => (
             <li key={index}>
               <span>{`${slot.title} - ${moment(slot.start).format(
-                "HH:mm"
+                'HH:mm'
               )}`}</span>
               <button onClick={() => handleSelectSlot(slot)}>Remove</button>
             </li>
