@@ -1,4 +1,3 @@
-// src/pages/PortfolioPage.jsx
 import React from 'react'
 import PortfolioList from '../components/PortfolioList'
 

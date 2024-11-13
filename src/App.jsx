@@ -4,6 +4,7 @@ import Project from './components/Project'
 import NewProject from './components/NewProject'
 import Service from './components/Service'
 import NewService from './components/NewService'
+import Calendar from './components/Calendar'
 import CalendarWrapper from './components/CalendarWrapper'
 import Package from './components/Package'
 import NewPackage from './components/NewPackage'
@@ -63,7 +64,6 @@ function App() {
             <Route path="/new-package" element={<NewPackage />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/book" element={<CalendarWrapper />} />{' '}
-            {/* Using CalendarWrapper */}
             <Route path="/policy" element={<Policy />} />
             <Route path="/admin" element={<AdminDashboard />} />
             <Route path="/signin" element={<SignIn setUser={setUser} />} />

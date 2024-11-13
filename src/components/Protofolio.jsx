@@ -14,12 +14,14 @@ const Protofolio = () => {
         autoplaySpeed={3000}
       >
         {projects.map((project, index) => (
-          <div key={index} className="project-card">
-            <img
-              src={project.image}
-              alt={project.title}
-              className="project-image"
-            />
+          <div>
+            <div key={index} className="project-card">
+              <img
+                src={project.image}
+                alt={project.title}
+                className="project-image"
+              />
+            </div>
             <h3>{project.title}</h3>
             <p>{project.description}</p>
           </div>
