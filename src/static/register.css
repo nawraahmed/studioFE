@@ -1,0 +1,108 @@
+/* Wrapper for the registration form */
+.register-wrapper {
+  margin-top: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: #fefcf6;
+}
+
+/* Register Card */
+.register-card {
+  width: 100%;
+  max-width: 600px;
+  background: #f4efe6;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: #f4efe6;
+  text-align: center;
+  margin-bottom: 100px;
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Input Wrappers */
+.input-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+}
+
+label {
+  font-size: 14px;
+  color: #333;
+  font-weight: 500;
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  background-color: #f9f9f9;
+}
+
+input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* Error Message */
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+/* Password Checklist */
+.custom-checklist {
+  margin-top: 10px;
+  text-align: left;
+  font-size: 12px;
+  color: #333;
+}
+
+/* Register Button */
+button {
+  width: 100%;
+  padding: 14px;
+  background-color: #5e6c5b;
+  color: white;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:disabled {
+  background-color: #808080;
+}
+
+button:hover {
+  background-color: #4a5e47;
+}
+
+/* Register Link */
+.register-signin-link {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.register-signin-link-text {
+  color: #5e6c5b;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.register-signin-link-text:hover {
+  text-decoration: underline;
+}

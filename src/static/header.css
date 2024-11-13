@@ -73,6 +73,10 @@
   text-align: center;
   color: #5e6c5b;
   font-family: 'Arial', sans-serif;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
 }
 
 .footer-links {
