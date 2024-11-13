@@ -1,100 +1,3 @@
-.header {
-  background-color: #f4efe6;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 2rem 2rem;
-  font-family: 'Arial', sans-serif;
-  position: relative;
-  z-index: 1;
-}
-
-.logo {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #5e6c5b;
-}
-
-.nav-links {
-  display: flex;
-  flex-direction: row;
-  gap: 1.5rem;
-}
-
-.nav-links a {
-  text-decoration: none;
-  color: #5e6c5b;
-  font-size: 1rem;
-}
-
-.nav-links a:hover {
-  color: #49886d;
-}
-
-.menu-toggle {
-  display: none;
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
-  color: #5e6c5b;
-}
-
-@media (max-width: 768px) {
-  .nav-links {
-    display: flex;
-    flex-direction: column;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background-color: #f4efe6;
-    padding: 2rem;
-    transform: scaleY(0);
-    transform-origin: top;
-    transition: transform 0.3s ease;
-    z-index: 0;
-  }
-
-  .nav-links.open {
-    transform: scaleY(1);
-    border-top: 1px solid #d3d3d3;
-  }
-
-  .menu-toggle {
-    display: block;
-  }
-}
-
-.footer {
-  background-color: #f4efe6;
-  padding: 1rem 2rem;
-  text-align: center;
-  color: #5e6c5b;
-  font-family: 'Arial', sans-serif;
-}
-
-.footer-links {
-  margin-bottom: 0.5rem;
-}
-
-.footer-links a {
-  margin: 0 1rem;
-  text-decoration: none;
-  color: #5e6c5b;
-}
-
-.footer-info {
-  font-size: 0.9rem;
-}
-
-body {
-  margin: 0;
-  background-color: #fefcf6;
-  font-family: 'Arial', sans-serif;
-  color: #5e6c5b;
-}
 
 h2 {
   border-bottom: 2px solid #5e6c5b;
@@ -110,15 +13,6 @@ h2 {
   z-index: 3;
 }
 
-.custom-heading::after {
-  content: '';
-  display: block;
-  width: 100%;
-  height: 6px;
-  background-color: #5e6c5b;
-  position: absolute;
-  bottom: -2px;
-}
 
 .app-container {
   padding: 0px 20px 0px 20px;
@@ -136,12 +30,6 @@ button {
 
 button:hover {
   opacity: 0.9;
-}
-
-.protofolio-slider {
-  width: 80%;
-  margin: 0 auto;
-  padding: 40px 0;
 }
 
 .project-card {
@@ -173,7 +61,7 @@ button:hover {
 }
 
 .project-card h3 {
-  margin: 10px 0;
+  text-align: center;
   font-size: 1.1em;
   color: #333;
   text-overflow: ellipsis;
@@ -203,32 +91,6 @@ button:hover {
 
 .project-card button:hover {
   background-color: #2e4736;
-}
-
-@media (max-width: 1024px) {
-  .protofolio-slider {
-    width: 90%;
-  }
-
-  .project-card {
-    width: 250px;
-    height: 350px;
-  }
-}
-
-@media (max-width: 768px) {
-  .protofolio-slider {
-    width: 95%;
-  }
-
-  .project-card {
-    width: 200px;
-    height: 300px;
-  }
-
-  .project-image {
-    height: 200px;
-  }
 }
 
 .portfolio-list {
