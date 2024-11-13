@@ -8,6 +8,7 @@ const Project = () => {
   const { projectId } = useParams()
   const navigate = useNavigate()
   const [project, setProject] = useState(null)
+  const [userRole, setUserRole] = useState(null)
   const [message, setMessage] = useState("")
 
   useEffect(() => {
@@ -23,6 +24,12 @@ const Project = () => {
 
     if (projectId) {
       fetchProject()
+    }
+
+    const role = localStorage.getItem("role")
+
+    if (role) {
+      setUserRole(role)
     }
   }, [projectId])
 
@@ -100,17 +107,19 @@ const Project = () => {
             margin: "10px 0",
           }}
         >
-          <button
-            onClick={() => navigate(`/project/${projectId}`)}
-            style={{
-              backgroundColor: "transparent",
-              border: "none",
-              cursor: "pointer",
-              color: "#007bff",
-            }}
-          >
-            <i className="fa fa-edit"></i> Edit Project
-          </button>
+          {userRole === "admin" && (
+            <button
+              onClick={() => navigate(`/project/${projectId}`)}
+              style={{
+                backgroundColor: "transparent",
+                border: "none",
+                cursor: "pointer",
+                color: "#007bff",
+              }}
+            >
+              <i className="fa fa-edit"></i> Edit Project
+            </button>
+          )}
           <h3>{project.title}</h3>
           <p>{project.description}</p>
           <p>Service: {project.service?.name}</p>
@@ -122,36 +131,40 @@ const Project = () => {
               project.files.map((file, index) => (
                 <div key={index} style={{ marginBottom: "10px" }}>
                   {renderFile(file)}
-                  <button
-                    onClick={() => deleteFile(file)}
-                    style={{
-                      color: "red",
-                      border: "none",
-                      cursor: "pointer",
-                      background: "transparent",
-                      padding: "5px",
-                    }}
-                  >
-                    <i className="fa fa-trash"></i>
-                  </button>
+                  {userRole === "admin" && (
+                    <button
+                      onClick={() => deleteFile(file)}
+                      style={{
+                        color: "red",
+                        border: "none",
+                        cursor: "pointer",
+                        background: "transparent",
+                        padding: "5px",
+                      }}
+                    >
+                      <i className="fa fa-trash"></i>
+                    </button>
+                  )}
                 </div>
               ))}
           </div>
 
-          <div>
-            <button
-              onClick={handleDelete}
-              style={{
-                backgroundColor: "red",
-                color: "white",
-                padding: "10px 20px",
-                border: "none",
-                cursor: "pointer",
-              }}
-            >
-              Delete Project
-            </button>
-          </div>
+          {userRole === "admin" && (
+            <div>
+              <button
+                onClick={handleDelete}
+                style={{
+                  backgroundColor: "red",
+                  color: "white",
+                  padding: "10px 20px",
+                  border: "none",
+                  cursor: "pointer",
+                }}
+              >
+                Delete Project
+              </button>
+            </div>
+          )}
         </div>
       ) : (
         <p>Loading project...</p>
