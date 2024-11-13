@@ -20,14 +20,18 @@ const NewProject = () => {
   const [message, setMessage] = useState("")
   const [isEditing, setIsEditing] = useState(false)
   const [newFiles, setNewFiles] = useState([])
+  const [loading, setLoading] = useState(true) // Added loading state
 
   useEffect(() => {
     const fetchServices = async () => {
       try {
         const servicesResponse = await Client.get("/service/services")
+        console.log("Services fetched: ", servicesResponse.data) // Logging services
         setServices(servicesResponse.data)
       } catch (error) {
         console.error("Error fetching services:", error)
+      } finally {
+        setLoading(false) // Stop loading once data is fetched
       }
     }
     fetchServices()
@@ -68,22 +72,6 @@ const NewProject = () => {
   const handleCoverImageChange = (e) => {
     const coverImage = e.target.files[0]
     setFormData((prevData) => ({ ...prevData, coverImage }))
-  }
-
-  const handleFileRemove = async (filePath) => {
-    try {
-      await Client.delete(`/projects/project/${projectId}/delete-file`, {
-        data: { filePath },
-      })
-      setFormData((prevProject) => ({
-        ...prevProject,
-        files: prevProject.files.filter((file) => file !== filePath),
-      }))
-      setMessage("File deleted successfully")
-    } catch (error) {
-      console.error("Error deleting file:", error)
-      setMessage("Failed to delete file")
-    }
   }
 
   const handleCancel = () => {
@@ -186,22 +174,29 @@ const NewProject = () => {
             required
           />
         </div>
+
         <div className="form-group">
           <label htmlFor="service">Service:</label>
-          <select
-            name="service"
-            id="service"
-            value={formData.service}
-            onChange={handleChange}
-            required
-          >
-            <option value="">Select a service</option>
-            {services.map((service) => (
-              <option key={service._id} value={service._id}>
-                {service.name}
-              </option>
-            ))}
-          </select>
+          {loading ? (
+            <p>Loading services...</p> // Display loading message
+          ) : services.length === 0 ? (
+            <p>No services available</p> // Display fallback message if no services
+          ) : (
+            <select
+              name="service"
+              id="service"
+              value={formData.service}
+              onChange={handleChange}
+              required
+            >
+              <option value="">Select a service</option>
+              {services.map((service) => (
+                <option key={service._id} value={service._id}>
+                  {service.name_en}
+                </option>
+              ))}
+            </select>
+          )}
         </div>
 
         <div className="form-group">
