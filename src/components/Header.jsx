@@ -42,11 +42,6 @@ const Header = ({ user, handleLogOut }) => {
         <Link to="/admin" onClick={closeMenu}>
           Admin Dashboard
         </Link>
-        {/* {user && user.role === 'admin' && (
-          <Link to="/admin" onClick={closeMenu}>
-            Admin Dashboard
-          </Link>
-        )} */}
 
         {user ? (
           <button

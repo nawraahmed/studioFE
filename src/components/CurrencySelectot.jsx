@@ -1,29 +1,20 @@
-// // src/components/CurrencySelector.js
-// import React, { useContext } from 'react';
-// import CurrencyContext from '../contexts/CurrencyContext';
+// src/components/CurrencySelector.js
 
-// const CurrencySelector = () => {
-//     const { currency, changeCurrency } = useContext(CurrencyContext);
+import React from 'react'
+import { useCurrency } from '../contexts/CurrencyProvider'
 
-//     const handleCurrencyChange = (e) => {
-//         changeCurrency(e.target.value);
-//     };
+const CurrencySelector = () => {
+  const { currency, setCurrency, rates } = useCurrency()
 
-//     return (
-//         <div>
-//             <label>Select Currency: </label>
-//             <select value={currency} onChange={handleCurrencyChange}>
-//                 <option value="USD">USD</option>
-//                 <option value="EUR">EUR</option>
-//                 <option value="AED">AED</option>
-//                 <option value="SAR">SAR</option>
-//                 <option value="KWD">KWD</option>
-//                 <option value="QAR">QAR</option>
-//                 <option value="BHD">BHD</option>
-//                 <option value="OMR">OMR</option>
-//             </select>
-//         </div>
-//     );
-// };
+  return (
+    <select value={currency} onChange={(e) => setCurrency(e.target.value)}>
+      {Object.keys(rates).map((cur) => (
+        <option key={cur} value={cur}>
+          {cur}
+        </option>
+      ))}
+    </select>
+  )
+}
 
-// export default CurrencySelector;
+export default CurrencySelector
