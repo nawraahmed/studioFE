@@ -1,5 +1,7 @@
-import { useState, useEffect } from "react"
-import { Link } from "react-router-dom"
+import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
+import '../static/header.css'
+import CurrencySelector from './CurrencySelectot'
 
 const Header = ({ user, handleLogOut }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -19,10 +21,10 @@ const Header = ({ user, handleLogOut }) => {
       <div className="logo">design studio</div>
 
       <button className="menu-toggle" onClick={toggleMenu}>
-        {isMenuOpen ? "✕" : "☰"}
+        {isMenuOpen ? '✕' : '☰'}
       </button>
 
-      <nav className={`nav-links ${isMenuOpen ? "open" : ""}`}>
+      <nav className={`nav-links ${isMenuOpen ? 'open' : ''}`}>
         <Link to="/" onClick={closeMenu}>
           Home
         </Link>
@@ -32,9 +34,9 @@ const Header = ({ user, handleLogOut }) => {
         <Link to="/packages" onClick={closeMenu}>
           Packages
         </Link>
-        <Link to="/contact" onClick={closeMenu}>
+        {/* <Link to="/contact" onClick={closeMenu}>
           Contact
-        </Link>
+        </Link> */}
         <Link to="/book" onClick={closeMenu}>
           Book
         </Link>
@@ -42,7 +44,6 @@ const Header = ({ user, handleLogOut }) => {
         <Link to="/admin" onClick={closeMenu}>
           Admin Dashboard
         </Link>
-
 
         {user && (
           <Link to="/profile" onClick={closeMenu}>
@@ -55,7 +56,6 @@ const Header = ({ user, handleLogOut }) => {
             Admin Dashboard
           </Link>
         )} */}
-
 
         {user ? (
           <button
@@ -71,6 +71,8 @@ const Header = ({ user, handleLogOut }) => {
             Sign In
           </Link>
         )}
+
+        <CurrencySelector />
       </nav>
     </header>
   )

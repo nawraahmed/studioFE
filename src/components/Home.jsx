@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import Protofolio from './Protofolio'
+import '../static/home.css'
 
 const Home = () => {
   return (
