@@ -1,18 +1,20 @@
-import React, { useState, useNavigate } from 'react'
-import LogsList from './LogsList'
-import UserManagement from './UserManagement'
-import TotalBookings from './TotalBookings'
+import React, { useState } from "react"
+import { useTranslation } from "react-i18next" // Import the useTranslation hook
+import LogsList from "./LogsList"
+import UserManagement from "./UserManagement"
+import TotalBookings from "./TotalBookings"
 
 const AdminDashboard = () => {
-  const [selectedSection, setSelectedSection] = useState('UserManagement') // Default to 'UserManagement'
+  const { t } = useTranslation() // Get the t function for translations
+  const [selectedSection, setSelectedSection] = useState("UserManagement") // Default to 'UserManagement'
 
   const renderSection = () => {
     switch (selectedSection) {
-      case 'UserManagement':
+      case "UserManagement":
         return <UserManagement />
-      case 'TotalBookings':
+      case "TotalBookings":
         return <TotalBookings />
-      case 'LogsList':
+      case "LogsList":
         return <LogsList />
       default:
         return null
@@ -21,34 +23,34 @@ const AdminDashboard = () => {
 
   return (
     <div className="dashboard-container">
-      <h1>Admin Dashboard</h1>
+      <h1>{t("admin_dashboard")}</h1> {/* Translate Admin Dashboard title */}
       <div className="dashboard-navigation">
         <button
           className={`navigation-button ${
-            selectedSection === 'UserManagement' ? 'active' : ''
+            selectedSection === "UserManagement" ? "active" : ""
           }`}
-          onClick={() => setSelectedSection('UserManagement')}
+          onClick={() => setSelectedSection("UserManagement")}
         >
-          User Management
+          {t("user_management")}{" "}
+          {/* Translate button text for User Management */}
         </button>
         <button
           className={`navigation-button ${
-            selectedSection === 'TotalBookings' ? 'active' : ''
+            selectedSection === "TotalBookings" ? "active" : ""
           }`}
-          onClick={() => setSelectedSection('TotalBookings')}
+          onClick={() => setSelectedSection("TotalBookings")}
         >
-          Total Bookings
+          {t("total_bookings")} {/* Translate button text for Total Bookings */}
         </button>
         <button
           className={`navigation-button ${
-            selectedSection === 'LogsList' ? 'active' : ''
+            selectedSection === "LogsList" ? "active" : ""
           }`}
-          onClick={() => setSelectedSection('LogsList')}
+          onClick={() => setSelectedSection("LogsList")}
         >
-          Logs
+          {t("logs")} {/* Translate button text for Logs */}
         </button>
       </div>
-
       <div className="dashboard-sections">{renderSection()}</div>
     </div>
   )

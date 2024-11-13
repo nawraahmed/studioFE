@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from 'react'
-import Client from '../services/api'
-import { useNavigate } from 'react-router-dom'
-import ProductPrice from './ProductPrice'
+import React, { useState, useEffect } from "react"
+import Client from "../services/api"
+import { useNavigate } from "react-router-dom"
+import ProductPrice from "./ProductPrice"
+import { useTranslation } from "react-i18next" // Import useTranslation hook
 
 const PackageCard = ({ packageData, onDelete }) => {
+  const { t } = useTranslation() // Get the t function for translations
+
   useEffect(() => {
     checkAndDeletePackage(packageData._id, packageData.servicesIncluded)
   }, [packageData.servicesIncluded])
@@ -19,13 +22,14 @@ const PackageCard = ({ packageData, onDelete }) => {
         onDelete(packageId)
       }
     } catch (error) {
-      console.error('Failed to delete package:', error)
+      console.error("Failed to delete package:", error)
     }
   }
 
   const handleUpdate = () => {
-    navigate('/new-package', { state: { packageData } })
+    navigate("/new-package", { state: { packageData } })
   }
+
   const handleBookNow = () => {
     navigate("/book")
   }
@@ -39,13 +43,14 @@ const PackageCard = ({ packageData, onDelete }) => {
         setIsActive(!isActive)
       }
     } catch (error) {
-      console.error('Failed to toggle package activation:', error)
+      console.error("Failed to toggle package activation:", error)
     }
   }
+
   const checkAndDeletePackage = async (packageId, servicesIncluded) => {
     if (servicesIncluded.length < 2) {
       console.log(
-        'Package has fewer than two services, deleting the package...'
+        "Package has fewer than two services, deleting the package..."
       )
       await handleDelete(packageId)
     }
@@ -59,20 +64,20 @@ const PackageCard = ({ packageData, onDelete }) => {
             type="checkbox"
             checked={isActive}
             onChange={handleToggle}
-            style={{ display: 'none' }}
+            style={{ display: "none" }}
           />
-          <span className={`slider ${isActive ? 'active' : ''}`}></span>
+          <span className={`slider ${isActive ? "active" : ""}`}></span>
         </div>
       </div>
       <h3>{packageData.name}</h3>
       <p>{packageData.description}</p>
       <strong>
         <p>
-          Price: <ProductPrice priceInBHD={packageData.price} />
+          {t("price")}: <ProductPrice priceInBHD={packageData.price} />
         </p>
       </strong>
       <div>
-        <h4>Included Services:</h4>
+        <h4>{t("included_services")}</h4>
         <ul>
           {packageData.servicesIncluded.map((service) => (
             <li key={service._id}>{service.name}</li>
@@ -81,10 +86,10 @@ const PackageCard = ({ packageData, onDelete }) => {
       </div>
       <div className="action-group">
         <button onClick={() => handleDelete(packageData._id)}>
-          Delete Package
+          {t("delete_package")}
         </button>
-        <button onClick={handleUpdate}>Update Package</button>
-        <button onClick={handleBookNow}>Book Now</button>
+        <button onClick={handleUpdate}>{t("update_package")}</button>
+        <button onClick={handleBookNow}>{t("book_now")}</button>
       </div>
     </div>
   )

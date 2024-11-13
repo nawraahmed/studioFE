@@ -1,11 +1,11 @@
 // frontend/src/components/CurrencyConverter.js
-import React, { useState } from 'react'
-import axios from 'axios'
+import React, { useState } from "react"
+import axios from "axios"
 
 function CurrencyConverter() {
-  const [amount, setAmount] = useState('')
-  const [fromCurrency, setFromCurrency] = useState('USD')
-  const [toCurrency, setToCurrency] = useState('AED')
+  const [amount, setAmount] = useState("")
+  const [fromCurrency, setFromCurrency] = useState("USD")
+  const [toCurrency, setToCurrency] = useState("AED")
   const [convertedAmount, setConvertedAmount] = useState(null)
   const [error, setError] = useState(null)
 
@@ -23,18 +23,18 @@ function CurrencyConverter() {
       if (response.data && response.data.convertedAmount) {
         setConvertedAmount(response.data.convertedAmount)
       } else {
-        setError('Failed to get converted amount. Please try again.')
+        setError("Failed to get converted amount. Please try again.")
       }
 
-      console.log('API response:', response.data) // Debugging line
+      console.log("API response:", response.data) // Debugging line
     } catch (error) {
-      console.error('Conversion error:', error)
-      setError('An error occurred during conversion. Please try again.')
+      console.error("Conversion error:", error)
+      setError("An error occurred during conversion. Please try again.")
     }
   }
 
   return (
-    <div style={{ padding: '20px', maxWidth: '400px', margin: 'auto' }}>
+    <div style={{ padding: "20px", maxWidth: "400px", margin: "auto" }}>
       <h2>Currency Converter</h2>
 
       <input
@@ -42,10 +42,10 @@ function CurrencyConverter() {
         value={amount}
         onChange={(e) => setAmount(e.target.value)}
         placeholder="Amount"
-        style={{ marginBottom: '10px', padding: '5px', width: '100%' }}
+        style={{ marginBottom: "10px", padding: "5px", width: "100%" }}
       />
 
-      <div style={{ marginBottom: '10px' }}>
+      <div style={{ marginBottom: "10px" }}>
         <label>From: </label>
         <select
           value={fromCurrency}
@@ -63,7 +63,7 @@ function CurrencyConverter() {
         </select>
       </div>
 
-      <div style={{ marginBottom: '10px' }}>
+      <div style={{ marginBottom: "10px" }}>
         <label>To: </label>
         <select
           value={toCurrency}
@@ -83,20 +83,20 @@ function CurrencyConverter() {
 
       <button
         onClick={handleConvert}
-        style={{ padding: '10px', width: '100%' }}
+        style={{ padding: "10px", width: "100%" }}
       >
         Convert
       </button>
 
       {/* Display Converted Amount */}
       {convertedAmount !== null && (
-        <p style={{ marginTop: '20px', fontSize: '1.2em' }}>
+        <p style={{ marginTop: "20px", fontSize: "1.2em" }}>
           Converted Amount: {convertedAmount} {toCurrency}
         </p>
       )}
 
       {/* Display Error Message */}
-      {error && <p style={{ color: 'red', marginTop: '20px' }}>{error}</p>}
+      {error && <p style={{ color: "red", marginTop: "20px" }}>{error}</p>}
     </div>
   )
 }

@@ -20,59 +20,73 @@ import PortfolioPage from "./components/PortfolioPage"
 import { useState, useEffect } from "react"
 import { CheckSession } from "./services/Auth"
 import Profile from "./components/Profile"
-import { CurrencyProvider } from './contexts/CurrencyProvider'
-import CurrencySelector from './components/CurrencySelectot'
+import { CurrencyProvider } from "./contexts/CurrencyProvider"
+import CurrencySelector from "./components/CurrencySelectot"
+import { useTranslation } from "react-i18next"
+import i18n from "./config/i18n"
 
 function App() {
+  const { i18n } = useTranslation()
   const [user, setUser] = useState(null)
 
+  // Handle logout
   const handleLogOut = () => {
     setUser(null)
     localStorage.clear()
   }
 
+  // Check user session based on token
   const checkToken = async () => {
     const user = await CheckSession()
     setUser(user)
   }
 
   useEffect(() => {
+    // Check if a token exists on mount
     const token = localStorage.getItem("token")
     if (token) {
       checkToken()
     }
   }, [])
 
+  // Adjust page direction based on the selected language
+  useEffect(() => {
+    document.documentElement.setAttribute(
+      "dir",
+      i18n.language === "ar" ? "rtl" : "ltr"
+    )
+  }, [i18n.language])
+
   return (
     <CurrencyProvider>
-    <div className="App">
-      <header>
-        <Header user={user} handleLogOut={handleLogOut} />
-      </header>
+      <div className="App">
+        <header>
+          <Header user={user} handleLogOut={handleLogOut} />
+        </header>
         <CurrencySelector />
-      <main className="app-container">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/projects/:projectId" element={<Project />} />
-          <Route path="/project" element={<NewProject />} />
-          <Route path="/project/:projectId" element={<NewProject />} />
-          <Route path="/services" element={<Service />} />
-          <Route path="/new-service" element={<NewService />} />
-          <Route path="/packages" element={<Package />} />
-          <Route path="/new-package" element={<NewPackage />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/book" element={<Calendar />} />
-          <Route path="/policy" element={<Policy />} />
-          <Route path="/admin" element={<AdminDashboard />} />
-          <Route path="/signin" element={<SignIn setUser={setUser} />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/protofolio" element={<Protofolio />} />
-          <Route path="/profile" element={<Profile user={user} />} />
-          <Route path="/portfolio-list" element={<PortfolioPage />} />{" "}
-        </Routes>
-      </main>
-      <Footer />
-    </div>
+        <main className="app-container">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/projects/:projectId" element={<Project />} />
+            <Route path="/project" element={<NewProject />} />
+            <Route path="/project/:projectId" element={<NewProject />} />
+            <Route path="/services" element={<Service />} />
+            <Route path="/new-service" element={<NewService />} />
+            <Route path="/packages" element={<Package />} />
+            <Route path="/new-package" element={<NewPackage />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/book" element={<Calendar />} />
+            <Route path="/policy" element={<Policy />} />
+            <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="/signin" element={<SignIn setUser={setUser} />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/protofolio" element={<Protofolio />} />
+            <Route path="/profile" element={<Profile user={user} />} />
+            <Route path="/portfolio-list" element={<PortfolioPage />} />
+          </Routes>
+        </main>
+        <Footer />
+      </div>
     </CurrencyProvider>
   )
 }
