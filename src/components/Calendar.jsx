@@ -1,36 +1,26 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect } from 'react'
+import { Calendar, momentLocalizer } from 'react-big-calendar'
+import moment from 'moment'
+import 'react-big-calendar/lib/css/react-big-calendar.css'
+import Client from '../services/api'
+import Modal from 'react-modal'
 
-import { Calendar, momentLocalizer } from "react-big-calendar"
-
-import moment from "moment"
-
-import "react-big-calendar/lib/css/react-big-calendar.css"
-
-import Client from "../services/api"
-
-import Modal from "react-modal"
-
-Modal.setAppElement("#root")
+Modal.setAppElement('#root')
 
 const localizer = momentLocalizer(moment)
 
 const CalendarComponent = () => {
   const [events, setEvents] = useState([])
-
   const [showModal, setShowModal] = useState(false)
-
   const [selectedDate, setSelectedDate] = useState(null)
-
-  const [serviceId, setServiceId] = useState("")
-
+  const [serviceId, setServiceId] = useState('')
   const [services, setServices] = useState([])
-
-  const [userRole, setUserRole] = useState("")
+  const [selectedSlotId, setSelectedSlotId] = useState(null)
+  const [userRole, setUserRole] = useState('')
 
   useEffect(() => {
     // Set user role from localStorage
-
-    const role = localStorage.getItem("userRole")
+    const role = localStorage.getItem('userRole')
 
     if (role) {
       setUserRole(role)
@@ -40,64 +30,50 @@ const CalendarComponent = () => {
 
     const fetchData = async () => {
       try {
-        const userId = localStorage.getItem("userId")
-
+        const userId = localStorage.getItem('userId')
         if (!userId) {
-          console.error("User ID not found in localStorage")
-
+          console.error('User ID not found in localStorage')
           return
         }
 
-        // Concurrently fetch bookings, services, and available slots
+        // Fetch bookings separately and handle potential empty responses or errors
+        let formattedBookings = []
+        try {
+          const bookingsResponse = await Client.get(`/userBookings/${userId}`)
+          formattedBookings = bookingsResponse.data.map((booking) => ({
+            id: booking._id,
+            title: booking.service?.name || 'Booking',
+            start: new Date(booking.bookingDate),
+            end: new Date(
+              new Date(booking.bookingDate).getTime() + 2 * 60 * 60 * 1000
+            ),
+            color: '#5E6C5B' // Color for existing bookings
+          }))
+        } catch (error) {
+          console.warn('No bookings found or error fetching bookings:', error)
+        }
 
-        const [bookingsResponse, servicesResponse, slotsResponse] =
-          await Promise.all([
-            Client.get(`/userBookings/${userId}`),
-
-            Client.get("/service/services"),
-
-            Client.get("/slot/slots"),
-          ])
-
-        // Format and set bookings data
-
-        const formattedBookings = bookingsResponse.data.map((booking) => ({
-          id: booking._id,
-
-          title: booking.service?.name || "Booking",
-
-          start: new Date(booking.bookingDate),
-
-          end: new Date(
-            new Date(booking.bookingDate).getTime() + 2 * 60 * 60 * 1000
-          ),
-
-          color: "#5E6C5B", // Color for existing bookings
-        }))
+        // Fetch services and slots without relying on user bookings
+        const [servicesResponse, slotsResponse] = await Promise.all([
+          Client.get('/service/services'),
+          Client.get('/slot/slots')
+        ])
 
         // Format and set available slots data
-
         const formattedSlots = slotsResponse.data.map((slot) => ({
           id: slot._id,
-
           title: slot.title,
-
           start: new Date(slot.start),
-
           end: new Date(slot.end),
-
-          color: slot.color || "#85C1E9",
+          color: slot.color || '#85C1E9'
         }))
 
         // Combine bookings and slots into events
-
         setEvents([...formattedBookings, ...formattedSlots])
-
-        console.log("Services Response:", servicesResponse.data)
-
+        console.log('Services Response:', servicesResponse.data)
         setServices(servicesResponse.data)
       } catch (error) {
-        console.error("Error fetching data:", error)
+        console.error('Error fetching data:', error)
       }
     }
 
@@ -105,58 +81,47 @@ const CalendarComponent = () => {
   }, [])
 
   // Customize the event rendering to use the color property
-
   const eventStyleGetter = (event) => {
     const style = {
       backgroundColor: event.color,
-
-      borderRadius: "8px",
-
+      borderRadius: '8px',
       opacity: 0.8,
-
-      color: "white",
-
-      border: "0px",
-
-      display: "block",
+      color: 'white',
+      border: '0px',
+      display: 'block'
     }
 
     return {
-      style: style,
+      style: style
     }
   }
 
   const handleCreateBooking = async () => {
     try {
       // Logic for creating a new booking
-
       if (!serviceId || !selectedDate) {
-        alert("Please select a service and date")
-
+        alert('Please select a service and date')
         return
       }
 
-      const userId = localStorage.getItem("userId")
+      const userId = localStorage.getItem('userId')
 
       if (!userId) {
-        alert("User ID not found")
+        alert('User ID not found')
 
         return
       }
 
       console.log(serviceId)
 
-      const response = await Client.post("/createBooking", {
+      const response = await Client.post('/createBooking', {
         user: userId,
-
         service: serviceId,
-
         bookingDate: selectedDate,
-
-        status: "pending",
+        status: 'pending'
       })
 
-      alert("Booking created successfully!")
+      alert('Booking created successfully!')
 
       setShowModal(false)
 
@@ -164,23 +129,30 @@ const CalendarComponent = () => {
 
       const newBooking = {
         id: response.data._id,
-
-        title: response.data.service?.name || "Booking",
-
+        title: response.data.service?.name || 'Booking',
         start: new Date(response.data.bookingDate),
-
         end: new Date(
           new Date(response.data.bookingDate).getTime() + 2 * 60 * 60 * 1000
         ),
 
-        color: "#5E6C5B",
+        color: '#5E6C5B'
       }
 
-      setEvents((prevEvents) => [...prevEvents, newBooking])
-    } catch (error) {
-      console.error("Error creating booking:", error)
+      // Remove the selected slot using the correct slot ID
+      if (selectedSlotId) {
+        await Client.delete(`/slot/slots/${selectedSlotId}`) // Use the slot ID
+      }
 
-      alert("Failed to create booking. Please try again.")
+      // Update the state to remove the deleted slot and add the new booking
+      setEvents((prevEvents) => {
+        return [
+          ...prevEvents.filter((event) => event.id !== selectedSlotId), // Remove the slot by ID
+          newBooking // Add the new booking
+        ]
+      })
+    } catch (error) {
+      console.error('Error creating booking:', error)
+      alert('Failed to create booking. Please try again.')
     }
   }
 
@@ -198,9 +170,9 @@ const CalendarComponent = () => {
         style={{ height: 500 }}
         eventPropGetter={eventStyleGetter}
         onSelectEvent={(event) => {
-          if (event.title.includes("Available Slot")) {
+          if (event.title.includes('Available Slot')) {
             setSelectedDate(event.start)
-
+            setSelectedSlotId(event.id) // Capture the slot ID
             setShowModal(true)
           }
         }}
@@ -246,10 +218,11 @@ const CalendarComponent = () => {
                 type="datetime-local"
                 id="bookingDate"
                 value={
-                  selectedDate ? selectedDate.toISOString().slice(0, 16) : ""
+                  selectedDate ? selectedDate.toISOString().slice(0, 16) : ''
                 }
                 onChange={(e) => setSelectedDate(new Date(e.target.value))}
                 required
+                readOnly
               />
             </div>
 
