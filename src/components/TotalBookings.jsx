@@ -105,19 +105,19 @@ const TotalBookings = () => {
         <p>{t("loading")}...</p> // Translated loading text
       ) : (
         <div>
-   <div className="admin-cards-container">
-          <div className="admin-card">
-            <h3>{t("all_time_bookings")}</h3> {/* Translated heading */}
-            <p>{totalBookings}</p>
-          </div>
-          <div className="admin-card">
-            <h3>{t("bookings_this_month")}</h3> {/* Translated heading */}
-            <p>{monthlyBookings}</p>
+          <div className="admin-cards-container">
+            <div className="admin-card">
+              <h3>{t("all_time_bookings")}</h3> {/* Translated heading */}
+              <p>{totalBookings}</p>
             </div>
-          </div>
-          <div className="chart-container">
-            <Bar data={data} options={options} />
-          </div>
+            <div className="admin-card">
+              <h3>{t("bookings_this_month")}</h3> {/* Translated heading */}
+              <p>{monthlyBookings}</p>
+              </div>
+            </div>
+            <div className="chart-container">
+              <Bar data={data} options={options} />
+            </div>
         </div>
       )}
     </div>
