@@ -8,6 +8,7 @@ const PortfolioList = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [currentProject, setCurrentProject] = useState(null)
   const [message, setMessage] = useState(null)
+  const [userRole, setUserRole] = useState(null)
   const navigate = useNavigate()
 
   // Fetch projects from the backend
@@ -23,6 +24,13 @@ const PortfolioList = () => {
     }
 
     fetchProjects()
+
+    const token = localStorage.getItem("token")
+    const role = localStorage.getItem("role")
+
+    if (role) {
+      setUserRole(role)
+    }
   }, [])
 
   // Get unique services for filter dropdown
@@ -116,20 +124,23 @@ const PortfolioList = () => {
             </div>
           ))
         )}
-        <button
-          className="add-project-button"
-          onClick={handleAddProject}
-          style={{
-            backgroundColor: "#4CAF50",
-            color: "white",
-            padding: "10px 20px",
-            border: "none",
-            borderRadius: "5px",
-            cursor: "pointer",
-          }}
-        >
-          Add New Project
-        </button>
+
+        {userRole === "admin" && (
+          <button
+            className="add-project-button"
+            onClick={handleAddProject}
+            style={{
+              backgroundColor: "#4CAF50",
+              color: "white",
+              padding: "10px 20px",
+              border: "none",
+              borderRadius: "5px",
+              cursor: "pointer",
+            }}
+          >
+            Add New Project
+          </button>
+        )}
       </div>
 
       {isModalOpen && currentProject && (

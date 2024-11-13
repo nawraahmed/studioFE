@@ -4,6 +4,7 @@ import Client from "../services/api"
 
 const NewProject = () => {
   const { projectId } = useParams()
+  const [userRole, setUserRole] = useState(null)
   const navigate = useNavigate()
 
   const initialState = {
@@ -52,6 +53,12 @@ const NewProject = () => {
         }
       }
       fetchProject()
+
+      const role = localStorage.getItem("role")
+
+      if (role) {
+        setUserRole(role)
+      }
     }
   }, [projectId])
 
