@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from "react"
-import Client from "../services/api"
-import ChangePassword from "./ChangePassword"
+import React, { useEffect, useState } from 'react'
+import Client from '../services/api'
+import ChangePassword from './ChangePassword'
+import '../static/profile.css'
 
 const Profile = ({ user }) => {
   const [bookings, setBookings] = useState([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
+  const [showChangePassword, setShowChangePassword] = useState(false) // State to toggle modal visibility
 
   console.log(user)
 
@@ -17,8 +19,8 @@ const Profile = ({ user }) => {
         const response = await Client.get(`/userBookings/${user.id}`)
         setBookings(response.data)
       } catch (error) {
-        console.error("Error fetching booking history:", error)
-        setError("Failed to load booking history.")
+        console.error('Error fetching booking history:', error)
+        setError('Failed to load booking history.')
       } finally {
         setLoading(false)
       }
@@ -33,9 +35,13 @@ const Profile = ({ user }) => {
         prevBookings.filter((booking) => booking._id !== bookingId)
       )
     } catch (error) {
-      console.error("Error deleting booking:", error)
-      alert("Failed to delete booking. Please try again.")
+      console.error('Error deleting booking:', error)
+      alert('Failed to delete booking. Please try again.')
     }
+  }
+
+  const toggleChangePasswordModal = () => {
+    setShowChangePassword((prev) => !prev) // Toggle the visibility of the modal
   }
 
   if (!user) return <p>Loading user data...</p>
@@ -55,8 +61,27 @@ const Profile = ({ user }) => {
         </p>
       </div>
 
-      {/* Render ChangePassword only if the user is not a Google sign-in user */}
-      {!isGoogleUser && <ChangePassword />}
+      {/* Button to open Change Password modal */}
+      {!isGoogleUser && (
+        <button
+          className="change-password-button"
+          onClick={toggleChangePasswordModal}
+        >
+          Change Password
+        </button>
+      )}
+
+      {/* Change Password Modal */}
+      {showChangePassword && !isGoogleUser && (
+        <div className="change-password-modal">
+          <div className="modal-content">
+            <button className="close-modal" onClick={toggleChangePasswordModal}>
+              &times;
+            </button>
+            <ChangePassword />
+          </div>
+        </div>
+      )}
 
       <div className="booking-history">
         <h3>Booking History</h3>
@@ -72,7 +97,7 @@ const Profile = ({ user }) => {
                   <strong>Service:</strong> {booking.service.name}
                 </p>
                 <p>
-                  <strong>Date:</strong>{" "}
+                  <strong>Date:</strong>{' '}
                   {new Date(booking.bookingDate).toLocaleString()}
                 </p>
                 <p>
