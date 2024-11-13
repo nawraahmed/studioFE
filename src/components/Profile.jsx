@@ -26,6 +26,18 @@ const Profile = ({ user }) => {
     fetchUserBookings()
   }, [user])
 
+  const handleDelete = async (bookingId) => {
+    try {
+      await Client.delete(`/bookings/${bookingId}`)
+      setBookings((prevBookings) =>
+        prevBookings.filter((booking) => booking._id !== bookingId)
+      )
+    } catch (error) {
+      console.error("Error deleting booking:", error)
+      alert("Failed to delete booking. Please try again.")
+    }
+  }
+
   if (!user) return <p>Loading user data...</p>
 
   // Check if the user is a Google sign-in user (no need to change password)
@@ -66,6 +78,12 @@ const Profile = ({ user }) => {
                 <p>
                   <strong>Status:</strong> {booking.status}
                 </p>
+                <button
+                  className="delete-button"
+                  onClick={() => handleDelete(booking._id)}
+                >
+                  Delete
+                </button>
               </div>
             ))}
           </div>
