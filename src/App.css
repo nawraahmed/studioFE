@@ -4,7 +4,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 2rem 2rem;
-  font-family: "Arial", sans-serif;
+  font-family: 'Arial', sans-serif;
   position: relative;
   z-index: 1;
 }
@@ -72,7 +72,7 @@
   padding: 1rem 2rem;
   text-align: center;
   color: #5e6c5b;
-  font-family: "Arial", sans-serif;
+  font-family: 'Arial', sans-serif;
 }
 
 .footer-links {
@@ -92,7 +92,7 @@
 body {
   margin: 0;
   background-color: #fefcf6;
-  font-family: "Arial", sans-serif;
+  font-family: 'Arial', sans-serif;
   color: #5e6c5b;
 }
 
@@ -111,7 +111,7 @@ h2 {
 }
 
 .custom-heading::after {
-  content: "";
+  content: '';
   display: block;
   width: 100%;
   height: 6px;
@@ -140,8 +140,10 @@ button:hover {
 
 .protofolio-slider {
   width: 80%;
+  height: 100%;
   margin: 0 auto;
   padding: 40px 0;
+  text-align: center;
 }
 
 .project-card {
@@ -173,7 +175,7 @@ button:hover {
 }
 
 .project-card h3 {
-  margin: 10px 0;
+  text-align: center;
   font-size: 1.1em;
   color: #333;
   text-overflow: ellipsis;
@@ -557,7 +559,7 @@ button:hover {
 
 .slider:before {
   position: absolute;
-  content: "";
+  content: '';
   height: 18px;
   width: 18px;
   left: 4px;
@@ -579,7 +581,7 @@ input:checked + .slider:before {
   max-width: 500px;
   margin: 0 auto;
   padding: 2rem;
-  font-family: "Arial", sans-serif;
+  font-family: 'Arial', sans-serif;
 }
 
 .form-header {
@@ -674,7 +676,7 @@ input:checked + .slider:before {
   padding: 0.5rem 0;
 }
 
-.service-item input[type="checkbox"] {
+.service-item input[type='checkbox'] {
   margin-right: 0.5rem;
 }
 
@@ -829,4 +831,53 @@ input:checked + .slider:before {
 
 .toggle-checkbox:checked + .toggle-label .toggle-inner {
   transform: translateX(26px);
+}
+
+.home-p {
+  font-size: 16px;
+  line-height: 1.5;
+  color: #3b3b3b;
+  font-family: 'Arial', sans-serif;
+  margin: 180px 100px 0;
+  padding: 10px 0;
+  text-align: justify;
+}
+
+.book-session-btn {
+  padding: 12px 25px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #ffffff;
+  background-color: #5e6c5b;
+  border: none;
+  border-radius: 25px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s ease;
+  margin-left: 160px;
+  margin-top: 50px;
+  margin-bottom: 40px;
+}
+
+.separator {
+  margin: 20px 0;
+  margin-left: 90px;
+  color: #3b3b3b;
+}
+
+.portfolio-link {
+  font-size: 18px;
+  text-decoration: none;
+  color: #3b3b3b;
+  margin-left: 165px;
+}
+
+.featured-title {
+  font-size: 2em;
+  text-align: center;
+  border-bottom: 9px solid #5e6c5b;
+  display: inline-block;
+  margin-top: 230px;
+  color: #3b3b3b;
+  margin-left: 85px;
 }
