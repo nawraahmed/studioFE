@@ -2,7 +2,6 @@ import React, { useState, useNavigate } from 'react'
 import LogsList from './LogsList'
 import UserManagement from './UserManagement'
 import TotalBookings from './TotalBookings'
-import ChangePassword from './ChangePassword'
 
 const AdminDashboard = () => {
   const [selectedSection, setSelectedSection] = useState('UserManagement') // Default to 'UserManagement'

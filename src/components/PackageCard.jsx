@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react"
-import Client from "../services/api"
-import { useNavigate } from "react-router-dom"
+import React, { useState, useEffect } from 'react'
+import Client from '../services/api'
+import { useNavigate } from 'react-router-dom'
+import ProductPrice from './ProductPrice'
 
 const PackageCard = ({ packageData, onDelete }) => {
   useEffect(() => {
@@ -18,12 +19,12 @@ const PackageCard = ({ packageData, onDelete }) => {
         onDelete(packageId)
       }
     } catch (error) {
-      console.error("Failed to delete package:", error)
+      console.error('Failed to delete package:', error)
     }
   }
 
   const handleUpdate = () => {
-    navigate("/new-package", { state: { packageData } })
+    navigate('/new-package', { state: { packageData } })
   }
   const handleBookNow = () => {
     navigate("/book")
@@ -38,13 +39,13 @@ const PackageCard = ({ packageData, onDelete }) => {
         setIsActive(!isActive)
       }
     } catch (error) {
-      console.error("Failed to toggle package activation:", error)
+      console.error('Failed to toggle package activation:', error)
     }
   }
   const checkAndDeletePackage = async (packageId, servicesIncluded) => {
     if (servicesIncluded.length < 2) {
       console.log(
-        "Package has fewer than two services, deleting the package..."
+        'Package has fewer than two services, deleting the package...'
       )
       await handleDelete(packageId)
     }
@@ -58,15 +59,17 @@ const PackageCard = ({ packageData, onDelete }) => {
             type="checkbox"
             checked={isActive}
             onChange={handleToggle}
-            style={{ display: "none" }}
+            style={{ display: 'none' }}
           />
-          <span className={`slider ${isActive ? "active" : ""}`}></span>
+          <span className={`slider ${isActive ? 'active' : ''}`}></span>
         </div>
       </div>
       <h3>{packageData.name}</h3>
       <p>{packageData.description}</p>
       <strong>
-        <p>Price: {packageData.price} BD</p>
+        <p>
+          Price: <ProductPrice priceInBHD={packageData.price} />
+        </p>
       </strong>
       <div>
         <h4>Included Services:</h4>
