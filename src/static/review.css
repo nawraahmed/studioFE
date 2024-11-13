@@ -1,9 +1,7 @@
 .review-section {
   margin: 20px;
   padding: 20px;
-  border: 1px solid #ddd;
   border-radius: 8px;
-  background-color: #f9f9f9;
   max-width: 600px;
   margin: 20px auto;
 }
@@ -14,7 +12,7 @@
   gap: 10px;
 }
 
-.review-section input[type='text'],
+.review-section input[type="text"],
 .review-section textarea {
   padding: 10px;
   border: 1px solid #ccc;

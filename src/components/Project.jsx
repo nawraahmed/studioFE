@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react"
-import { useNavigate } from "react-router-dom"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import Client from "../services/api"
 import Review from "./Review"
+import "../static/project.css" // External CSS file for styling
 
 const Project = () => {
   const { projectId } = useParams()
@@ -27,7 +27,6 @@ const Project = () => {
     }
 
     const role = localStorage.getItem("role")
-
     if (role) {
       setUserRole(role)
     }
@@ -47,9 +46,8 @@ const Project = () => {
   const deleteFile = async (filePath) => {
     try {
       await Client.delete(`/projects/project/${projectId}/delete-file`, {
-        data: { filePath }, // Sending filePath in the request body
+        data: { filePath },
       })
-      // Remove the deleted file from the project state
       setProject((prevProject) => ({
         ...prevProject,
         files: prevProject.files.filter((file) => file !== filePath),
@@ -73,7 +71,7 @@ const Project = () => {
         <img
           src={adjustedUrl}
           alt="project-file"
-          style={{ maxWidth: "40%", height: "40%" }}
+          className="project-file-image"
         />
       )
     } else if (fileExtension === "pdf") {
@@ -83,7 +81,7 @@ const Project = () => {
           type="application/pdf"
           width="100%"
           height="500px"
-          style={{ border: "none" }}
+          className="project-file-pdf"
           title="PDF Preview"
         ></iframe>
       )
@@ -97,52 +95,39 @@ const Project = () => {
   }
 
   return (
-    <div>
-      {message && <p>{message}</p>}
+    <div className="project-container">
+      {message && <p className="message">{message}</p>}
       {project ? (
-        <div
-          style={{
-            border: "1px solid #ccc",
-            padding: "10px",
-            margin: "10px 0",
-          }}
-        >
+        <div className="project-details">
           {userRole === "admin" && (
             <button
               onClick={() => navigate(`/project/${projectId}`)}
-              style={{
-                backgroundColor: "transparent",
-                border: "none",
-                cursor: "pointer",
-                color: "#007bff",
-              }}
+              className="edit-button"
             >
               <i className="fa fa-edit"></i> Edit Project
             </button>
           )}
           <h3>{project.title}</h3>
           <p>{project.description}</p>
-          <p>Service: {project.service?.name}</p>
-          <p>User: {project.user?.name}</p>
+          <p>
+            <strong>Service:</strong> {project.service?.name}
+          </p>
+          <p>
+            <strong>User:</strong> {project.user?.name}
+          </p>
 
-          <div>
+          <div className="project-files">
             <strong>Files:</strong>
             {project.files &&
               project.files.map((file, index) => (
-                <div key={index} style={{ marginBottom: "10px" }}>
+                <div key={index} className="file-item">
                   {renderFile(file)}
                   {userRole === "admin" && (
                     <button
                       onClick={() => deleteFile(file)}
-                      style={{
-                        color: "red",
-                        border: "none",
-                        cursor: "pointer",
-                        background: "transparent",
-                        padding: "5px",
-                      }}
+                      className="delete-file-button"
                     >
-                      <i className="fa fa-trash"></i>
+                      <i className="fa fa-trash"></i> Delete
                     </button>
                   )}
                 </div>
@@ -150,17 +135,8 @@ const Project = () => {
           </div>
 
           {userRole === "admin" && (
-            <div>
-              <button
-                onClick={handleDelete}
-                style={{
-                  backgroundColor: "red",
-                  color: "white",
-                  padding: "10px 20px",
-                  border: "none",
-                  cursor: "pointer",
-                }}
-              >
+            <div className="delete-project-container">
+              <button onClick={handleDelete} className="delete-project-button">
                 Delete Project
               </button>
             </div>
@@ -169,7 +145,8 @@ const Project = () => {
       ) : (
         <p>Loading project...</p>
       )}
-      <div>
+
+      <div className="reviews-container">
         <Review projectId={projectId} />
       </div>
     </div>
