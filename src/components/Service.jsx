@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react"
-import { Link } from "react-router-dom"
-import Client from "../services/api"
-import { BASE_URL } from "../services/api"
-import { useLocation, useNavigate } from "react-router-dom"
+import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
+import Client from '../services/api'
+import { BASE_URL } from '../services/api'
+import { useLocation, useNavigate } from 'react-router-dom'
+import ProductPrice from './ProductPrice'
 
 const Service = () => {
   const [services, setServices] = useState([])
@@ -14,7 +15,7 @@ const Service = () => {
         const response = await Client.get(`service/services`)
         setServices(response.data)
       } catch (error) {
-        console.error("Error fetching services:", error)
+        console.error('Error fetching services:', error)
       }
     }
     fetchServices()
@@ -28,14 +29,14 @@ const Service = () => {
       setServices((prevServices) =>
         prevServices.filter((service) => service._id !== serviceId)
       )
-      console.log("Service deleted successfully")
+      console.log('Service deleted successfully')
     } catch (error) {
-      console.error("Error deleting service:", error)
+      console.error('Error deleting service:', error)
     }
   }
 
   const handleUpdate = (serviceData) => {
-    navigate("/new-service", { state: { serviceData } })
+    navigate('/new-service', { state: { serviceData } })
   }
 
   return (
@@ -55,7 +56,8 @@ const Service = () => {
               <h3>{service.name}</h3>
               <p>{service.description}</p>
               <p>
-                <strong>Starting from</strong> {service.startingPrice}
+                <strong>Starting from</strong>{' '}
+                <ProductPrice priceInBHD={service.startingPrice} />
               </p>
               <button onClick={() => handleDelete(service._id)}>
                 Delete Service

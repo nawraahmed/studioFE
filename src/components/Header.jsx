@@ -43,6 +43,7 @@ const Header = ({ user, handleLogOut }) => {
           Admin Dashboard
         </Link>
 
+
         {user && (
           <Link to="/profile" onClick={closeMenu}>
             Profile
@@ -54,6 +55,7 @@ const Header = ({ user, handleLogOut }) => {
             Admin Dashboard
           </Link>
         )} */}
+
 
         {user ? (
           <button

@@ -4,6 +4,7 @@ import { BrowserRouter } from "react-router-dom"
 import "@fortawesome/fontawesome-free/css/all.min.css"
 import App from "./App.jsx"
 
+
 createRoot(document.querySelector("#root")).render(
   <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
     <BrowserRouter future={{ v7_relativeSplatPath: true }}>
