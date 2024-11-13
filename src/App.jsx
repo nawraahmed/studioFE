@@ -24,9 +24,15 @@ import Profile from "./components/Profile"
 import { CurrencyProvider } from "./contexts/CurrencyProvider"
 import CurrencySelector from "./components/CurrencySelectot"
 import AdminCalendar from "./components/AdminCalendar"
+import { useTranslation } from "react-i18next"
 
 function App() {
   const [user, setUser] = useState(null)
+  const { i18n } = useTranslation()
+
+  useEffect(() => {
+    document.body.dir = i18n.language === "ar" ? "rtl" : "ltr"
+  }, [i18n.language])
 
   const handleLogOut = () => {
     setUser(null)
