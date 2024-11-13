@@ -7,13 +7,13 @@ const Profile = ({ user }) => {
   const [bookings, setBookings] = useState([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
-  const [showChangePassword, setShowChangePassword] = useState(false) // State to toggle modal visibility
+  const [showChangePassword, setShowChangePassword] = useState(false)
 
   console.log(user)
 
   useEffect(() => {
     const fetchUserBookings = async () => {
-      if (!user) return // Exit if user is not available
+      if (!user) return
       setLoading(true)
       try {
         const response = await Client.get(`/userBookings/${user.id}`)
@@ -41,27 +41,30 @@ const Profile = ({ user }) => {
   }
 
   const toggleChangePasswordModal = () => {
-    setShowChangePassword((prev) => !prev) // Toggle the visibility of the modal
+    setShowChangePassword((prev) => !prev)
   }
 
   if (!user) return <p>Loading user data...</p>
 
-  // Check if the user is a Google sign-in user (no need to change password)
   const isGoogleUser = !!user.googleId
 
   return (
     <div className="profile-container">
       <h2>User Profile</h2>
-      <div className="profile-details">
-        <p>
-          <strong>Name:</strong> {user.name}
-        </p>
-        <p>
-          <strong>Email:</strong> {user.email}
-        </p>
+      <div className="profile-header">
+        <div className="avatar-container">
+          <img
+            src="https://i.pinimg.com/736x/f7/bd/a7/f7bda742ef6583feb9149ac24bf272ee.jpg"
+            alt="User Avatar"
+            className="avatar"
+          />
+        </div>
+        <div className="user-info">
+          <h3>{user.name}</h3>
+          <p>{user.email}</p>
+        </div>
       </div>
 
-      {/* Button to open Change Password modal */}
       {!isGoogleUser && (
         <button
           className="change-password-button"
@@ -71,11 +74,13 @@ const Profile = ({ user }) => {
         </button>
       )}
 
-      {/* Change Password Modal */}
       {showChangePassword && !isGoogleUser && (
-        <div className="change-password-modal">
-          <div className="modal-content">
-            <button className="close-modal" onClick={toggleChangePasswordModal}>
+        <div className="unique-change-password-modal">
+          <div className="unique-modal-content">
+            <button
+              className="unique-close-modal"
+              onClick={toggleChangePasswordModal}
+            >
               &times;
             </button>
             <ChangePassword />

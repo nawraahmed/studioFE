@@ -14,7 +14,7 @@
   gap: 10px;
 }
 
-.review-section input[type="text"],
+.review-section input[type='text'],
 .review-section textarea {
   padding: 10px;
   border: 1px solid #ccc;

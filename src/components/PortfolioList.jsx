@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react"
-import { useNavigate } from "react-router-dom"
-import Client from "../services/api"
+import React, { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import Client from '../services/api'
 
 const PortfolioList = () => {
   const [projects, setProjects] = useState([])
-  const [selectedService, setSelectedService] = useState("All")
+  const [selectedService, setSelectedService] = useState('All')
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [currentProject, setCurrentProject] = useState(null)
   const [message, setMessage] = useState(null)
@@ -14,11 +14,11 @@ const PortfolioList = () => {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const res = await Client.get("/projects/project")
+        const res = await Client.get('/projects/project')
         setProjects(res.data)
       } catch (error) {
-        console.error("Error fetching projects:", error)
-        setMessage("Failed to load projects")
+        console.error('Error fetching projects:', error)
+        setMessage('Failed to load projects')
       }
     }
 
@@ -27,15 +27,15 @@ const PortfolioList = () => {
 
   // Get unique services for filter dropdown
   const services = [
-    "All",
+    'All',
     ...new Set(
       projects.map((project) => project.service?.name || project.service)
-    ),
+    )
   ]
 
   // Filtered projects based on selected service
   const filteredProjects =
-    selectedService === "All"
+    selectedService === 'All'
       ? projects
       : projects.filter(
           (project) =>
@@ -61,7 +61,7 @@ const PortfolioList = () => {
   }
 
   const handleAddProject = () => {
-    navigate("/project")
+    navigate('/project')
   }
 
   return (
@@ -98,9 +98,9 @@ const PortfolioList = () => {
                     project.cover
                       ? `http://localhost:4000/${project.cover.replace(
                           /^public[\\/]+/,
-                          ""
+                          ''
                         )}`
-                      : "path/to/default-image.jpg"
+                      : 'path/to/default-image.jpg'
                   }
                   alt={project.title}
                   className="project-image"
@@ -120,12 +120,12 @@ const PortfolioList = () => {
           className="add-project-button"
           onClick={handleAddProject}
           style={{
-            backgroundColor: "#4CAF50",
-            color: "white",
-            padding: "10px 20px",
-            border: "none",
-            borderRadius: "5px",
-            cursor: "pointer",
+            backgroundColor: '#4CAF50',
+            color: 'white',
+            padding: '10px 20px',
+            border: 'none',
+            borderRadius: '5px',
+            cursor: 'pointer'
           }}
         >
           Add New Project
@@ -139,7 +139,7 @@ const PortfolioList = () => {
               <img
                 src={`http://localhost:4000/${currentProject.cover.replace(
                   /^public[\\/]+/,
-                  ""
+                  ''
                 )}`}
                 alt={currentProject.title}
                 className="modal-image"
@@ -148,8 +148,8 @@ const PortfolioList = () => {
             <div className="modal-right">
               <h3 className="modal-title">{currentProject.title}</h3>
               <p className="modal-service-type">
-                Service Type:{" "}
-                {currentProject.service?.name || "Unknown Service"}
+                Service Type:{' '}
+                {currentProject.service?.name || 'Unknown Service'}
               </p>
               <p className="modal-description">{currentProject.description}</p>
               <button

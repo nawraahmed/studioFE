@@ -92,3 +92,51 @@
 .footer-info {
   font-size: 0.9rem;
 }
+
+.currency-selector {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.currency-selector select {
+  padding: 0.3rem 0.5rem;
+  border: 1px solid #d3d3d3;
+  border-radius: 4px;
+  background-color: #f4efe6;
+  color: #5e6c5b;
+  font-family: 'Arial', sans-serif;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.currency-selector select:hover {
+  border-color: #49886d;
+}
+
+.currency-selector select:focus {
+  outline: none;
+  border-color: #49886d;
+  box-shadow: 0 0 4px rgba(73, 136, 109, 0.5);
+}
+
+.nav-links button {
+  background-color: transparent;
+  border: 1px solid #5e6c5b;
+  color: #5e6c5b;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.nav-links button:hover {
+  background-color: #5e6c5b;
+  color: #f4efe6;
+}
+
+.nav-links button:focus {
+  outline: none;
+  box-shadow: 0 0 4px rgba(73, 136, 109, 0.5);
+}

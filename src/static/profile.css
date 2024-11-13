@@ -1,5 +1,43 @@
-/* Modal Background */
-.change-password-modal {
+/* Profile Container */
+.profile-container {
+  background: #fefcf6;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 900px;
+  margin: 20px auto;
+}
+
+/* Profile Header (Avatar + User Info) */
+.profile-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.avatar-container {
+  margin-right: 20px;
+}
+
+.avatar {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #5e6c5b; /* Add border for a more defined avatar */
+}
+
+.user-info h3 {
+  font-size: 1.5em;
+  color: #5e6c5b;
+}
+
+.user-info p {
+  color: #3b3b3b;
+}
+
+/* Unique Modal Background */
+.unique-change-password-modal {
   position: fixed;
   top: 0;
   left: 0;
@@ -12,37 +50,37 @@
   z-index: 999;
 }
 
-/* Modal Content */
-.modal-content {
-  background-color: #fefcf6; /* Light background color */
-  padding: 20px;
-  border-radius: 8px;
-  width: 400px;
+/* Unique Modal Content */
+.unique-modal-content {
+  background-color: #fefcf6;
+  padding: 30px; /* Increased padding */
+  border-radius: 12px; /* Larger rounded corners */
+  width: 600px; /* Increased width */
   max-width: 100%;
   position: relative;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Optional shadow for better visual */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); /* Larger shadow for depth */
 }
 
-/* Close Button */
-.close-modal {
+/* Unique Close Button */
+.unique-close-modal {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 15px;
+  right: 15px;
   background: none;
   border: none;
-  font-size: 24px;
-  color: #5e6c5b; /* Highlight color */
+  font-size: 28px; /* Larger close button */
+  color: #5e6c5b;
   cursor: pointer;
 }
 
-.close-modal:hover {
-  color: #4e5b47; /* Slightly darker shade on hover */
+.unique-close-modal:hover {
+  color: #4e5b47;
 }
 
 /* Change Password Button */
 .change-password-button {
   padding: 10px 20px;
-  background-color: #5e6c5b; /* Highlight color */
+  background-color: #5e6c5b;
   color: white;
   font-size: 16px;
   border: none;
@@ -53,28 +91,12 @@
 }
 
 .change-password-button:hover {
-  background-color: #4e5b47; /* Slightly darker shade on hover */
+  background-color: #4e5b47;
 }
 
-/* Profile Container */
-.profile-container {
-  background: #fefcf6; /* Background color */
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-/* Profile Details */
-.profile-details {
-  background: #f4efe6; /* Background for containers */
-  padding: 15px;
-  margin-bottom: 20px;
-  border-radius: 5px;
-}
-
-/* Booking History Section */
+/* Booking History */
 .booking-history {
-  background: #f4efe6; /* Background for containers */
+  background: #f4efe6;
   padding: 20px;
   border-radius: 8px;
 }
@@ -85,14 +107,14 @@
 
 .booking-item {
   padding: 10px;
-  background: #fefcf6; /* Light background color */
+  background: #fefcf6;
   margin-bottom: 10px;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .delete-button {
-  background-color: #5e6c5b; /* Highlight color */
+  background-color: #5e6c5b;
   color: white;
   padding: 8px 15px;
   border: none;
@@ -103,10 +125,10 @@
 }
 
 .delete-button:hover {
-  background-color: #4e5b47; /* Slightly darker shade on hover */
+  background-color: #4e5b47;
 }
 
 h2,
 h3 {
-  color: #5e6c5b; /* Highlight color for headings */
+  color: #5e6c5b;
 }
