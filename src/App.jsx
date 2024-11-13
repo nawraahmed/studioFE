@@ -20,6 +20,8 @@ import PortfolioPage from "./components/PortfolioPage"
 import { useState, useEffect } from "react"
 import { CheckSession } from "./services/Auth"
 import Profile from "./components/Profile"
+import { CurrencyProvider } from './contexts/CurrencyProvider'
+import CurrencySelector from './components/CurrencySelectot'
 
 function App() {
   const [user, setUser] = useState(null)
@@ -42,10 +44,12 @@ function App() {
   }, [])
 
   return (
+    <CurrencyProvider>
     <div className="App">
       <header>
         <Header user={user} handleLogOut={handleLogOut} />
       </header>
+        <CurrencySelector />
       <main className="app-container">
         <Routes>
           <Route path="/" element={<Home />} />
@@ -69,6 +73,7 @@ function App() {
       </main>
       <Footer />
     </div>
+    </CurrencyProvider>
   )
 }
 
