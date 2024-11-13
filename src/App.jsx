@@ -20,8 +20,9 @@ import PortfolioPage from "./components/PortfolioPage"
 import { useState, useEffect } from "react"
 import { CheckSession } from "./services/Auth"
 import Profile from "./components/Profile"
-import { CurrencyProvider } from './contexts/CurrencyProvider'
-import CurrencySelector from './components/CurrencySelectot'
+import { CurrencyProvider } from "./contexts/CurrencyProvider"
+import CurrencySelector from "./components/CurrencySelectot"
+import AdminCalendar from "./components/AdminCalendar"
 
 function App() {
   const [user, setUser] = useState(null)
@@ -45,34 +46,35 @@ function App() {
 
   return (
     <CurrencyProvider>
-    <div className="App">
-      <header>
-        <Header user={user} handleLogOut={handleLogOut} />
-      </header>
+      <div className="App">
+        <header>
+          <Header user={user} handleLogOut={handleLogOut} />
+        </header>
         <CurrencySelector />
-      <main className="app-container">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/projects/:projectId" element={<Project />} />
-          <Route path="/project" element={<NewProject />} />
-          <Route path="/project/:projectId" element={<NewProject />} />
-          <Route path="/services" element={<Service />} />
-          <Route path="/new-service" element={<NewService />} />
-          <Route path="/packages" element={<Package />} />
-          <Route path="/new-package" element={<NewPackage />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/book" element={<Calendar />} />
-          <Route path="/policy" element={<Policy />} />
-          <Route path="/admin" element={<AdminDashboard />} />
-          <Route path="/signin" element={<SignIn setUser={setUser} />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/protofolio" element={<Protofolio />} />
-          <Route path="/profile" element={<Profile user={user} />} />
-          <Route path="/portfolio-list" element={<PortfolioPage />} />{" "}
-        </Routes>
-      </main>
-      <Footer />
-    </div>
+        <main className="app-container">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/projects/:projectId" element={<Project />} />
+            <Route path="/project" element={<NewProject />} />
+            <Route path="/project/:projectId" element={<NewProject />} />
+            <Route path="/services" element={<Service />} />
+            <Route path="/new-service" element={<NewService />} />
+            <Route path="/packages" element={<Package />} />
+            <Route path="/new-package" element={<NewPackage />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/book" element={<Calendar />} />
+            <Route path="/policy" element={<Policy />} />
+            <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="/signin" element={<SignIn setUser={setUser} />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/protofolio" element={<Protofolio />} />
+            <Route path="/profile" element={<Profile user={user} />} />
+            <Route path="/portfolio-list" element={<PortfolioPage />} />
+            <Route path="/admin-calendar" element={<AdminCalendar />} />
+          </Routes>
+        </main>
+        <Footer />
+      </div>
     </CurrencyProvider>
   )
 }
