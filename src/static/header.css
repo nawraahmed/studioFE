@@ -4,7 +4,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 2rem 2rem;
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
   position: relative;
   z-index: 1;
 }
@@ -65,6 +65,18 @@
   .menu-toggle {
     display: block;
   }
+
+  .footer {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
 }
 
 .footer {
@@ -72,8 +84,10 @@
   padding: 1rem 2rem;
   text-align: center;
   color: #5e6c5b;
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
   position: fixed;
+  display: flex;
+  justify-content: space-between;
   bottom: 0;
   left: 0;
   width: 100%;
@@ -91,6 +105,7 @@
 
 .footer-info {
   font-size: 0.9rem;
+  margin-right: 10px;
 }
 
 .currency-selector {
@@ -105,7 +120,7 @@
   border-radius: 4px;
   background-color: #f4efe6;
   color: #5e6c5b;
-  font-family: 'Arial', sans-serif;
+  font-family: "Arial", sans-serif;
   font-size: 0.9rem;
   cursor: pointer;
 }
