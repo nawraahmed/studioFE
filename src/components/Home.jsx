@@ -1,29 +1,32 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import Protofolio from './Protofolio'
-import '../static/home.css'
+import React from "react"
+import { Link } from "react-router-dom"
+import Protofolio from "./Protofolio"
+import { useTranslation } from "react-i18next"
+import "../static/home.css"
 
 const Home = () => {
+  const { t } = useTranslation()
+
   return (
     <div className="home">
       <div className="top-section">
         <div className="text-content">
           <p className="home-p">
-            Professional branding services tailored to make your
+            {t("professional_branding_services")}
             <br />
-            business stand out. Book an appointment and
+            {t("business_stand_out")}
             <br />
-            explore our work.
+            {t("explore_our_work")}
           </p>
 
-          <button className="book-session-btn">Book A Session!</button>
+          <button className="book-session-btn">{t("book_a_session")}</button>
 
           <div className="separator">
-            <span>_________________or_________________</span>
+            <span>_________________{t("or")}_________________</span>
           </div>
 
           <Link to="/portfolio-list" className="portfolio-link">
-            View Our Portfolio
+            {t("view_our_portfolio")}{" "}
           </Link>
         </div>
 
@@ -34,7 +37,7 @@ const Home = () => {
         />
       </div>
 
-      <h1 className="featured-title">Featured Projects</h1>
+      <h1 className="featured-title">{t("featured_projects")}</h1>
       <Protofolio />
     </div>
   )

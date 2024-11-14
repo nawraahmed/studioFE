@@ -25,5 +25,14 @@
   },
   "service": {
     "price": "تبدأ من"
-  }
+  },
+
+  "view_our_portfolio": "عرض ملف الأعمال",
+  "featured_projects": "المشاريع المميزة",
+
+  "professional_branding_services": "خدمات العلامات التجارية الاحترافية المصممة لجعل عملك",
+  "business_stand_out": "يتألق. احجز موعد واستكشاف أعمالنا.",
+  "explore_our_work": "",
+  "book_a_session": "احجز جلسة !",
+  "or": "أو"
 }
