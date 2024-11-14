@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import Client from "../services/api"
+import Review from "./Review"
 import "../static/project.css" // External CSS file for styling
 
 const Project = () => {
@@ -70,7 +71,7 @@ const Project = () => {
         <img
           src={adjustedUrl}
           alt="project-file"
-          style={{ maxWidth: "40%", height: "40%" }}
+          className="project-file-image"
         />
       )
     } else if (fileExtension === "pdf") {
@@ -80,7 +81,7 @@ const Project = () => {
           type="application/pdf"
           width="100%"
           height="500px"
-          style={{ border: "none" }}
+          className="project-file-pdf"
           title="PDF Preview"
         ></iframe>
       )
@@ -144,6 +145,10 @@ const Project = () => {
       ) : (
         <p>Loading project...</p>
       )}
+
+      <div className="reviews-container">
+        <Review projectId={projectId} />
+      </div>
     </div>
   )
 }
