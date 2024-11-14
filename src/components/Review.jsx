@@ -66,8 +66,12 @@ const Review = ({ projectId }) => {
         comment: "",
         rating: 0,
       }) // Reset form fields
+
+      // Show success alert after submitting the form
+      alert("Review submitted successfully!")
     } catch (error) {
       console.error("Error submitting review:", error)
+      alert("Error submitting review. Please try again.")
     }
   }
 

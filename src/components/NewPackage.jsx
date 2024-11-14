@@ -115,7 +115,7 @@ const NewPackage = () => {
                   className="form-checkbox"
                 />
                 <label htmlFor={service._id} className="service-label">
-                  {service.name}
+                  {service.name_en}
                 </label>
               </div>
             ))}

@@ -58,3 +58,320 @@
 .toggle-checkbox:checked + .toggle-label .toggle-inner {
   transform: translateX(26px);
 }
+.container {
+  padding: 20px;
+}
+
+.add-service {
+  margin-bottom: 20px;
+}
+
+.package-list {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  align-items: center;
+  flex-wrap: wrap;
+  transition: all 0.3s ease-in-out;
+}
+
+.package-item {
+  width: 200px;
+  height: 300px;
+  background: #f4f4f4;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 15px;
+}
+
+.package-item .package-image img {
+  max-width: 100%;
+  height: auto;
+}
+
+.package-item .package-details {
+  text-align: center;
+}
+
+.package-item.center {
+  transform: scale(1.2); /* Enlarge the middle item */
+  z-index: 1; /* Bring it to the front */
+}
+
+.package-item:not(.center) {
+  opacity: 0.7; /* Make non-center items a little less prominent */
+}
+/* Container for the services list */
+.services-list {
+  max-height: 150px;
+  overflow-y: auto;
+  padding: 0.5rem;
+  border-radius: 4px;
+}
+
+/* Style for each service item */
+.service-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.service-item label {
+  margin-left: 0.5rem;
+}
+
+/* Card Container */
+.card.package {
+  position: relative;
+  width: 100%;
+  max-width: 350px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Make the content larger and centered */
+.card.package .content {
+  flex-grow: 1;
+  padding: 1rem;
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.card.package h3 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.card.package p {
+  color: #666;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* Toggle Switch Styles */
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+  margin-top: 1rem;
+}
+
+.toggle-checkbox {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-label {
+  position: absolute;
+  cursor: pointer;
+  background-color: #ccc;
+  border-radius: 24px;
+  width: 50px;
+  height: 24px;
+  transition: background-color 0.3s ease;
+}
+
+.toggle-label .toggle-inner {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  background-color: #fff;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+.toggle-checkbox:checked + .toggle-label {
+  background-color: #4caf50;
+}
+
+.toggle-checkbox:checked + .toggle-label .toggle-inner {
+  transform: translateX(26px);
+}
+
+.card.package:hover {
+  transform: translateY(-5px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .card.package {
+    max-width: 100%;
+  }
+}
+
+/* Container for the services list */
+.services-list {
+  max-height: 150px;
+  overflow-y: auto;
+  padding: 0.5rem;
+  border-radius: 4px;
+}
+
+/* Style for each service item */
+.service-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.service-item label {
+  margin-left: 0.5rem;
+}
+
+/* Card Container */
+.card.package {
+  position: relative;
+  width: 100%;
+  max-width: 350px;
+  background-color: #ffffff;
+  border-bottom-right-radius: 12px;
+  border-bottom-left-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease-in-out;
+  margin-top: 0;
+  height: 36rem;
+  position: relative;
+}
+
+.price-box {
+  margin-top: 40px;
+  background-color: #49886d;
+  color: #fff;
+  padding: 0.5rem;
+  font-size: 1.25rem;
+  text-align: center;
+  font-weight: bold;
+  border-radius: 12px 12px 0 0;
+}
+
+/* Make the content larger and centered */
+.card.package .content {
+  flex-grow: 1;
+  padding: 1rem;
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.card.package h3 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 0.5rem;
+}
+
+.card.package p {
+  color: #666;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* Toggle Switch Styles */
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+  margin-top: 1rem;
+}
+
+.toggle-checkbox {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-label {
+  position: absolute;
+  cursor: pointer;
+  background-color: #ccc;
+  border-radius: 24px;
+  width: 50px;
+  height: 24px;
+  transition: background-color 0.3s ease;
+}
+
+.toggle-label .toggle-inner {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  background-color: #fff;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+.toggle-checkbox:checked + .toggle-label {
+  background-color: #4caf50;
+}
+
+.toggle-checkbox:checked + .toggle-label .toggle-inner {
+  transform: translateX(26px); /* Move the switch to the right */
+}
+
+/* Hover Effect on Card */
+.card.package:hover {
+  transform: translateY(-5px);
+}
+
+.headerpkg {
+  position: relative;
+  height: 15vh;
+  background-image: url("https://i.pinimg.com/736x/82/fc/35/82fc3581d01d79e05be9a82f4bab6898.jpg");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  padding: 1rem;
+}
+
+.headerpkg::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: inherit;
+  filter: blur(19px);
+  z-index: 1;
+}
+
+.headecontent {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 2rem;
+}
+
+.headecontent h3 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  font-weight: bold;
+  color: #333;
+}

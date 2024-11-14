@@ -5,7 +5,13 @@ import ProductPrice from "./ProductPrice"
 import "../static/package.css"
 
 const PackageCard = ({ packageData, onDelete }) => {
+  const [userRole, setUserRole] = useState("")
   useEffect(() => {
+    const role = localStorage.getItem("userRole")
+
+    if (role) {
+      setUserRole(role)
+    }
     checkAndDeletePackage(packageData._id, packageData.servicesIncluded)
   }, [packageData.servicesIncluded])
 
@@ -53,39 +59,45 @@ const PackageCard = ({ packageData, onDelete }) => {
   }
 
   return (
-    <div className="card package">
-      <div>
-        <div className="toggle-switch" onClick={handleToggle}>
-          <input
-            type="checkbox"
-            checked={isActive}
-            onChange={handleToggle}
-            style={{ display: "none" }}
-          />
-          <span className={`slider ${isActive ? "active" : ""}`}></span>
+    <div>
+      <div className="price-box">
+        <strong>Price: {packageData.price} BHD</strong>
+      </div>
+      <div className="card package">
+        {userRole === "admin" && (
+          <div>
+            <div className="toggle-switch" onClick={handleToggle}>
+              <input
+                type="checkbox"
+                checked={isActive}
+                onChange={handleToggle}
+                style={{ display: "none" }}
+              />
+              <span className={`slider ${isActive ? "active" : ""}`}></span>
+            </div>
+          </div>
+        )}
+        <h3>{packageData.name}</h3>
+        <p>{packageData.description}</p>
+        <div>
+          <h4>Included Services:</h4>
+          <ul>
+            {packageData.servicesIncluded.map((service) => (
+              <li key={service._id}>{service.name_en}</li>
+            ))}
+          </ul>
         </div>
-      </div>
-      <h3>{packageData.name}</h3>
-      <p>{packageData.description}</p>
-      <strong>
-        <p>
-          Price: <ProductPrice priceInBHD={packageData.price} />
-        </p>
-      </strong>
-      <div>
-        <h4>Included Services:</h4>
-        <ul>
-          {packageData.servicesIncluded.map((service) => (
-            <li key={service._id}>{service.name}</li>
-          ))}
-        </ul>
-      </div>
-      <div className="action-group">
-        <button onClick={() => handleDelete(packageData._id)}>
-          Delete Package
-        </button>
-        <button onClick={handleUpdate}>Update Package</button>
-        <button onClick={handleBookNow}>Book Now</button>
+        <div className="action-group">
+          {userRole === "admin" && (
+            <div>
+              <button onClick={() => handleDelete(packageData._id)}>
+                Delete Package
+              </button>
+              <button onClick={handleUpdate}>Update Package</button>
+            </div>
+          )}
+          <button onClick={handleBookNow}>Book Now</button>
+        </div>
       </div>
     </div>
   )

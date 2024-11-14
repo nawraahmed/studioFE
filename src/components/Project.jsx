@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import Client from "../services/api"
 import "../static/project.css" // External CSS file for styling
+import Review from "./Review"
 
 const Project = () => {
   const { projectId } = useParams()
@@ -140,6 +141,9 @@ const Project = () => {
               </button>
             </div>
           )}
+          <div>
+            <Review projectId={projectId} />
+          </div>
         </div>
       ) : (
         <p>Loading project...</p>
