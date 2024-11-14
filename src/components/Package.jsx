@@ -6,8 +6,13 @@ import "../static/package.css"
 
 const Package = () => {
   const [packages, setPackages] = useState([])
-
+  const [userRole, setUserRole] = useState("")
   useEffect(() => {
+    const role = localStorage.getItem("userRole")
+
+    if (role) {
+      setUserRole(role)
+    }
     const fetchPackages = async () => {
       try {
         const response = await Client.get("/package/packages")
@@ -24,20 +29,27 @@ const Package = () => {
 
   return (
     <div className="container">
-      <div className="add-service">
-        <h3>All Packages</h3>
-        <Link to="/new-package">
-          <button>+ Add New Package</button>
-        </Link>
+      <div className="headerpkg">
+        <div className="headecontent">
+          <h3>All Packages</h3>
+          {userRole === "admin" && (
+            <Link to="/new-package">
+              <button className="add-btn">+ Add New Package</button>
+            </Link>
+          )}
+        </div>
       </div>
-      <div className="grid">
+
+      <div className="package-list">
         {packages.length === 0 ? (
           <p>No packages available at the moment.</p>
         ) : (
           packages.map((pkg) => (
-            <div key={pkg._id}>
-              <PackageCard packageData={pkg} onDelete={handleDeletePackage} />
-            </div>
+            <PackageCard
+              key={pkg._id}
+              packageData={pkg}
+              onDelete={handleDeletePackage}
+            />
           ))
         )}
       </div>
