@@ -78,6 +78,22 @@ const NewProject = () => {
     isEditing ? navigate(`/projects/${projectId}`) : navigate(`/portfolio-list`)
   }
 
+  const handleFileRemove = async (filePath) => {
+    try {
+      await Client.delete(`/projects/project/${projectId}/delete-file`, {
+        data: { filePath },
+      })
+      setFormData((prevProject) => ({
+        ...prevProject,
+        files: prevProject.files.filter((file) => file !== filePath),
+      }))
+      setMessage("File deleted successfully")
+    } catch (error) {
+      console.error("Error deleting file:", error)
+      setMessage("Failed to delete file")
+    }
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
 
