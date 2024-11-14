@@ -24,5 +24,14 @@
   },
   "service": {
     "price": "starting from"
-  }
+  },
+
+  "view_our_portfolio": "View Our Portfolio",
+  "featured_projects": "Featured Projects",
+
+  "professional_branding_services": "Professional branding services tailored to make your",
+  "business_stand_out": "business stand out. Book an appointment and",
+  "explore_our_work": "explore our work.",
+  "book_a_session": "Book A Session!",
+  "or": "or"
 }

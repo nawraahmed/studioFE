@@ -7,6 +7,8 @@ import LanguageSwitcher from "./LanguageSwitcher"
 
 const Header = ({ user, handleLogOut }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [userRole, setUserRole] = useState(null)
+
   const { t } = useTranslation()
 
   const toggleMenu = () => {
@@ -16,6 +18,13 @@ const Header = ({ user, handleLogOut }) => {
   const closeMenu = () => {
     setIsMenuOpen(false)
   }
+
+  useEffect(() => {
+    const role = localStorage.getItem("role")
+    if (role) {
+      setUserRole(role)
+    }
+  }, [])
 
   return (
     <header className="header">
@@ -42,9 +51,11 @@ const Header = ({ user, handleLogOut }) => {
           {t("nav.book")}
         </Link>
 
-        <Link to="/admin" onClick={closeMenu}>
-          {t("nav.admin_dashboard")}
-        </Link>
+        {user && userRole === "admin" && (
+          <Link to="/admin" onClick={closeMenu}>
+            {t("nav.admin_dashboard")}
+          </Link>
+        )}
 
         {user && (
           <Link to="/profile" onClick={closeMenu}>
